@@ -4,16 +4,13 @@ const autoprefixer = require('autoprefixer');
 module.exports = [{
   mode: "development", // "production" | "development" | "none"
   entry: {
-    //style_bundle: './src/scss/index.scss',
-    //script_bundle: './src/ts/index.ts'
     entry: ['./src/scss/index.scss', './src/ts/index.ts']
   },
   devtool: 'inline-source-map',
   output: {
     //path: path.resolve(__dirname, "dist"),
-    //what's the difference?
-    //publicPath : 'assets',
-    //filename: '[name].js',
+    // about publicPath: https://juejin.im/post/5ae9ae5e518825672f19b094
+    publicPath : '/dist/',
     filename: 'bundle.js',
   },
   module: {
@@ -24,8 +21,6 @@ module.exports = [{
           {
             loader: 'file-loader',
             options: {
-              //path inside dist folder
-              //outputPath: 'assets',
               name: 'bundle.css',
             },
           },
@@ -54,7 +49,7 @@ module.exports = [{
           { 
             loader: 'babel-loader',
             query: {
-              presets: ['@babel/preset-env'],
+              presets: ['@babel/preset-typescript'],
             },
           },
         ],
