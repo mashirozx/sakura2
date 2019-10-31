@@ -12,3 +12,5 @@ npm run build
 ```
 
 Test server on <http://localhost:8080/>
+
+[Notes](./NOTES.md)
