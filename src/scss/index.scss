@@ -1,0 +1,9 @@
+@import "./scheme.scss";
+@import "./size.scss";
+
+@import "@material/button/mdc-button";
+
+.foo-button {
+  @include mdc-button-ink-color(teal);
+  @include mdc-states(teal);
+}
