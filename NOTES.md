@@ -2,6 +2,7 @@
 - [material-components-web](https://material.io/develop/web/components/)
 - [TS handbook](https://typescript.bootcss.com/)
 - [SASS hankbook](https://www.sasscss.com/docs/)
+- [TS 注释规范](https://juejin.im/post/5ce24f8ae51d45106477bd45)
 
 ### MDC 
 #### 输入框样式 
@@ -19,8 +20,7 @@
   @include mdc-text-field-caret-color($orange);
   @include mdc-text-field-label-color($black);
 }
-*/
-/*
+
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
   color: orange;
 }
@@ -32,3 +32,21 @@
 
 ### Linux 相关
 Ctrl-Z -> `jobs` -> `fg 1`
+
+### col
+```scss
+<div class="user-info mdc-text-field mdc-text-field--outlined">
+  <input type="text" id="tf-outlined" class="mdc-text-field__input">
+  <div class="mdc-notched-outline">
+    <div class="mdc-notched-outline__leading"></div>
+    <div class="mdc-notched-outline__notch">
+      <label for="tf-outlined" class="mdc-floating-label">Your Name</label>
+    </div>
+    <div class="mdc-notched-outline__trailing"></div>
+  </div>
+</div>
+
+<button class="commit-button mdc-button mdc-button--outlined">
+  <span class="mdc-button__label">BuiBuiBui~</span>
+</button>
+```

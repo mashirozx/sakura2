@@ -12,7 +12,6 @@
     "css-loader": "^3.2.0",
     "extract-loader": "^3.1.0",
     "file-loader": "^4.2.0",
-    "fsevents": "^1.2.9",
     "material-components-web": "^3.2.0",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
@@ -33,7 +32,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
-    "build": "rm dist/* && webpack",
+    "build": "webpack",
     "clean": "rm dist/*"
   },
   "author": "mashirozx",

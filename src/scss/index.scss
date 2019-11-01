@@ -1,2 +1,7 @@
 @import "./variables.scss";
-@import "./mdc.scss";
+
+@import "./components/normalize.scss";
+@import "./components/mdc.scss";
+
+@import "./layouts/index.scss";
+

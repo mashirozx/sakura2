@@ -1,0 +1,12 @@
+/**
+ * @description index page framework
+ * @author Mashiro
+ * @since 19/11/1
+ */
+
+ .header-container {
+  display: -webkit-flex; 
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between
+ }

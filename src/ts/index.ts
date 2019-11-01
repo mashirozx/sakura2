@@ -1,20 +1,26 @@
-//MDC按键波纹
-import {MDCRipple} from '@material/ripple/index';
-const ripple = new MDCRipple(document.querySelector('.mdc-button'));
+/**
+ * @description Index
+ * @author Mashiro
+ * @since 19/10/31
+ */
 
-import {MDCTextField} from '@material/textfield';
-const textField = new MDCTextField(document.querySelector('.mdc-text-field'));
+import * as components from "./components/index"
+//import * as modules from "./modules/index"
 
-const username = new MDCTextField(document.querySelector('.username'));
-const password = new MDCTextField(document.querySelector('.password'));
+//todo remove to particails
+let componentsIni = components
+//let modulesIni = modules
 
-import hello from "./components/function";
+import scrollDirection from "./modules/scrollEvent"
 
-let words: string[] = ["World", "Mashiro", "Yukishino"];
+window.onscroll = function(){
+  //console.log(scrollDirection())
+  if(scrollDirection() == 'down'){
+    (<HTMLElement>document.getElementById("nav-header")).style.top = `-120px`
+  }
+  else if(scrollDirection() == 'up'){
+    (<HTMLElement>document.getElementById("nav-header")).style.top = `0px`
+  }
+}
 
-words.forEach((wordd: string) => {
-  console.log(`${hello(wordd)}`);
-});
-
-console.log('hello 1');
-console.log(`hello 2`);
+//(<HTMLElement>document.getElementById("img-container")).style.height =  `${window.innerHeight}px`

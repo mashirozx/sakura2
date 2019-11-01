@@ -3,38 +3,45 @@
   <head>
     <title>Sakura v2</title>
     <link rel="stylesheet" href="./dist/bundle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
   <body>
-    <section class="main-container">
+    <div id="root"><!--page main content (async container)-->
+      <div class="header-container">
+        <header id="nav-header" class="mdc-top-app-bar mdc-top-app-bar--dense"><!--nav mune-->
+          <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+              <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+              <span class="mdc-top-app-bar__title">Title</span>
+            </section>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+              <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Download">file_download</button>
+              <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Print this page">print</button>
+              <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Bookmark this page">bookmark</button>
+            </section>
+          </div>
+        </header>
+      </div>
+
       <div class="header-top"><!--index cover image-->
         <div class="img-container">
-          <figure style="height: 100px;"></figure>
+          <figure>
+            <img src="https://view.moezx.cc/images/2019/10/17/vector-flying-plane-sunny-blue-sky_79451-230.jpg">
+          </figure>
         </div>
         <div class="video-container"></div>
-      </div> 
-      <div class="page-main"><!--page main content (async container)-->
-        <header class="site-header"></header> <!--nav mune-->
-        <div class="site-content">
-
-
-          <div class="user-info mdc-text-field mdc-text-field--outlined">
-            <input type="text" id="tf-outlined" class="mdc-text-field__input">
-            <div class="mdc-notched-outline">
-              <div class="mdc-notched-outline__leading"></div>
-              <div class="mdc-notched-outline__notch">
-                <label for="tf-outlined" class="mdc-floating-label">Your Name</label>
-              </div>
-              <div class="mdc-notched-outline__trailing"></div>
-            </div>
-          </div>
-          
-          <button class="commit-button mdc-button mdc-button--outlined">
-            <span class="mdc-button__label">BuiBuiBui~</span>
-          </button>
-          
-        </div>
       </div>
-    </section>
+
+      <div class="site-content">
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+      </div>
+
+
+    </div>
 
     <script src="./dist/bundle.js" async></script>
   </body>
