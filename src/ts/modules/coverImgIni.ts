@@ -15,18 +15,23 @@ export default function () {
     let coverImageContainer: HTMLElement = document.querySelector("#cover-img-container")
     coverImageContainer.style.height = `${window.innerHeight}px`
 
-    let scene = document.querySelector('#cover-img-container')
-    let parallaxInstance = new Parallax(scene);
-
-    let cover: {
-        e: HTMLImageElement,
-        w: number,
-        h: number
+    interface LooseObject {
+        [key: string]: any
     }
 
-    cover.e = document.querySelector("#cover-img") as HTMLImageElement
-    cover.w = cover.e.naturalWidth
-    cover.h = cover.e.naturalHeight
+    let coverImg: LooseObject = {}
+    let coverView: LooseObject = {}
 
-    console.log(cover.w)
+    coverImg.e = <HTMLImageElement>document.querySelector("#cover-img") as HTMLImageElement
+    coverImg.w = <number>cover.e.naturalWidth
+    coverImg.h = <number>cover.e.naturalHeight
+
+    coverView=<HTMLImageElement>document.querySelector("#cover-img") as HTMLImageElement
+    // Parallax view box
+    cover.e.style.height = `${window.innerHeight}px`
+
+
+
+    let scene = document.querySelector('#cover-img-container')
+    let parallaxInstance = new Parallax(scene);
 }

@@ -28,7 +28,8 @@
     "babel-loader": "^8.0.6",
     "postcss-loader": "^3.0.0",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "uglifyjs-webpack-plugin": "^2.2.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

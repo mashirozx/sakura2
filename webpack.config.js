@@ -1,5 +1,6 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
+//const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = [{
   mode: "development", // "production" | "development" | "none"
@@ -59,4 +60,9 @@ module.exports = [{
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ]
   },
+  // plugins: [
+  //   new UglifyJsPlugin({
+  //     test: /\.js($|\?)/i
+  //   })
+  // ]
 }];

@@ -8,7 +8,7 @@ import * as components from "./components/index"
 import coverImgIni from "./modules/coverImgIni"
 import headerBarScrollHandler from "./modules/headerBarScrollHandler"
 
-//TODO: move to ./particails
+//TODO: rewrite
 let componentsIni = components
 
 window.onscroll = function () {
