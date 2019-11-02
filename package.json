@@ -10,6 +10,7 @@
     "@material/layout-grid": "^3.1.0",
     "@material/line-ripple": "^3.1.0",
     "@material/ripple": "^3.2.0",
+    "@material/textfield": "^3.2.0",
     "@material/theme": "^3.1.0",
     "css-loader": "^3.2.0",
     "extract-loader": "^3.1.0",
@@ -35,8 +36,10 @@
     "uglifyjs-webpack-plugin": "^2.2.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test_dafault": "echo \"Error: no test specified\" && exit 1",
+    "test": "rm -rf dist && mkdir dist",
     "start": "webpack-dev-server",
+    "dev": "webpack-dev-server",
     "build": "webpack",
     "clean": "rm dist/*"
   },
