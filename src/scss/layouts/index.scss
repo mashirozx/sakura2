@@ -5,19 +5,17 @@
  */
 
 .header-container {
-  display: -webkit-flex;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between
+  // display: -webkit-flex;
+  // display: flex;
+  // flex-flow: column nowrap;
+  // justify-content: space-between
 }
 
 .header-top {
   figure {
     width: 100%;
-    background: tomato;
     margin: 0;
     overflow: hidden;
-
-    
   }
+  
 }
