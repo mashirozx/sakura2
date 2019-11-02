@@ -1,1 +1,1 @@
-export * from './mdc';
+export * from './MDCHandler';

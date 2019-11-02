@@ -1,7 +1,9 @@
 @import "./variables.scss";
 
 @import "./components/normalize.scss";
-@import "./components/mdc.scss";
+//@import "./components/mdc.scss";
 
-@import "./layouts/homepage.scss";
-
+@import "./layouts/header.scss";
+@import "./layouts/coverImage.scss";
+@import "./layouts/pageContent.scss";
+@import "./layouts/postThumbList.scss";

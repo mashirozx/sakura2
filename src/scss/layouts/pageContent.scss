@@ -1,0 +1,28 @@
+/**
+ * @description site content
+ * @author Mashiro
+ * @since 19/11/1
+ */
+
+.page-content {
+    position: relative; // important for parallax scrolling
+    background: white;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    .main-center {
+        height: 100%;
+        width: 800px;
+        background: yellowgreen;
+    }
+
+    .side-bar-left {
+        width: 100px;
+    }
+
+    .side-bar-right {
+        width: 100px;
+    }
+}

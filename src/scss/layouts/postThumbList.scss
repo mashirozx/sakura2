@@ -1,0 +1,28 @@
+@import "@material/card/mdc-card";
+@import "@material/button/mdc-button";
+@import "@material/typography/mdc-typography";
+
+.demo-card {
+    width: 350px;
+    margin: 48px 0;
+}
+
+.demo-basic-with-text-over-media .demo-card__media-content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: end;
+    align-items: flex-end;
+}
+
+.demo-card__primary {
+    padding: 1rem;
+}
+
+.demo-basic-with-text-over-media .demo-card__media-content .demo-card__subtitle,
+.demo-basic-with-text-over-media .demo-card__media-content .demo-card__title {
+    color: #fff;
+}
+
+.demo-basic-with-text-over-media .demo-card__secondary {
+    padding-top: 1rem;
+}
