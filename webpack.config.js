@@ -34,12 +34,16 @@ module.exports = [{
             }
           },
           { 
-            loader: 'sass-loader',
+            // loader: 'sass-loader',
+            // options: {
+            //   sassOptions: {
+            //     includePaths: ['./node_modules']
+            //   }
+            // } 
+            loader: 'fast-sass-loader',
             options: {
-              sassOptions: {
-                includePaths: ['./node_modules']
-              }
-            } 
+              includePaths: ['./node_modules']
+            }
           },
         ]
       },
