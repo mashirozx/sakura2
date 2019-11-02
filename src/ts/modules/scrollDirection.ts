@@ -1,3 +1,10 @@
+/**
+ * @description Sakura theme module
+ * @author Mashiro
+ * @since 19/10/31
+ * @license MIT
+ */
+
 let scrollAction: {
     x: number,
     y: number,
@@ -8,6 +15,11 @@ let scrollAction: {
     d: undefined
 }
 
+/**
+ * Detect window scroll direction
+ * @param  {string}  direction  option: `Y`/`y` - horizontal; `X`/`x` - vertical
+ * @return {string}             return window scroll direction
+ */
 export default function (direction: string) {
     if (scrollAction.x == undefined) {
         scrollAction.x = window.pageXOffset

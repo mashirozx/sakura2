@@ -5,31 +5,16 @@
  */
 
 import * as components from "./components/index"
-//import * as modules from "./modules/index"
+import coverImgIni from "./modules/coverImgIni"
+import headerBarScrollHandler from "./modules/headerBarScrollHandler"
 
 //TODO: move to ./particails
 let componentsIni = components
-//let modulesIni = modules
-
-import scrollDirection from "./modules/scrollEvent"
 
 window.onscroll = function () {
-  let ele: HTMLElement = document.getElementById("nav-header")
-  if (scrollDirection('y') == 'down') {
-    ele.style.top = `-120px`
-  }
-  else if (scrollDirection('y') == 'up') {
-    ele.style.top = `0px`
-  }
+  headerBarScrollHandler()
 }
 
-let coverImageContainer: HTMLElement = document.getElementById("cover-img-container")
-coverImageContainer.style.height = `${window.innerHeight}px`
-
-import Parallax from 'parallax-js'
-//let scene = document.getElementById('cover-img-container')
-//let parallaxInstance = new Parallax(scene)
-
-let ele: HTMLImageElement = document.querySelector("#cover-img") as HTMLImageElement
-let eleW: number = ele.naturalWidth
-console.log(eleW)
+window.onload = function () {
+  coverImgIni()
+}
