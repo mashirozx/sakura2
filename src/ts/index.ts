@@ -33,4 +33,3 @@ import Parallax from 'parallax-js'
 // let ele: HTMLImageElement = document.getElementById("cover-img") as HTMLImageElement
 // let eleW: number = ele.naturalWidth
 // console.log(eleW)
-
