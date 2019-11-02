@@ -30,6 +30,6 @@ import Parallax from 'parallax-js'
 //let scene = document.getElementById('cover-img-container')
 //let parallaxInstance = new Parallax(scene)
 
-// let ele: HTMLImageElement = document.getElementById("cover-img") as HTMLImageElement
-// let eleW: number = ele.naturalWidth
-// console.log(eleW)
+let ele: HTMLImageElement = document.querySelector("#cover-img") as HTMLImageElement
+let eleW: number = ele.naturalWidth
+console.log(eleW)

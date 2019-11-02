@@ -45,7 +45,6 @@ module.exports = [{
       {
         test: /\.tsx?$/,
         use: [
-          { loader: 'ts-loader' },
           { 
             loader: 'babel-loader',
             query: {
