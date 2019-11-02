@@ -3,6 +3,7 @@
 - [TS handbook](https://typescript.bootcss.com/)
 - [SASS hankbook](https://www.sasscss.com/docs/)
 - [TS 注释规范](https://juejin.im/post/5ce24f8ae51d45106477bd45)
+- [9012年学 TS](https://juejin.im/post/5c68d99bf265da2db4141418)
 
 ### MDC 
 #### 输入框样式 
@@ -30,11 +31,7 @@
 }
 ```
 
-### Linux 相关
-Ctrl-Z -> `jobs` -> `fg 1`
-
-### col
-```scss
+```html
 <div class="user-info mdc-text-field mdc-text-field--outlined">
   <input type="text" id="tf-outlined" class="mdc-text-field__input">
   <div class="mdc-notched-outline">
@@ -50,3 +47,6 @@ Ctrl-Z -> `jobs` -> `fg 1`
   <span class="mdc-button__label">BuiBuiBui~</span>
 </button>
 ```
+
+### Linux
+Ctrl-Z -> `jobs` -> `fg 1`

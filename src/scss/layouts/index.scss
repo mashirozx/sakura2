@@ -4,18 +4,20 @@
  * @since 19/11/1
  */
 
- .header-container {
-  display: -webkit-flex; 
+.header-container {
+  display: -webkit-flex;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between
- }
+}
 
 .header-top {
   figure {
     width: 100%;
-    height: 657px;
     background: tomato;
     margin: 0;
+    overflow: hidden;
+
+    
   }
 }

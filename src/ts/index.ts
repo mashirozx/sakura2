@@ -7,20 +7,30 @@
 import * as components from "./components/index"
 //import * as modules from "./modules/index"
 
-//todo remove to particails
+//TODO: move to ./particails
 let componentsIni = components
 //let modulesIni = modules
 
 import scrollDirection from "./modules/scrollEvent"
 
-window.onscroll = function(){
-  //console.log(scrollDirection())
-  if(scrollDirection() == 'down'){
-    (<HTMLElement>document.getElementById("nav-header")).style.top = `-120px`
+window.onscroll = function () {
+  let ele: HTMLElement = document.getElementById("nav-header")
+  if (scrollDirection('y') == 'down') {
+    ele.style.top = `-120px`
   }
-  else if(scrollDirection() == 'up'){
-    (<HTMLElement>document.getElementById("nav-header")).style.top = `0px`
+  else if (scrollDirection('y') == 'up') {
+    ele.style.top = `0px`
   }
 }
 
-//(<HTMLElement>document.getElementById("img-container")).style.height =  `${window.innerHeight}px`
+let coverImageContainer: HTMLElement = document.getElementById("cover-img-container")
+coverImageContainer.style.height = `${window.innerHeight}px`
+
+import Parallax from 'parallax-js'
+//let scene = document.getElementById('cover-img-container')
+//let parallaxInstance = new Parallax(scene)
+
+let ele: HTMLImageElement = document.getElementById("cover-img") as HTMLImageElement
+let eleW: number = ele.naturalWidth
+console.log(eleW)
+

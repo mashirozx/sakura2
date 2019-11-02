@@ -1,46 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Sakura v2</title>
-    <link rel="stylesheet" href="./dist/bundle.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  </head>
-  <body>
-    <div id="root"><!--page main content (async container)-->
-      <div class="header-container">
-        <header id="nav-header" class="mdc-top-app-bar mdc-top-app-bar--dense"><!--nav mune-->
-          <div class="mdc-top-app-bar__row">
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-              <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
-              <span class="mdc-top-app-bar__title">Title</span>
-            </section>
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-              <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Download">file_download</button>
-              <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Print this page">print</button>
-              <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Bookmark this page">bookmark</button>
-            </section>
-          </div>
-        </header>
-      </div>
 
-      <div class="header-top"><!--index cover image-->
-        <figure id="cover-img-container">
-          <img src="https://view.moezx.cc/images/2019/10/17/vector-flying-plane-sunny-blue-sky_79451-230.jpg">
-        </figure>
-        <div class="cover-video-container"></div>
-      </div>
+<head>
+  <title>Sakura v2</title>
+  <link rel="stylesheet" href="./dist/bundle.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
 
-      <div class="site-content">
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<body>
+  <div id="root">
+    <!--page main content (async container)-->
+    <div class="header-container">
+      <header id="nav-header" class="mdc-top-app-bar mdc-top-app-bar--dense">
+        <!--nav mune-->
+        <div class="mdc-top-app-bar__row">
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+            <span class="mdc-top-app-bar__title">Sakura</span>
+          </section>
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+            <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+              aria-label="Download">file_download</button>
+            <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+              aria-label="Print this page">print</button>
+            <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+              aria-label="Bookmark this page">bookmark</button>
+          </section>
+        </div>
+      </header>
+    </div>
 
-      </div>
+    <style>
+      #img-view {
+        width: 100%;
+        height: 100%;
+      }
 
+      #img-view img {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <div class="header-top">
+      <!--index cover image-->
+      <figure id="cover-img-container">
+        <div id="img-view" data-depth="0.2">
+          <img id="cover-img" src="https://view.moezx.cc/images/2019/10/17/vector-flying-plane-sunny-blue-sky_79451-230.jpg">
+        </div>
+      </figure>
+      <div class="cover-video-container"></div>
+    </div>
+
+    <div class="site-content">
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
     </div>
 
-    <script src="./dist/bundle.js" async></script>
-  </body>
+
+  </div>
+
+  <script src="./dist/bundle.js" async></script>
+</body>
+
 </html>
