@@ -1,7 +1,7 @@
 /**
+ * Copyright 2019 Mashiro
  * @description Sakura theme module
  * @author Mashiro
- * @since 19/10/31
  * @license MIT
  */
 

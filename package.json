@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@material/animation": "^3.1.0",
+    "@material/auto-init": "^4.0.0",
     "@material/button": "^3.2.0",
     "@material/card": "^3.2.0",
     "@material/layout-grid": "^3.1.0",

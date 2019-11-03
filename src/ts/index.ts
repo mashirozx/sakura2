@@ -1,7 +1,8 @@
 /**
- * @description Index
+ * Copyright 2019 Mashiro
+ * @description Main
  * @author Mashiro
- * @since 19/10/31
+ * @license MIT
  */
 
 import coverImgIni from "./modules/coverImgIni"
@@ -15,4 +16,5 @@ window.onscroll = function () {
 window.onload = function () {
   coverImgIni()
   MDCHandler()
+
 }
