@@ -7,11 +7,14 @@ I'll build the basical templates here, the stylesheets and scripts in `dist` fol
 
 ```bash
 npm i -g webpack-cli
+npm install clean-css-cli -g
 npm install
 # Run dev server
 npm start
 # Build
 npm run build
+# If need a release
+npm install clean-css-cli -g
 ```
 
 Test server on <http://localhost:8080/>

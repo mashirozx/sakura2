@@ -1,6 +1,6 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
-//const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = [{
   mode: "development", // "production" | "development" | "none"
@@ -9,37 +9,31 @@ module.exports = [{
   },
   devtool: 'inline-source-map',
   output: {
-    //path: path.resolve(__dirname, "dist"),
-    // about publicPath: https://juejin.im/post/5ae9ae5e518825672f19b094
-    publicPath : '/dist/',
+    publicPath: '/dist/',
     filename: 'bundle.js',
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.scss$/,
-        use: [
-          {
+        use: [{
             loader: 'file-loader',
             options: {
               name: 'bundle.css',
             },
           },
-          { loader: 'extract-loader' },
-          { loader: 'css-loader' },
+          {
+            loader: 'extract-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
           {
             loader: 'postcss-loader',
             options: {
-               plugins: () => [autoprefixer()]
+              plugins: () => [autoprefixer()]
             }
           },
-          { 
-            // loader: 'sass-loader',
-            // options: {
-            //   sassOptions: {
-            //     includePaths: ['./node_modules']
-            //   }
-            // } 
+          {
             loader: 'fast-sass-loader',
             options: {
               includePaths: ['./node_modules']
@@ -49,24 +43,23 @@ module.exports = [{
       },
       {
         test: /\.tsx?$/,
-        use: [
-          { 
-            loader: 'babel-loader',
-            query: {
-              presets: ['@babel/preset-typescript'],
-            },
+        use: [{
+          loader: 'babel-loader',
+          query: {
+            presets: ['@babel/preset-typescript'],
           },
-        ],
+        }, ],
         exclude: /node_modules/
       }
     ]
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
+    extensions: ['.tsx', '.ts', '.js']
   },
-  // plugins: [
-  //   new UglifyJsPlugin({
-  //     test: /\.js($|\?)/i
-  //   })
-  // ]
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin({
+      sourceMap: false,
+    })],
+  },
 }];

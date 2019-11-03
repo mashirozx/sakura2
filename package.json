@@ -32,16 +32,18 @@
     "autoprefixer": "^9.7.0",
     "babel-loader": "^8.0.6",
     "fast-sass-loader": "^1.5.0",
+    "mini-css-extract-plugin": "^0.8.0",
     "postcss-loader": "^3.0.0",
+    "terser-webpack-plugin": "^2.2.1",
     "ts-loader": "^6.2.1",
     "typescript": "^3.6.4",
     "uglifyjs-webpack-plugin": "^2.2.0"
   },
   "scripts": {
     "test_dafault": "echo \"Error: no test specified\" && exit 1",
-    "test": "cpx dist/*.{js,css} docs/dist && cpx *.html docs",
+    "test": "cleancss dist/bundle.css -o docs/dist/bundle.css",
     "start": "webpack-dev-server",
-    "release": "cpx dist/*.{js,css} docs/dist && cpx *.html docs",
+    "release": "cpx dist/bundle.js docs/dist && cpx *.html docs && cleancss dist/bundle.css -o docs/dist/bundle.css",
     "build": "webpack",
     "clean": "rm dist/*"
   },
