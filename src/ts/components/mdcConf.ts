@@ -5,9 +5,9 @@
  * @license MIT
  */
 
-import { MDCRipple } from '@material/ripple'
-import { MDCTextField } from '@material/textfield'
-import { MDCTopAppBar } from '@material/top-app-bar'
+import { MDCRipple } from '@material/ripple';
+import { MDCTextField } from '@material/textfield';
+import { MDCTopAppBar } from '@material/top-app-bar';
 
 const Conf = [
     ['.mdc-top-app-bar', MDCTopAppBar],
@@ -15,7 +15,7 @@ const Conf = [
     [
         [
             '.mdc-button',
-            '.demo-card__primary-action',
+            '.primary-action',
         ],
         MDCRipple
     ],

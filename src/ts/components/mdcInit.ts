@@ -7,12 +7,16 @@
 import mdcConf from "./mdcConf"
 
 const Conf = mdcConf
+
+/** 
+ * Initial [material-components-web](https://github.com/material-components/material-components-web/) 
+ * through configuration in `mdcConf.ts``.
+ * See <https://git.io/JegHJ>
+ */
 export default function () {
-    /* See https://git.io/JegHJ */
     let components = []
     for (const i of Conf) {
         if (typeof (i[0]) == 'string') {
-            console.log(i)
             const component = i[0]
             const constructor = i[1]
             components.map.call(document.querySelectorAll(component), function (e: any) {
