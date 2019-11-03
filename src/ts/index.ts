@@ -5,9 +5,10 @@
  * @license MIT
  */
 
-import coverImgIni from "./modules/coverImgIni"
+import coverImgIni from "./modules/coverImgInit"
 import headerBarScrollHandler from "./modules/headerBarScrollHandler"
-import MDCHandler from "./components/MDCHandler"
+import mdcInit from "./components/mdcInit"
+
 
 window.onscroll = function () {
   headerBarScrollHandler()
@@ -15,6 +16,6 @@ window.onscroll = function () {
 
 window.onload = function () {
   coverImgIni()
-  MDCHandler()
+  mdcInit()
 
 }
