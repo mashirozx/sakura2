@@ -2,9 +2,10 @@
 
 @import "./components/normalize.scss";
 
-@import "./components/mdc.scss"; //test
+@import "./components/mdc.scss";
 
 @import "./layouts/header.scss";
 @import "./layouts/coverImage.scss";
 @import "./layouts/pageContent.scss";
 @import "./layouts/postThumbList.scss";
+@import "./components/pjax.scss";

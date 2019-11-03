@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <div id="root">
+  <div id="root" class="root">
     <!--page main content (async container)-->
     <div class="header-container">
       <header id="nav-header" class="mdc-top-app-bar mdc-top-app-bar--dense">
@@ -20,13 +20,10 @@
             <span class="mdc-top-app-bar__title">Sakura</span>
           </section>
           <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-            <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
-              aria-label="Download">file_download</button>
-            <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
-              aria-label="Print this page">print</button>
-            <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
-              aria-label="Bookmark this page">bookmark</button>
-          </section>
+              <a href="/" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">home</a>
+              <a href="#" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">print</a>
+              <a href="#" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">bookmark</a>
+            </section>
         </div>
       </header>
     </div>
@@ -72,7 +69,7 @@
                   </div>
 
                   <div class="btn--align-left">
-                    <button class="mdc-button mdc-button--outlined">Read</button>
+                    <a href="./single.html" class="mdc-button mdc-button--outlined">Read</a>
                   </div>
                 </div>
                 <div class="post-thumb">
@@ -113,7 +110,7 @@
                   </div>
 
                   <div class="btn--align-right">
-                    <button class="mdc-button mdc-button--outlined">Read</button>
+                    <a href="./single.html" class="mdc-button mdc-button--outlined">Read</a>
                   </div>
                 </div>
               </div>

@@ -3007,3 +3007,10 @@ svg.mdc-button__icon {
             .post-thumb-item .primary-action .content .post-thumb .thumb-img-box img:hover {
               -webkit-transform: scale(1.1);
                       transform: scale(1.1); }
+
+/**
+ * Copyright 2019 Mashiro
+ * @description Pjax reload animations
+ * @author Mashiro
+ * @license MIT
+ */

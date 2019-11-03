@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>A single page</title>
+  <link rel="stylesheet" href="./dist/bundle.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_679578_dgipmwt51qb.css">
+</head>
+
+<body>
+  <div id="root" class="root">
+    <!--page main content (async container)-->
+    <div class="header-container">
+      <header id="nav-header" class="mdc-top-app-bar mdc-top-app-bar--dense">
+        <!--nav mune-->
+        <div class="mdc-top-app-bar__row">
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+            <span class="mdc-top-app-bar__title">Sakura</span>
+          </section>
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+            <a href="./" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">home</a>
+            <a href="#" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">print</a>
+            <a href="#" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">bookmark</a>
+          </section>
+        </div>
+      </header>
+    </div>
+
+    
+
+    <div class="page-content">
+      <aside class="side-bar-left">left</aside>
+      <section class="main-center">
+
+        <h1 id="pjax">Pjax</h1>
+        <p><a href="https://travis-ci.org/MoOx/pjax"><img src="https://img.shields.io/travis/MoOx/pjax.svg"
+              alt="Build Status"></a>.</p>
+        <blockquote>
+          <p>Easily enable fast AJAX navigation on any website (using pushState() + XHR)</p>
+        </blockquote>
+        <p>Pjax is <strong>a standalone JavaScript module</strong> that uses <a
+            href="https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX">AJAX</a> (XmlHttpRequest) and <a
+            href="https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history">pushState()</a>
+          to deliver a fast browsing experience.</p>
+        <p><em>It allows you to completely transform the user experience of standard websites (server-side generated or
+            static ones) to make users feel like they are browsing an app, especially for those with low bandwidth
+            connections.</em></p>
+        <p><strong>No more full page reloads. No more multiple HTTP requests.</strong></p>
+        <p><em>Pjax does not rely on other libraries, like jQuery or similar. It is written entirely in vanilla JS.</em>
+        </p>
+        <h2 id="installation">Installation</h2>
+        <ul>
+          <li>
+            <p>You can link directly to the <a href="https://cdn.jsdelivr.net/npm/pjax/pjax.js">bundle</a>:</p>
+            <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.jsdelivr.net/npm/pjax@VERSION/pjax.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          </code></pre>
+          </li>
+          <li>
+            <p>Or the <a href="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js">minified bundle</a>:</p>
+            <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.jsdelivr.net/npm/pjax@VERSION/pjax.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          </code></pre>
+          </li>
+          <li>
+            <p>You can also install Pjax from <strong>npm</strong>:</p>
+            <pre><code class="lang-shell">npm <span class="hljs-keyword">install</span> pjax
+          </code></pre>
+            <p><strong>Note</strong>: If you use this option, you will need to do one of the following:</p>
+            <ul>
+              <li>Link a script tag to either <code>pjax.js</code> or <code>pjax.min.js</code>. E.g.:
+                <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./node_modules/pjax/pjax.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          </code></pre>
+              </li>
+              <li>Use a bundler like Webpack. (<code>index.js</code> cannot be used in the browser without a bundler).
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>Or you can clone the repo and build the bundle from the source using npm:</p>
+            <pre><code class="lang-shell">git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/MoOx/pjax.git
+          cd pjax
+          npm install
+          npm run build
+          </code></pre>
+            <p>and then link a script tag to either <code>pjax.js</code> or <code>pjax.min.js</code>. E.g.:</p>
+            <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./pjax.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          </code></pre>
+          </li>
+        </ul>
+        <hr>
+        <h2 id="what-pjax-does">What Pjax Does</h2>
+        <p><em>Under the hood, it&#39;s just ONE HTTP request with a <code>pushState()</code> call.</em></p>
+        <p>Pjax loads pages using AJAX and updates the browser&#39;s current URL using <code>pushState()</code>
+          <em>without</em> reloading your page&#39;s layout or any resources (JS, CSS), giving a fast page load.</p>
+        <p>It works with all permalinks and can update all the parts of the page you want (including HTML metas, title,
+          and navigation state).</p>
+        <p>In the case of <a href="http://caniuse.com/#search=pushstate">browsers that don&#39;t support
+            <code>history.pushState()</code></a>, Pjax gracefully degrades and does not do anything at all.</p>
+        <p>Additionally, Pjax:</p>
+        <ul>
+          <li>Is not limited to one container, like jQuery-Pjax is.</li>
+          <li>Fully supports browser history (back and forward buttons).</li>
+          <li>Supports keyboard browsing.</li>
+          <li>Automatically falls back to standard navigation for external pages (thanks to Captain Obvious&#39;s help).
+          </li>
+          <li>Automatically falls back to standard navigation for internal pages that do not have an appropriate DOM
+            tree.</li>
+          <li>Allows for CSS transitions (animations) very easily.</li>
+          <li>Is only around 6kb (minified and gzipped).</li>
+        </ul>
+        <h2 id="how-pjax-works">How Pjax Works</h2>
+        <ul>
+          <li>It listens to every click on links <em>you want</em> (by default all of them).</li>
+          <li>When an internal link is clicked, Pjax fetches the page&#39;s HTML via AJAX.</li>
+          <li>Pjax renders the page&#39;s DOM tree (without loading any resources - images, CSS, JS, etc).</li>
+          <li>It checks that all defined parts can be replaced:<ul>
+              <li>If the page doesn&#39;t meet the requirements, standard navigation is used.</li>
+              <li>If the page meets the requirements, Pjax does all defined DOM replacements.</li>
+            </ul>
+          </li>
+          <li>Then it updates the browser&#39;s current URL using <code>pushState()</code>.</li>
+        </ul>
+        <h2 id="overview">Overview</h2>
+        <p><em>Pjax is fully automatic</em>. You don&#39;t need to change anything about your existing HTML,
+          you just need to designate which elements on your page that you want to be replaced when your site is
+          navigated.</p>
+        <p>Consider the following page.</p>
+        <pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+            <span class="hljs-comment">&lt;!-- metas, title, styles, etc --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>My Cool Blog<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"description"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"Welcome to My Cool Blog"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/styles.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+          
+          <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"the-header"</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"is-active"</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/about"</span>&gt;</span>About<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/contact"</span>&gt;</span>Contact<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+          
+            <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"the-content"</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>My Cool Blog<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
+                Thanks for stopping by!
+          
+                <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/about"</span>&gt;</span>Click Here to find out more about me.<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+          
+            <span class="hljs-tag">&lt;<span class="hljs-name">aside</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"the-sidebar"</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Recent Posts<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+              <span class="hljs-comment">&lt;!-- sidebar content --&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">aside</span>&gt;</span>
+          
+            <span class="hljs-tag">&lt;<span class="hljs-name">footer</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"the-footer"</span>&gt;</span>
+              &amp;copy; My Cool Blog
+            <span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span>
+          
+            <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"onDomReadystuff.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="actionscript">
+              <span class="hljs-comment">// analytics</span>
+            </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+          </code></pre>
+        <p>We want Pjax to intercept the URL <code>/about</code>, and replace <code>.the-content</code> with the
+          resulting content of the request.</p>
+        <p>It would also be nice if we could replace the <code>&lt;nav&gt;</code> to show that the <code>/about</code>
+          link is active, as well as update our page meta and the <code>&lt;aside&gt;</code> sidebar.</p>
+        <p>So all in all we want to update the page title and meta, header, content area, and sidebar, <strong>without
+            reloading styles or scripts</strong>.</p>
+        <p>We can easily do this by telling Pjax to listen on all <code>a</code> tags (which is the default) and use CSS
+          selectors defined above (without forgetting minimal meta):</p>
+        <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> pjax = <span class="hljs-keyword">new</span> <span class="hljs-type">Pjax</span>({
+            selectors: <span class="hljs-type"></span>[
+              <span class="hljs-string">"title"</span>,
+              <span class="hljs-string">"meta[name=description]"</span>,
+              <span class="hljs-string">".the-header"</span>,
+              <span class="hljs-string">".the-content"</span>,
+              <span class="hljs-string">".the-sidebar"</span>,
+            ]
+          })
+          </code></pre>
+        <p>Now, when someone in a Pjax-compatible browser clicks an internal link on the page, the content of each of
+          the selectors will be replaced with the specific content pieces found in the next page&#39;s content.</p>
+        <p><em>Magic! For real!</em> <strong>There is no need to do anything server-side!</strong></p>
+        <h2 id="differences-with-jquery-pjax-https-github-com-defunkt-jquery-pjax-">Differences with <a
+            href="https://github.com/defunkt/jquery-pjax">jQuery-pjax</a></h2>
+        <ul>
+          <li>No jQuery dependency.</li>
+          <li>Not limited to a container.</li>
+          <li>No server-side requirements.</li>
+          <li>Works for CommonJS environment (Webpack/Browserify), AMD (RequireJS) or even globally.</li>
+          <li>Allows page transitions with CSS animations.</li>
+          <li>Can be easily tweaked, since every method is public (and as a result, overridable).</li>
+        </ul>
+        <h2 id="compatibility">Compatibility</h2>
+        <p>Pjax only works with <a href="http://caniuse.com/#search=pushstate">browsers that support the
+            <code>history.pushState()</code> API</a>. When the API isn&#39;t supported, Pjax goes into fallback mode
+          (and it just does nothing).</p>
+        <p>To see if Pjax is actually supported by your browser, use <code>Pjax.isSupported()</code>.</p>
+        <h2 id="usage">Usage</h2>
+        <h3 id="-new-pjax-"><code>new Pjax()</code></h3>
+        <p>Let&#39;s talk more about the most basic way to get started.</p>
+        <p>When instantiating <code>Pjax</code>, you can pass options into the constructor as an object:</p>
+        <pre><code class="lang-js">var pjax = new <span class="hljs-type">Pjax</span>({
+            elements: <span class="hljs-comment">"a"</span>, // default is <span class="hljs-comment">"a[href], form[action]"</span>
+            selectors: [<span class="hljs-comment">"title"</span>, <span class="hljs-comment">".the-header"</span>, <span class="hljs-comment">".the-content"</span>, <span class="hljs-comment">".the-sidebar"</span>]
+          })
+          </code></pre>
+        <p>This will enable Pjax on all links, and designate the part to replace using CSS selectors
+          <code>&quot;title&quot;, &quot;.the-header&quot;, &quot;.the-content&quot;, &quot;.the-sidebar&quot;</code>.
+        </p>
+        <p>In some cases, you might want to only target some specific elements to apply Pjax behavior. In that case, you
+          can do two different things:</p>
+        <ol>
+          <li>Use a custom CSS selector( such as <code>&quot;a.js-Pjax&quot;</code> or <code>&quot;.js-Pjax
+              a&quot;</code>, etc).</li>
+          <li>Override <code>Pjax.prototype.getElements</code>.<ul>
+              <li><strong>Note</strong>: If doing this, make sure to return a <code>NodeList</code>.</li>
+            </ul>
+          </li>
+        </ol>
+        <pre><code class="lang-js">// <span class="hljs-keyword">use</span> <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>
+          <span class="hljs-keyword">var</span> pjax = <span class="hljs-keyword">new</span> Pjax({ elements: <span class="hljs-string">"a.js-Pjax"</span> })
+          </code></pre>
+        <pre><code class="lang-js"><span class="hljs-comment">// use case 2</span>
+          Pjax.prototype.getElements = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">".js-Pjax"</span>)
+          }
+          
+          <span class="hljs-keyword">var</span> pjax = <span class="hljs-keyword">new</span> Pjax()
+          </code></pre>
+        <h3 id="-loadurl-href-options-"><code>loadUrl(href, [options])</code></h3>
+        <p>With this method, you can manually trigger the loading of a URL:</p>
+        <pre><code class="lang-js">var pjax = <span class="hljs-keyword">new</span> Pjax()
+          
+          // <span class="hljs-keyword">use</span> <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>
+          pjax.loadUrl(<span class="hljs-string">"/your-url"</span>)
+          
+          // <span class="hljs-keyword">use</span> <span class="hljs-keyword">case</span> <span class="hljs-number">2</span> (<span class="hljs-keyword">with</span> options override)
+          pjax.loadUrl(<span class="hljs-string">"/your-other-url"</span>, { timeout: <span class="hljs-number">10</span> })
+          </code></pre>
+        <h3 id="-handleresponse-responsetext-request-href-options-"><code>handleResponse(responseText, request, href,
+            options)</code></h3>
+        <p>This method takes the raw response, processes the URL, then calls <code>pjax.loadContent()</code> to actually
+          load it into the DOM.</p>
+        <p>It is passed the following arguments:</p>
+        <ul>
+          <li><strong>responseText</strong> (string): This is the raw response text. This is equivalent to
+            <code>request.responseText</code>.</li>
+          <li><strong>request</strong> (XMLHttpRequest): This is the XHR object.</li>
+          <li><strong>href</strong> (string): This is the URL that was passed to <code>loadUrl()</code>.</li>
+          <li><strong>options</strong> (object): This is an object with the options for this request. The structure
+            basically matches the regular options object, with a few extra internal properties.</li>
+        </ul>
+        <p>You can override this if you want to process the data before, or instead of, it being loaded into the DOM.
+        </p>
+        <p>For example, if you want to check for a non-HTML response, you could do the following:</p>
+        <pre><code class="lang-js"><span class="hljs-keyword">var</span> pjax = <span class="hljs-keyword">new</span> Pjax();
+          
+          pjax._handleResponse = pjax.handleResponse;
+          
+          pjax.handleResponse = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(responseText, request, href, options)</span> </span>{
+            <span class="hljs-keyword">if</span> (request.responseText.match(<span class="hljs-string">"&lt;html"</span>)) {
+              pjax._handleResponse(responseText, request, href, options);
+            } <span class="hljs-keyword">else</span> {
+              <span class="hljs-comment">// handle non-HTML response here</span>
+            }
+          }
+          </code></pre>
+        <h3 id="-refresh-el-"><code>refresh([el])</code></h3>
+        <p>Use this method to bind Pjax to children of a DOM element that didn&#39;t exist when Pjax was initialised
+          e.g. content inserted dynamically by another library or script. If called with no arguments, Pjax will parse
+          the entire document again to look for newly-inserted elements.</p>
+        <pre><code class="lang-js"><span class="hljs-comment">// Inside a callback or Promise that runs after new DOM content has been inserted</span>
+          <span class="hljs-keyword">var</span> <span class="hljs-keyword">new</span><span class="hljs-type">Content</span> = document.querySelector(<span class="hljs-string">".new-content"</span>);
+          
+          pjax.refresh(<span class="hljs-keyword">new</span><span class="hljs-type">Content</span>);
+          </code></pre>
+        <h3 id="-reload-"><code>reload()</code></h3>
+        <p>A helper shortcut for <code>window.location.reload()</code>. Used to force a page reload.</p>
+        <pre><code class="lang-js"><span class="hljs-selector-tag">pjax</span><span class="hljs-selector-class">.reload</span>()
+          </code></pre>
+        <h2 id="options">Options</h2>
+        <h3 id="-elements-string-default-a-href-form-action-"><code>elements</code> (String, default:
+          <code>&quot;a[href], form[action]&quot;</code>)</h3>
+        <p>CSS selector(s) used to find links to apply Pjax to. If needing multiple specific selectors, separate them by
+          a comma.</p>
+        <pre><code class="lang-js"><span class="hljs-comment">// Single element</span>
+          <span class="hljs-keyword">var</span> pjax = <span class="hljs-keyword">new</span> Pjax({
+            elements: <span class="hljs-string">".ajax"</span>
+          })
+          </code></pre>
+        <pre><code class="lang-js"><span class="hljs-comment">// Multiple elements</span>
+          <span class="hljs-keyword">var</span> pjax = <span class="hljs-keyword">new</span> Pjax({
+            elements: <span class="hljs-string">".pjax, .ajax"</span>,
+          })
+          </code></pre>
+        <h3 id="-selectors-array-default-title-js-pjax-"><code>selectors</code> (Array, default:
+          <code>[&quot;title&quot;, &quot;.js-Pjax&quot;]</code>)</h3>
+        <p>CSS selectors used to find which content to replace.</p>
+        <pre><code class="lang-js"><span class="hljs-keyword">var</span> pjax = <span class="hljs-keyword">new</span> <span class="hljs-type">Pjax</span>({
+            selectors: <span class="hljs-type"></span>[
+              <span class="hljs-string">"title"</span>,
+              <span class="hljs-string">"the-content"</span>,
+            ]
+          })
+          </code></pre>
+        <p>If a query returns multiples items, it will just keep the index.</p>
+        <p>Example of what you can do:</p>
+        <pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Page title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"js-Pjax"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"js-Pjax"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">footer</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"the-footer"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">...</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+          </code></pre>
+        <p>This example is correct and should work &quot;as expected&quot;.</p>
+        <p><strong>NOTE:</strong> <em>If the current page and new page do not have the same amount of DOM elements, Pjax
+            will fall back to normal page load.</em></p>
+        <h3 id="-switches-object-default-"><code>switches</code> (Object, default: <code>{}</code>)</h3>
+        <p>This is an object containing callbacks that can be used to switch old elements with new elements.</p>
+        <p>The object keys should be one of the defined selectors (from the <code>selectors</code> option).</p>
+        <p>Examples:</p>
+        <pre><code class="lang-js"><span class="hljs-selector-tag">var</span> pjax = new Pjax({
+            selectors: [<span class="hljs-string">"title"</span>, <span class="hljs-string">".Navbar"</span>, <span class="hljs-string">".js-Pjax"</span>],
+            switches: {
+              <span class="hljs-string">"title"</span>: Pjax<span class="hljs-selector-class">.switches</span><span class="hljs-selector-class">.outerHTML</span>, <span class="hljs-comment">// default behavior</span>
+              <span class="hljs-string">".the-content"</span>: function(oldEl, newEl, options) {
+                <span class="hljs-comment">// this is identical to the default behavior</span>
+                oldEl<span class="hljs-selector-class">.outerHTML</span> = newEl<span class="hljs-selector-class">.outerHTML</span>
+                this.onSwitch()
+              },
+              <span class="hljs-string">".js-Pjax"</span>: Pjax<span class="hljs-selector-class">.switches</span><span class="hljs-selector-class">.sideBySide</span>
+            }
+          })
+          </code></pre>
+        <p>Callbacks are bound to the Pjax instance itself to allow you to reuse it (ex: <code>this.onSwitch()</code>)
+        </p>
+        <h3 id="existing-switch-callbacks">Existing Switch Callbacks</h3>
+        <ul>
+          <li><code>Pjax.switches.outerHTML</code>:
+            The default behavior, replaces elements using <code>outerHTML</code>.</li>
+          <li><code>Pjax.switches.innerHTML</code>:
+            Replaces elements using <code>innerHTML</code> and copies <code>className</code>.</li>
+          <li><code>Pjax.switches.replaceNode</code>:
+            Replaces elements using <code>replaceChild</code></li>
+          <li><code>Pjax.switches.sideBySide</code>:
+            Smart replacing that allows you to have both elements in the same parent when you want to use CSS
+            animations. Old elements are removed when all children have been fully animated (an <a
+              href="http://www.w3.org/TR/css3-animations/#animationend">animationEnd</a> event is triggered).</li>
+        </ul>
+        <h3 id="creating-a-switch-callback">Creating a Switch Callback</h3>
+        <p>Your callback function can do whatever you want, but you need to:</p>
+        <ol>
+          <li>Replace the <code>oldEl</code>&#39;s content with the <code>newEl</code>&#39;s content in some fashion.
+          </li>
+          <li>Call <code>this.onSwitch()</code> to trigger the attached callback.</li>
+        </ol>
+        <p>Here is the default behavior as an example:</p>
+        <pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span></span>(oldEl, <span class="hljs-keyword">new</span><span class="hljs-type">El</span>, pjaxOptions) {
+            oldEl.outerHTML = <span class="hljs-keyword">new</span><span class="hljs-type">El</span>.outerHTML
+            <span class="hljs-built_in">this</span>.onSwitch()
+          }
+          </code></pre>
+        <h3 id="-switchesoptions-object-default-"><code>switchesOptions</code> (Object, default: <code>{}</code>)</h3>
+        <p>These are options that can be used during content replacement by switches. For now, only
+          <code>Pjax.switches.sideBySide</code> uses it. This is very convenient when you use something like <a
+            href="https://github.com/daneden/animate.css">Animate.css</a> with or without <a
+            href="https://github.com/matthieua/WOW">WOW.js</a>.</p>
+        <pre><code class="lang-js">var pjax = new Pjax({
+          <span class="hljs-symbol">  selectors:</span> [<span class="hljs-string">"title"</span>, <span class="hljs-string">".js-Pjax"</span>],
+          <span class="hljs-symbol">  switches:</span> {
+              <span class="hljs-string">".js-Pjax"</span>: Pjax.switches.sideBySide
+            },
+          <span class="hljs-symbol">  switchesOptions:</span> {
+              <span class="hljs-string">".js-Pjax"</span>: {
+          <span class="hljs-symbol">      classNames:</span> {
+                  <span class="hljs-comment">// class added to the old element being replaced, e.g. a fade out</span>
+          <span class="hljs-symbol">        remove:</span> <span class="hljs-string">"Animated Animated--reverse Animate--fast Animate--noDelay"</span>,
+                  <span class="hljs-comment">// class added to the new element that is replacing the old one, e.g. a fade in</span>
+          <span class="hljs-symbol">        add:</span> <span class="hljs-string">"Animated"</span>,
+                  <span class="hljs-comment">// class added on the element when navigating back</span>
+          <span class="hljs-symbol">        backward:</span> <span class="hljs-string">"Animate--slideInRight"</span>,
+                  <span class="hljs-comment">// class added on the element when navigating forward (used for new page too)</span>
+          <span class="hljs-symbol">        forward:</span> <span class="hljs-string">"Animate--slideInLeft"</span>
+                },
+          <span class="hljs-symbol">      callbacks:</span> {
+                  <span class="hljs-comment">// to make a nice transition with 2 pages at the same time</span>
+                  <span class="hljs-comment">// we are playing with absolute positioning for the element we are removing</span>
+                  <span class="hljs-comment">// &amp; we need live metrics to have something great</span>
+                  <span class="hljs-comment">// see associated CSS below</span>
+          <span class="hljs-symbol">        removeElement:</span> function(el) {
+                    el.style.marginLeft = <span class="hljs-string">"-"</span> + (el.getBoundingClientRect().width/<span class="hljs-number">2</span>) + <span class="hljs-string">"px"</span>
+                  }
+                }
+              }
+            }
+          })
+          </code></pre>
+        <p><em>Note that <code>remove</code> includes <code>Animated--reverse</code> which is a simple way to not have
+            to have a duplicate transition (slideIn + reverse =&gt; slideOut).</em></p>
+        <p>Here is some css that works well with the above configuration:</p>
+        <pre><code class="lang-css"><span class="hljs-comment">/*
+            Note: If your content elements don't have a fixed width it can cause
+            an issue when positioning absolutely
+          */</span>
+          <span class="hljs-selector-class">.js-Pjax</span> { <span class="hljs-attribute">position</span>: relative } <span class="hljs-comment">/* parent element where switch will be made */</span>
+          
+          <span class="hljs-selector-class">.js-Pjax-child</span> { <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span> }
+          
+          <span class="hljs-comment">/* position for the elements that will be removed */</span>
+          <span class="hljs-selector-class">.js-Pjax-remove</span> {
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+            <span class="hljs-comment">/* transform: translateX(-50%) */</span>
+            <span class="hljs-comment">/* transform can't be used since we already use generic translate for the remove effect (eg animate.css) */</span>
+            <span class="hljs-comment">/* margin-left: -width/2; // made with js */</span>
+            <span class="hljs-comment">/* you can totally drop the margin-left thing from switchesOptions if you use custom animations */</span>
+          }
+          
+          <span class="hljs-comment">/* CSS animations */</span>
+          <span class="hljs-selector-class">.Animated</span> {
+            <span class="hljs-attribute">animation-fill-mode</span>: both;
+            <span class="hljs-attribute">animation-duration</span>: <span class="hljs-number">1s</span>;
+          }
+          
+          <span class="hljs-selector-class">.Animated--reverse</span> { <span class="hljs-attribute">animation-direction</span>: reverse }
+          
+          <span class="hljs-selector-class">.Animate--fast</span> { <span class="hljs-attribute">animation-duration</span>: .<span class="hljs-number">5s</span> }
+          <span class="hljs-selector-class">.Animate--noDelay</span> { <span class="hljs-attribute">animation-delay</span>: <span class="hljs-number">0s</span> <span class="hljs-meta">!important</span>;  }
+          
+          <span class="hljs-selector-class">.Animate--slideInRight</span> { <span class="hljs-attribute">animation-name</span>: Animation-slideInRight }
+          
+          @<span class="hljs-keyword">keyframes</span> Animation-slideInRight {
+            0% {
+              <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+              <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(100rem);
+            }
+          
+            100% {
+              <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(0);
+            }
+          }
+          
+          <span class="hljs-selector-class">.Animate--slideInLeft</span> { <span class="hljs-attribute">animation-name</span>: Animation-slideInLeft }
+          
+          @<span class="hljs-keyword">keyframes</span> Animation-slideInLeft {
+            0% {
+              <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+              <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(-100rem);
+            }
+          
+            100% {
+              <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(0);
+            }
+          }
+          </code></pre>
+        <p>To give context to this CSS, here is an HTML snippet:</p>
+        <pre><code class="lang-html"><span class="hljs-meta">&lt;!doctype html&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Page Title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"js-Pjax"</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"js-Pjax-child"</span>&gt;</span>
+                Your content here
+              <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+              <span class="hljs-comment">&lt;!--
+              During the replacement process, you'll have the following tree:
+          
+              &lt;div class="js-Pjax-child js-Pjax-remove Animate..."&gt;
+                Your OLD content here
+              &lt;/div&gt;
+              &lt;div class="js-Pjax-child js-Pjax-add Animate..."&gt;
+                Your NEW content here
+              &lt;/div&gt;
+          
+              --&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">...</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+          </code></pre>
+        <h3 id="-history-boolean-default-true-"><code>history</code> (Boolean, default: <code>true</code>)</h3>
+        <p>Enable the use of <code>pushState()</code>. Disabling this will prevent Pjax from updating browser history.
+          While possible, there is almost no use case where you would want to do this.</p>
+        <p>Internally, this option is used when a <code>popstate</code> event triggers Pjax (to not
+          <code>pushState()</code> again).</p>
+        <h3 id="-analytics-function-boolean-default-a-function-that-pushes-_gaq-_trackpageview-or-sends-ga-pageview-">
+          <code>analytics</code> (Function | Boolean, default: a function that pushes <code>_gaq</code>
+          <code>_trackPageview</code> or sends <code>ga</code> <code>pageview</code></h3>
+        <p>Function that allows you to add behavior for analytics. By default it tries to track
+          a pageview with Google Analytics (if it exists on the page). It&#39;s called every time a page is switched,
+          even for history navigation.</p>
+        <p>Set to <code>false</code> to disable this behavior.</p>
+        <h3 id="-scrollto-integer-integer-integer-false-default-0-"><code>scrollTo</code> (Integer | [Integer, Integer]
+          | False, default: <code>0</code>)</h3>
+        <p>When set to an integer, this is the value (in px from the top of the page) to scroll to when a page is
+          switched.</p>
+        <p>When set to an array of 2 integers ([x, y]), this is the value to scroll both horizontally and vertically.
+        </p>
+        <p>Set this to <code>false</code> to disable scrolling, which will mean the page will stay in that same position
+          it was before loading the new elements.</p>
+        <h3 id="-scrollrestoration-boolean-default-true-"><code>scrollRestoration</code> (Boolean, default:
+          <code>true</code>)</h3>
+        <p>When set to <code>true</code>, Pjax will attempt to restore the scroll position when navigating backwards or
+          forwards.</p>
+        <h3 id="-cachebust-boolean-default-true-"><code>cacheBust</code> (Boolean, default: <code>true</code>)</h3>
+        <p>When set to <code>true</code>, Pjax appends a timestamp query string segment to the requested URL in order to
+          skip the browser cache.</p>
+        <h3 id="-debug-boolean-default-false-"><code>debug</code> (Boolean, default: <code>false</code>)</h3>
+        <p>Enables verbose mode. Useful to debug page layout differences.</p>
+        <h3 id="-currenturlfullreload-boolean-default-false-"><code>currentUrlFullReload</code> (Boolean, default:
+          <code>false</code>)</h3>
+        <p>When set to <code>true</code>, clicking on a link that points to the current URL will trigger a full page
+          reload.</p>
+        <p>When set to <code>false</code>, clicking on such a link will cause Pjax to load the current page without a
+          full page reload. If you want to add some custom behavior, add a click listener to the link and call
+          <code>preventDefault()</code>. This will prevent Pjax from receiving the event.</p>
+        <p><strong>Note</strong>: This must be done before Pjax is instantiated, otherwise Pjax&#39;s event handler will
+          be called first, and <code>preventDefault()</code> won&#39;t have been called yet.</p>
+        <p>Here is some sample code:</p>
+        <pre><code class="lang-js">  <span class="hljs-keyword">var</span> links = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">".js-Pjax"</span>);
+          
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; links.length; i++) {
+              <span class="hljs-keyword">var</span> el = links[i]
+          
+              el.addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+                <span class="hljs-keyword">if</span> (el.href === <span class="hljs-built_in">window</span>.location.href.split(<span class="hljs-string">"#"</span>)[<span class="hljs-number">0</span>]) {
+                  e.preventDefault();
+          
+                  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Link to current page clicked"</span>);
+                  <span class="hljs-comment">// Custom code goes here.</span>
+                }
+              })
+            }
+          
+            <span class="hljs-keyword">var</span> pjax = <span class="hljs-keyword">new</span> Pjax()
+          </code></pre>
+        <p>(Note that if <code>cacheBust</code> is set to <code>true</code>, the code that checks if the href is the
+          same as the current page&#39;s URL will not work, due to the query string appended to force a cache bust).</p>
+        <h3 id="-timeout-integer-default-0-"><code>timeout</code> (Integer, default: <code>0</code>)</h3>
+        <p>The timeout in <em>milliseconds</em> for the XHR requests. Set to <code>0</code> to disable the timeout.</p>
+        <h2 id="events">Events</h2>
+        <p>Pjax fires a number of events regardless of how it&#39;s invoked.</p>
+        <p>All events are fired from the <em>document</em>, not the link that was clicked.</p>
+        <ul>
+          <li><code>pjax:send</code> - Fired after the Pjax request begins.</li>
+          <li><code>pjax:complete</code> - Fired after the Pjax request finishes.</li>
+          <li><code>pjax:success</code> - Fired after the Pjax request succeeds.</li>
+          <li><code>pjax:error</code> - Fired after the Pjax request fails. The request object will be passed along as
+            <code>event.options.request</code>.</li>
+        </ul>
+        <p><code>send</code> and <code>complete</code> are a good pair of events to use if you are implementing a
+          loading indicator (eg: <a href="http://buunguyen.github.io/topbar/">topbar</a>)</p>
+        <pre><code class="lang-js"><span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">'pjax:send'</span>, topbar.show)
+          <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">'pjax:complete'</span>, topbar.hide)
+          </code></pre>
+        <h2 id="http-headers">HTTP Headers</h2>
+        <p>Pjax uses several custom headers when it makes and receives HTTP requests. If the requests are going to your
+          server, you can use those headers for some meta information about the response.</p>
+        <h3 id="request-headers">Request Headers</h3>
+        <p>Pjax sends the following headers with every request:</p>
+        <ul>
+          <li><code>X-Requested-With: &quot;XMLHttpRequest&quot;</code></li>
+          <li><code>X-PJAX: &quot;true&quot;</code></li>
+          <li><code>X-PJAX-Selectors</code>:
+            A serialized JSON array of selectors, taken from <code>options.selectors</code>. You can use this to send
+            back only the elements that Pjax will use to switch, instead of sending the whole page. Note that you&#39;ll
+            need to deserialize this on the server (Such as by using <code>JSON.parse()</code>)</li>
+        </ul>
+        <h3 id="response-headers">Response Headers</h3>
+        <p>Pjax looks for the following headers on the response:</p>
+        <ul>
+          <li><code>X-PJAX-URL</code> or <code>X-XHR-Redirected-To</code></li>
+        </ul>
+        <p>Pjax first checks the <code>responseURL</code> property on the XHR object to see if the request was
+          redirected by the server. Most browsers support this, but not all. To ensure Pjax will be able to tell when
+          the request is redirected, you can include one of these headers with the response, set to the final URL.</p>
+        <h2 id="dom-ready-state">DOM Ready State</h2>
+        <p>Most of the time, you will have code related to the current DOM that you only execute when the DOM is ready.
+        </p>
+        <p>Since Pjax doesn&#39;t automatically re-execute your previous code each time you load a page, you&#39;ll need
+          to add code to re-trigger the DOM ready code. Here&#39;s a simple example:</p>
+        <pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">whenDOMReady</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-comment">// do your stuff</span>
+          }
+          
+          whenDOMReady()
+          
+          <span class="hljs-keyword">var</span> pjax = <span class="hljs-keyword">new</span> Pjax()
+          
+          <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">"pjax:success"</span>, whenDOMReady)
+          </code></pre>
+        <p><em>Note: Don&#39;t create the Pjax instance in the <code>whenDOMReady</code> function.</em></p>
+        <p>If you want to just update a specific part (which is a good idea), you can add the DOM-related code in a
+          function and re-execute this function when the <code>pjax:success</code> event is fired.</p>
+        <pre><code class="lang-js"><span class="hljs-comment">// do your global stuff</span>
+          <span class="hljs-comment">//... DOM ready code</span>
+          
+          <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">whenContainerReady</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-comment">// do your container related stuff</span>
+          }
+          
+          whenContainerReady()
+          
+          <span class="hljs-keyword">var</span> pjax = <span class="hljs-keyword">new</span> Pjax()
+          
+          <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">"pjax:success"</span>, whenContainerReady)
+          </code></pre>
+        <h2 id="faq">FAQ</h2>
+        <h3 id="q-disqus-doesn-t-work-anymore-how-can-i-fix-that-">Q: Disqus doesn&#39;t work anymore, how can I fix
+          that ?</h3>
+        <h4 id="a-there-are-a-few-things-you-need-to-do-">A: There are a few things you need to do:</h4>
+        <ul>
+          <li>
+            <p>Wrap your Disqus snippet into a DOM element that you will add to the <code>selector</code> property (or
+              just wrap it with <code>class=&quot;js-Pjax&quot;</code>) and be sure to have at least an empty wrapper on
+              each page (to avoid differences of DOM between pages).</p>
+          </li>
+          <li>
+            <p>Edit your Disqus snippet like the one below.</p>
+          </li>
+        </ul>
+        <h4 id="disqus-snippet-_before_-pjax-integration">Disqus snippet <em>before</em> Pjax integration</h4>
+        <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+            <span class="hljs-keyword">var</span> disqus_shortname = <span class="hljs-string">'YOURSHORTNAME'</span>
+            <span class="hljs-keyword">var</span> disqus_identifier = <span class="hljs-string">'PAGEID'</span>
+            <span class="hljs-keyword">var</span> disqus_url = <span class="hljs-string">'PAGEURL'</span>
+            <span class="hljs-keyword">var</span> disqus_script = <span class="hljs-string">'embed.js'</span>
+          
+            (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d,s</span>) </span>{
+            s = d.createElement(<span class="hljs-string">'script'</span>);s.async=<span class="hljs-number">1</span>;s.src = <span class="hljs-string">'//'</span> + disqus_shortname + <span class="hljs-string">'.disqus.com/'</span>+disqus_script;
+            (d.getElementsByTagName(<span class="hljs-string">'head'</span>)[<span class="hljs-number">0</span>]).appendChild(s);
+            })(<span class="hljs-built_in">document</span>)
+          </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          </code></pre>
+        <h4 id="disqus-snippet-_after_-pjax-integration">Disqus snippet <em>after</em> Pjax integration</h4>
+        <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"js-Pjax"</span>&gt;</span><span class="hljs-comment">&lt;!-- needs to be here on every Pjax-ified page, even if empty --&gt;</span>
+          <span class="hljs-comment">&lt;!-- if (some condition) { // eventual server-side test to know whether or not you include this script --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+              <span class="hljs-keyword">var</span> disqus_shortname = <span class="hljs-string">'YOURSHORTNAME'</span>
+              <span class="hljs-keyword">var</span> disqus_identifier = <span class="hljs-string">'PAGEID'</span>
+              <span class="hljs-keyword">var</span> disqus_url = <span class="hljs-string">'PAGEURL'</span>
+              <span class="hljs-keyword">var</span> disqus_script = <span class="hljs-string">'embed.js'</span>
+          
+              <span class="hljs-comment">// here we will only load the disqus &lt;script&gt; if not already loaded</span>
+              <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">window</span>.DISQUS) {
+                (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d,s</span>) </span>{
+                s = d.createElement(<span class="hljs-string">'script'</span>);s.async=<span class="hljs-number">1</span>;s.src = <span class="hljs-string">'//'</span> + disqus_shortname + <span class="hljs-string">'.disqus.com/'</span>+disqus_script;
+                (d.getElementsByTagName(<span class="hljs-string">'head'</span>)[<span class="hljs-number">0</span>]).appendChild(s);
+                })(<span class="hljs-built_in">document</span>)
+              }
+              <span class="hljs-comment">// if disqus &lt;script&gt; is already loaded, we just reset disqus the right way</span>
+              <span class="hljs-comment">// see https://help.disqus.com/developer/using-disqus-on-ajax-sites</span>
+              <span class="hljs-keyword">else</span> {
+                DISQUS.reset({
+                  <span class="hljs-attr">reload</span>: <span class="hljs-literal">true</span>,
+                  <span class="hljs-attr">config</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+                    <span class="hljs-keyword">this</span>.page.identifier = disqus_identifier
+                    <span class="hljs-keyword">this</span>.page.url = disqus_url
+                  }
+                })
+              }
+            </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+          <span class="hljs-comment">&lt;!-- } --&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          </code></pre>
+        <p><strong>Note: Pjax only handles inline <code>&lt;script&gt;</code> blocks for the container you are
+            switching.</strong></p>
+        <h2 id="examples">Examples</h2>
+        <p>Clone this repository and run <code>npm run example</code>, which will open the example app in your browser.
+        </p>
+        <h2 id="contributing">CONTRIBUTING</h2>
+        <ul>
+          <li>⇄ Pull requests and ★ Stars are always welcome.</li>
+          <li>For bugs and feature requests, please create an issue.</li>
+          <li>Pull requests must be accompanied by passing automated tests (<code>npm test</code>). If the API is
+            changed, please update the Typescript definitions as well (<code>pjax.d.ts</code>).</li>
+        </ul>
+        <h2 id="-changelog-changelog-md-"><a href="CHANGELOG.md">CHANGELOG</a></h2>
+        <h2 id="-license-license-"><a href="LICENSE">LICENSE</a></h2>
+
+
+      </section>
+      <aside class="side-bar-right">right</aside>
+    </div>
+
+    <div class="footer-container"></div>
+
+  </div>
+
+  <script src="./dist/bundle.js" async></script>
+</body>
+
+</html>
