@@ -39,9 +39,9 @@
   },
   "scripts": {
     "test_dafault": "echo \"Error: no test specified\" && exit 1",
-    "test": "cpx dist/*.{js,css} release/dist && cpx *.html release",
+    "test": "cpx dist/*.{js,css} docs/dist && cpx *.html docs",
     "start": "webpack-dev-server",
-    "release": "webpack",
+    "release": "cpx dist/*.{js,css} docs/dist && cpx *.html docs",
     "build": "webpack",
     "clean": "rm dist/*"
   },
