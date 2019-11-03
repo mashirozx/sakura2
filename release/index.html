@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sakura v2</title>
+  <link rel="stylesheet" href="./dist/bundle.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_679578_dgipmwt51qb.css">
+</head>
+
+<body>
+  <div id="root">
+    <!--page main content (async container)-->
+    <div class="header-container">
+      <header id="nav-header" class="mdc-top-app-bar mdc-top-app-bar--dense">
+        <!--nav mune-->
+        <div class="mdc-top-app-bar__row">
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+            <span class="mdc-top-app-bar__title">Sakura</span>
+          </section>
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+            <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+              aria-label="Download">file_download</button>
+            <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+              aria-label="Print this page">print</button>
+            <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+              aria-label="Bookmark this page">bookmark</button>
+          </section>
+        </div>
+      </header>
+    </div>
+
+    <div class="header-top">
+      <!--index cover image-->
+      <figure data="mark" id="cover-img-container">
+        <div data="layer" id="img-view" data-depth="0.5">
+          <img data="cover" id="cover-img" src="https://view.moezx.cc/images/2019/10/21/1zuypi4mkggq6js5lqxt3sjaa.jpg">
+        </div>
+      </figure>
+      <div class="cover-video-container"></div>
+    </div>
+
+    <div id="header-top-after"></div>
+
+    <div class="page-content">
+      <aside class="side-bar-left">left</aside>
+      <section class="main-center">
+        <div class="post-list">
+          <!--post thumb list-->
+
+          <!--thumb right template-->
+          <div class="mdc-card post-thumb-item">
+            <div class="mdc-card__primary-action mdc-ripple-upgraded primary-action">
+              <div class="content">
+                <div class="post-info">
+                  <div class="text">
+                    <h4 class="mdc-typography mdc-typography--subtitle1 post-date">
+                      <i class="iconfont icon-time"></i> Posted on 2018-05-25 <i class="iconfont hotpost icon-hot"></i>
+                    </h4>
+                    <h3 class="mdc-typography mdc-typography--headline5 post-title">
+                      Our Changing Planet
+                    </h3>
+                    <h4 class="mdc-typography mdc-typography--subtitle1 post-meta">
+                      <i class="iconfont icon-attention"></i> 8 332 Hits
+                      <i class="iconfont icon-mark"></i> 26 Comments
+                      <i class="iconfont icon-file"></i> Child
+                    </h4>
+                    <div class="mdc-typography mdc-typography--body2 post-abstract">
+                      Visit ten places on our planet that are undergoing the biggest changes today.
+                    </div>
+                  </div>
+
+                  <div class="btn--align-left">
+                    <button class="mdc-button mdc-button--outlined">Read</button>
+                  </div>
+                </div>
+                <div class="post-thumb">
+                  <div href="#" class="thumb-img-box">
+                    <img src="https://view.moezx.cc/images/2019/10/21/5e65o9lxtbvht2tdjvpgsmarw.jpg">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--thumb right template end-->
+
+          <!--thumb left template-->
+          <div class="mdc-card post-thumb-item">
+            <div class="mdc-card__primary-action mdc-ripple-upgraded primary-action">
+              <div class="content">
+                <div class="post-thumb">
+                  <div href="#" class="thumb-img-box">
+                    <img src="https://view.moezx.cc/images/2019/10/21/1owb0inchnbrhkamrpk10a2ff.jpg">
+                  </div>
+                </div>
+                <div class="post-info">
+                  <div class="text">
+                    <h4 class="mdc-typography mdc-typography--subtitle1 post-date">
+                      <i class="iconfont icon-time"></i> Posted on 2018-05-25 <i class="iconfont hotpost icon-hot"></i>
+                    </h4>
+                    <h3 class="mdc-typography mdc-typography--headline5 post-title">
+                      Our Changing Planet
+                    </h3>
+                    <h4 class="mdc-typography mdc-typography--subtitle1 post-meta">
+                      <i class="iconfont icon-attention"></i> 8 332 Hits
+                      <i class="iconfont icon-mark"></i> 26 Comments
+                      <i class="iconfont icon-file"></i> Child
+                    </h4>
+                    <div class="mdc-typography mdc-typography--body2 post-abstract">
+                      Visit ten places on our planet that are undergoing the biggest changes today.
+                    </div>
+                  </div>
+
+                  <div class="btn--align-right">
+                    <button class="mdc-button mdc-button--outlined">Read</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--thumb left template end-->
+
+          <!--post-list end-->
+      </section>
+      <aside class="side-bar-right">right</aside>
+    </div>
+
+    <div class="footer-container"></div>
+
+  </div>
+
+  <script src="./dist/bundle.js" async></script>
+</body>
+
+</html>
