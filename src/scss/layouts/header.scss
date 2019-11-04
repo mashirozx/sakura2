@@ -1,13 +1,13 @@
 /**
  * Copyright 2019 Mashiro
- * @description header
+ * @description header.scss
  * @author Mashiro
  * @license MIT
  */
 @import "@material/top-app-bar/mdc-top-app-bar";
 @import "@material/icon-button/mdc-icon-button";
 
-.header-container {
+header {
     // display: -webkit-flex;
     // display: flex;
     // flex-flow: column nowrap;

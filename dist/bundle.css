@@ -1865,7 +1865,7 @@ template {
 
 /**
  * Copyright 2019 Mashiro
- * @description header
+ * @description header.scss
  * @author Mashiro
  * @license MIT
  */
@@ -2235,6 +2235,20 @@ template {
     opacity: 0.12; }
   .mdc-icon-button.mdc-ripple-upgraded {
     --mdc-ripple-fg-opacity: 0.12; }
+
+/**
+ * Copyright 2019 Mashiro
+ * @description footer.scss
+ * @author Mashiro
+ * @license MIT
+ */
+footer::before {
+  content: "";
+  display: block;
+  width: 100%;
+  background-position: center;
+  background-size: auto 100%;
+  background-image: url(../dist/images/wave.svg); }
 
 /**
  * @description homepage cover image

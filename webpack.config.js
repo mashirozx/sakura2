@@ -9,11 +9,37 @@ module.exports = [{
   },
   devtool: 'inline-source-map',
   output: {
-    publicPath: '/dist/',
     filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '../dist/',
+  },
+  devServer:{
+    contentBase: path.join(__dirname, 'src'),
+    compress: false, // gzip
+    port: 8080,
+    publicPath: '/dist/'
   },
   module: {
     rules: [{
+        test: /\.(png|jpg|gif|svg)$/,
+        exclude: [
+          path.resolve(__dirname, './node_modules'),
+        ],
+        use: {
+          loader: 'file-loader',
+          options: {
+            name(file) {
+              // if (process.env.NODE_ENV === 'development') {
+              //   return '[path][name].[ext]';
+              // }
+              // return '[hash].[ext]';
+              return '[name].[ext]';
+            },
+            outputPath: 'images',
+          },
+        },
+      },
+      {
         test: /\.scss$/,
         use: [{
             loader: 'file-loader',
@@ -33,12 +59,23 @@ module.exports = [{
               plugins: () => [autoprefixer()]
             }
           },
+          // tooooooo slow!
           {
-            loader: 'fast-sass-loader',
+            loader: 'sass-loader',
             options: {
-              includePaths: ['./node_modules']
+              sourceMap: true,
+              sassOptions: {
+                includePaths: ['./node_modules']
+              },
             }
           },
+          // source-map not supported in fast-sass-loader!
+          // {
+          //   loader: 'fast-sass-loader',
+          //   options: {
+          //     includePaths: ['./node_modules']
+          //   }
+          // },
         ]
       },
       {
@@ -50,16 +87,16 @@ module.exports = [{
           },
         }, ],
         exclude: /node_modules/
-      }
+      },
     ]
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin({
-      sourceMap: false,
-    })],
-  },
+  // optimization: {
+  //   minimize: true,
+  //   minimizer: [new TerserPlugin({
+  //     sourceMap: false,
+  //   })],
+  // },
 }];
