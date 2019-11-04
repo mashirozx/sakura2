@@ -1,23 +1,27 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const TerserPlugin = require('terser-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = [{
   mode: "development", // "production" | "development" | "none"
   entry: {
-    entry: ['./src/scss/index.scss', './src/ts/index.ts']
+    main: ['./src/scss/index.scss', path.resolve(__dirname, './src/ts/index.ts')]
+  },
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: './js/bundle.js'
   },
   devtool: 'inline-source-map',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '../dist/',
-  },
-  devServer:{
-    contentBase: path.join(__dirname, 'src'),
-    compress: false, // gzip
-    port: 8080,
-    publicPath: '/dist/'
+  devServer: {
+    contentBase: path.join(__dirname, './dist'), //编译打包文件的位置
+    publicPath: '/',
+    port: 8080, //服务器端口号
+    // host: '0.0.0.0',
+    // proxy: {}, //代理列表
+    // compress: true,
+    // historyApiFallback: true, //开启服务器history重定向模式
   },
   module: {
     rules: [{
@@ -28,23 +32,26 @@ module.exports = [{
         use: {
           loader: 'file-loader',
           options: {
-            name(file) {
-              // if (process.env.NODE_ENV === 'development') {
-              //   return '[path][name].[ext]';
-              // }
-              // return '[hash].[ext]';
-              return '[name].[ext]';
-            },
-            outputPath: 'images',
+            // name(file) {
+            //   return './images/[name].[ext]';
+            // },
+            // 有毒💢
+            // 现在的情况是 dev 时要手动 cp -r ./src/img ./dist
+            // build 正常
+            name: '../images/[name].[ext]'
+            // outputPath: './images',
           },
         },
       },
       {
         test: /\.scss$/,
-        use: [{
+        use: [
+          //MiniCssExtractPlugin.loader,
+          {
             loader: 'file-loader',
             options: {
-              name: 'bundle.css',
+              name: './css/bundle.css',
+              // outputPath: './css',
             },
           },
           {
@@ -93,10 +100,21 @@ module.exports = [{
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin({
-      sourceMap: false,
-    })],
-  },
+  // optimization: {
+  //   minimize: true,
+  //   minimizer: [new TerserPlugin({
+  //     sourceMap: false,
+  //   })],
+  // },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+    }),
+    // new MiniCssExtractPlugin({
+    //   // Options similar to the same options in webpackOptions.output
+    //   // both options are optional
+    //   filename: "[name].css",
+    //   chunkFilename: "[name]_[hash].css"
+    // })
+  ]
 }];

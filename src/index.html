@@ -3,7 +3,7 @@
 
 <head>
   <title>Sakura v2</title>
-  <link rel="stylesheet" href="./dist/bundle.css">
+  <link rel="stylesheet" href="./css/bundle.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_679578_dgipmwt51qb.css">
 </head>
@@ -36,7 +36,11 @@
       <div class="cover-video-container"></div>
     </div>
 
-    <div id="header-top-after"></div>
+    <!--transparent area-->
+    <div id="header-top-after" class="header-top-after">
+      <!--wave decoration-->
+      <div id="header-top-after-deco" class="header-top-after-deco"></div>
+    </div>
 
     <div class="page-content">
       <aside class="side-bar-left">left</aside>
@@ -62,7 +66,8 @@
                       <i class="iconfont icon-file"></i> Child
                     </h4>
                     <div class="mdc-typography mdc-typography--body2 post-abstract">
-                      Visit ten places on our planet that are undergoing the biggest changes today.
+                      Visit ten places on our planet that are undergoing the biggest changes
+                      today.
                     </div>
                   </div>
 
@@ -103,7 +108,8 @@
                       <i class="iconfont icon-file"></i> Child
                     </h4>
                     <div class="mdc-typography mdc-typography--body2 post-abstract">
-                      Visit ten places on our planet that are undergoing the biggest changes today.
+                      Visit ten places on our planet that are undergoing the biggest changes
+                      today.
                     </div>
                   </div>
 
@@ -122,12 +128,11 @@
     </div>
 
     <footer>
-      Copyright
+      <div class="before" id="footer-before"></div>
+      <div class="main">Copyright</div>
     </footer>
 
   </div>
-
-  <script src="./dist/bundle.js" async></script>
 </body>
 
 </html>

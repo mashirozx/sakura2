@@ -17,6 +17,27 @@
 
 }
 
-#header-top-after {
-  width: 100%
+.header-top-after {
+  width: 100%;
+
+  // @media screen and (min-width: 761px) {
+  //   margin-top: -30px;
+  // }
+
+  &-deco {
+    display: block;
+    width: 100%;
+    background-position: center;
+    background-size: auto 100%;
+    background-image: url(../images/wave2.svg);
+    // bug or whatever????
+    // https://github.com/webpack-contrib/css-loader/issues/864
+    // TODO: https://github.com/webpack-contrib/mini-css-extract-plugin
+
+    @media screen and (min-width: $tablet-min-width) {
+      height: 30px;
+      position: absolute;
+      bottom: 0;
+    }
+  }
 }

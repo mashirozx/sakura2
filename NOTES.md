@@ -4,6 +4,7 @@
 - [SASS hankbook](https://www.sasscss.com/docs/)
 - [TS 注释规范](https://juejin.im/post/5ce24f8ae51d45106477bd45)
 - [9012年学 TS](https://juejin.im/post/5c68d99bf265da2db4141418)
+- [WP 常用插件和 loader](https://juejin.im/post/5c7f28056fb9a049bb7d169a)
 
 ### MDC 
 #### 输入框样式 
