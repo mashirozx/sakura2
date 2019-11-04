@@ -3,6 +3,8 @@
  * must before import
  */
 /* font color */
+/* Tablet min width */
+/* img files */
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -2243,13 +2245,20 @@ template {
  * @license MIT
  */
 footer {
-  background-image: url(../images/wave.svg); }
-  footer::before {
-    content: "";
+  position: relative;
+  background-color: #fcb8ab;
+  height: 100px; }
+  footer .before {
     display: block;
     width: 100%;
     background-position: center;
-    background-size: auto 100%; }
+    background-size: auto 100%;
+    background-image: url(../images/wave.svg); }
+    @media screen and (min-width: 761px) {
+      footer .before {
+        height: 30px;
+        position: absolute;
+        top: -30px; } }
 
 /**
  * @description homepage cover image
@@ -2265,8 +2274,19 @@ footer {
     margin: 0;
     overflow: hidden; }
 
-#header-top-after {
+.header-top-after {
   width: 100%; }
+  .header-top-after-deco {
+    display: block;
+    width: 100%;
+    background-position: center;
+    background-size: auto 100%;
+    background-image: url(../images/wave2.svg); }
+    @media screen and (min-width: 761px) {
+      .header-top-after-deco {
+        height: 30px;
+        position: absolute;
+        bottom: 0; } }
 
 /**
  * Copyright 2019 Mashiro
@@ -2285,9 +2305,9 @@ footer {
   -webkit-box-pack: justify;
           justify-content: space-between; }
   .page-content .main-center {
+    margin: 50px 0;
     height: 100%;
-    width: 800px;
-    background: #9acd3220; }
+    width: 800px; }
   .page-content .side-bar-left {
     width: 100px; }
   .page-content .side-bar-right {
