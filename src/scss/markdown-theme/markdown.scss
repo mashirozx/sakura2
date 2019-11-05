@@ -1,0 +1,285 @@
+/**
+ * @description markdown.css (https://github.com/mrcoles/markdown-css)
+ * @author NOT Mashiro
+ * @license MIT
+ */
+
+.markdown {
+    $font-size: 14px;
+    $line-height: 20px;
+    $color: #333;
+    $four-space: 34px;
+    $four-space-css3: #{"4ch"}; // some browsers support char spacing
+    $two-space-css3: #{"2ch"}; // less does not support ch very well
+    $ul-tick: "*";
+    $strong-char: "__";
+    $em-char: "*";
+
+    // makes things like pre tags play more nicely with mobile
+    word-wrap: break-word;
+
+    &,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    pre,
+    code,
+    blockquote,
+    em,
+    strong,
+    code {
+        font-size: $font-size;
+        line-height: $line-height;
+        font-weight: normal;
+        font-style: normal;
+        font-family: consolas, monaco, courier, "courier new", monospace;
+        color: $color;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    pre,
+    code,
+    blockquote,
+    ol,
+    ul,
+    li,
+    p,
+    section,
+    header,
+    footer {
+        float: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1,
+    p,
+    ul,
+    ol,
+    pre,
+    blockquote {
+        margin-top: $line-height;
+        margin-bottom: $line-height;
+    }
+
+    h1 {
+        position: relative;
+        display: inline-block;
+
+        // table-cell puts on own line and limits width to text
+        display: table-cell;
+
+        padding: $line-height 0 $line-height * 2;
+        margin: 0;
+        overflow: hidden;
+
+        // `h1:after` creates something as the last child of the h1,
+        // likewise `:before` creates something as the first child
+        &:after {
+            // 100 characters wide max
+            content: "====================================================================================================";
+            position: absolute;
+            bottom: $line-height;
+            left: 0;
+        }
+    }
+
+    // this matches the next sibling after an h1 (apart from a pure text node)
+    // since h1s use padding instead of margin, I did not want to double pad
+    h1+* {
+        margin-top: 0;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        position: relative;
+        margin-bottom: $line-height;
+    }
+
+    h2:before,
+    h3:before,
+    h4:before,
+    h5:before,
+    h6:before {
+        content: "## ";
+        display: inline;
+    }
+
+    h3:before {
+        content: "### ";
+    }
+
+    h4:before {
+        content: "#### ";
+    }
+
+    h5:before {
+        content: "##### ";
+    }
+
+    h6:before {
+        content: "###### ";
+    }
+
+    li {
+        position: relative;
+        display: block;
+        padding-left: $four-space;
+        padding-left: $four-space-css3;
+    }
+
+    li:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    ul>li:after {
+        content: $ul-tick;
+    }
+
+    ol {
+        // Auto-increments the numbering for ordered lists.
+        counter-reset: ol;
+    }
+
+    ol>li:after {
+        content: counter(ol) ".";
+        counter-increment: ol;
+    }
+
+    pre {
+        margin-left: $four-space;
+        margin-left: $four-space-css3;
+    }
+
+    blockquote {
+        position: relative;
+        padding-left: $four-space/2;
+        padding-left: $two-space-css3;
+        overflow: hidden;
+
+        &:after {
+            // 100 lines max
+            // the \A becomes a newline character and `white-space: pre`
+            // makes it act like a <br>
+            content: ">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>";
+            white-space: pre;
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: $font-size;
+            line-height: $line-height;
+        }
+    }
+
+    strong:before,
+    strong:after {
+        content: $strong-char;
+        display: inline;
+    }
+
+    em:before,
+    em:after {
+        content: $em-char;
+        display: inline;
+    }
+
+
+    a {
+        text-decoration: none;
+    }
+
+    a:before {
+        content: "[";
+        display: inline;
+        color: $color;
+    }
+
+    a:after {
+        content: "]("attr(href) ")";
+        display: inline;
+        color: $color;
+    }
+
+    code {
+        font-weight: 100;
+    }
+
+    code:before,
+    code:after {
+        content: "`";
+        display: inline;
+    }
+
+    pre code:before,
+    pre code:after {
+        content: none;
+    }
+
+    hr {
+        position: relative;
+        height: $line-height;
+        font-size: 0;
+        line-height: 0;
+        overflow: hidden;
+        border: 0;
+        margin-bottom: $line-height;
+
+        &:after {
+            // 100 characters wide max
+            // older ie versions do not show the content
+            content: "----------------------------------------------------------------------------------------------------";
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: $font-size;
+            line-height: $line-height;
+            width: 100%;
+            word-wrap: break-word;
+        }
+    }
+
+    img {
+        width: 100%;
+    }
+
+    // only opera support before and after with img :(
+    // img {
+    //     display: inline-block;
+
+    //     &:before {
+    //         content: "!["attr(alt);
+    //         display: inline-block;
+    //     }
+
+    //     &:after {
+    //         content: "]("attr(src) ")";
+    //         display: inline-block;
+    //     }
+    // }
+}
+
+// firefox cannot put position absolute inside table-cell
+@-moz-document url-prefix() {
+    .markdown h1 {
+        display: block;
+    }
+}
+
+.markdown-ones {
+    ol>li:after {
+        content: "1.";
+    }
+}

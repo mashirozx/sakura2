@@ -41,9 +41,8 @@ window.onload = function () {
     cacheBust: true
   })
 
-  console.log('pjax:loaded')
   function pjaxReload() {
-    console.log('pjax:complete')
+    // console.log('pjax:complete')
     if (window.location.pathname == "/") {
       console.log(`home!`)
     } else {

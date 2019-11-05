@@ -1,0 +1,278 @@
+$lightPrimaryColor: #c5cae9;
+$textPrimaryColor: #fff;
+$accentColor: rgb(99, 137, 185);
+$primaryTextColor: #646464;
+$secondaryTextColor: #000;
+$borderColor: #dadada;
+$backColor: #f6f6f6;
+$codeBg: #f6f6f6;
+
+$font-custom:"Comic Sans MS", "Helvetica Neue", "Microsoft Yahei", "Microsoft Yahei", -apple-system, sans-serif;
+$font-content:"Helvetica Neue", "Microsoft Yahei", "Microsoft Yahei", -apple-system, sans-serif;
+$font-size: 15px;
+
+$contentWidth: 982px;
+$menuWidth: 240px;
+$menuPadding: 20px;
+$headerH: 56px;
+$navH: 44px;
+$mNavH: 36px;
+
+.markdown {
+    text-align: left;
+    font-family: $font-content;
+    letter-spacing: 2px;
+    padding-bottom: 10px;
+    line-height: 1.8;
+    font-size: 120%;
+
+    a:not(.post-more) {
+        // @include hoverAnchor($accentColor);
+    }
+
+    >.highlight,
+    >.image-bubble,
+    >pre {
+        margin-left: -35px;
+        margin-right: -35px;
+    }
+
+    >.highlight,
+    >pre {
+        padding: 10px 35px 20px 35px;
+    }
+
+    .image-bubble {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .image-caption {
+        display: inline-block;
+        margin-top: 10px;
+        color: $secondaryTextColor;
+    }
+
+    .headerlink {
+        visibility: hidden;
+        margin-left: -1em;
+        padding-right: 5px;
+        color: $lightPrimaryColor;
+        border-bottom: none !important;
+
+        &:hover {
+            text-decoration: none;
+            border: none;
+        }
+    }
+
+    p {
+        word-wrap: break-word;
+    }
+
+    p,
+    li {
+        a {
+            color: $accentColor;
+            word-break: break-all;
+        }
+
+        margin-bottom:7px;
+    }
+
+    strong {
+        font-weight: bold;
+        color: rgb(39, 39, 39);
+        text-shadow: rgb(158, 158, 158) 0px 0px 1px;
+
+        a {
+            border-color: $accentColor
+        }
+    }
+
+    em {
+        color: $secondaryTextColor
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-left: 10px;
+        font-weight: bold;
+        color: $primaryTextColor;
+        padding-top: $headerH;
+        margin-top: 40px * -1;
+        padding-bottom: 8px;
+        text-shadow: rgb(187, 186, 186) 0px 0px 1px, rgb(255, 255, 251) 0px 0px 1px, rgb(255, 255, 251) 0px 0px 2px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    blockquote,
+    ol,
+    p,
+    pre,
+    table,
+    ul,
+    .video-container {
+        margin-bottom: 10px;
+    }
+
+    .video-container iframe {
+        max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        &:hover {
+            .headerlink {
+                visibility: visible
+            }
+        }
+    }
+
+    h1 {
+        font-size: 170%;
+    }
+
+    h2 {
+        font-size: 150%;
+    }
+
+    blockquote p:first-child,
+    blockquote:first-child,
+    ol:first-child,
+    p:first-child,
+    pre:first-child,
+    table:first-child,
+    ul:first-child,
+    figure:first-child {
+        margin-top: 0
+    }
+
+    ol,
+    ul {
+        line-height: 30px;
+    }
+
+    video,
+    audio {
+        max-width: 100%;
+    }
+
+    blockquote {
+        position: relative;
+        padding: 6px 14px;
+        border-left: 3px solid #ccc;
+        color: #999;
+        background: $codeBg;
+        border-radius: 0 2px 2px 0;
+
+        p {
+            margin: 0;
+        }
+
+        footer {
+            margin-top: 10px;
+            text-align: right;
+        }
+    }
+
+    table {
+        width: 100%;
+        border: 1px solid #dedede;
+        margin: 15px 0;
+        border-collapse: collapse;
+
+        tr,
+        td {
+            height: 35px;
+        }
+
+        thead {
+            tr {
+                background: #f8f8f8;
+            }
+        }
+
+        tbody {
+            tr {
+                &:hover {
+                    background: #efefef;
+                }
+            }
+        }
+
+        td,
+        th {
+            border: 1px solid #dedede;
+            padding: 0 10px;
+        }
+    }
+
+    figure {
+        table {
+            border: none;
+            width: auto;
+            margin: 0;
+
+            tbody {
+                tr {
+                    &:hover {
+                        background: none;
+                    }
+                }
+
+                td {
+                    border: none;
+                }
+            }
+        }
+    }
+
+    code,
+    kbd,
+    pre,
+    samp {
+        font-family: $font-code;
+    }
+
+    code,
+    pre {
+        background: $codeBg
+    }
+
+    p code,
+    li code {
+        line-height: 1;
+        margin: 0 4px;
+        padding: 3px 5px;
+        border: 1px solid rgb(233, 233, 233);
+        border-radius: 2px;
+        word-wrap: break-word;
+        color: rgb(112, 111, 111);
+        font-weight: bold;
+        text-shadow: rgb(202, 202, 202) 0px 0px 1px;
+    }
+
+    pre {
+        margin: 24px 0;
+
+        code {
+            border-radius: 0;
+            font-size: inherit;
+            margin: 0;
+            padding: 0;
+        }
+    }
+}
