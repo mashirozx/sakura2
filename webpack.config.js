@@ -18,7 +18,7 @@ module.exports = [{
     contentBase: path.join(__dirname, './dist'), //编译打包文件的位置
     publicPath: '/',
     port: 8080, //服务器端口号
-    // host: '0.0.0.0',
+    host: '0.0.0.0',
     // proxy: {}, //代理列表
     // compress: true,
     // historyApiFallback: true, //开启服务器history重定向模式

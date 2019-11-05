@@ -1,2 +1,5 @@
 node_modules
 push.bat
+pull.bat
+push.sh
+pull.sh
