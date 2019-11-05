@@ -2246,8 +2246,7 @@ template {
  */
 footer {
   position: relative;
-  background-color: #fcb8ab;
-  height: 100px; }
+  background-color: #fcb8ab; }
   footer .before {
     display: block;
     width: 100%;
@@ -2259,6 +2258,10 @@ footer {
         height: 30px;
         position: absolute;
         top: -30px; } }
+  footer .main {
+    padding: 30px;
+    text-align: center;
+    color: #ffffff; }
 
 /**
  * @description homepage cover image
@@ -2845,7 +2848,7 @@ svg.mdc-button__icon {
   font-size: 6rem;
   line-height: 6rem;
   font-weight: 300;
-  letter-spacing: -0.01563em;
+  letter-spacing: -0.01562em;
   text-decoration: inherit;
   text-transform: inherit; }
 
@@ -3014,14 +3017,14 @@ svg.mdc-button__icon {
           .post-thumb-item .primary-action .content .post-info .text .post-date,
           .post-thumb-item .primary-action .content .post-info .text .post-meta {
             margin: 0;
-            color: #888;
+            color: #888888;
             font-size: 12px; }
             .post-thumb-item .primary-action .content .post-info .text .post-date i,
             .post-thumb-item .primary-action .content .post-info .text .post-meta i {
               font-size: 12px; }
           .post-thumb-item .primary-action .content .post-info .text .post-abstract {
             margin: 20px 0;
-            color: #888; }
+            color: #888888; }
         .post-thumb-item .primary-action .content .post-info .btn--align-left {
           margin: auto auto 30px 30px; }
         .post-thumb-item .primary-action .content .post-info .btn--align-right {

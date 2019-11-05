@@ -7,8 +7,7 @@
 
 footer {
     position: relative;
-    background-color: #fcb8ab;
-    height: 100px;
+    background-color: $mdc-theme-primary;
 
     .before {
         display: block;
@@ -23,4 +22,11 @@ footer {
             top: -30px;
         }
     }
+
+    .main {
+        padding: 30px;
+        text-align: center;
+        color: $font-color-super-light;
+    }
+
 }

@@ -10,6 +10,7 @@ import headerBarScrollHandler from "./modules/headerBarScrollHandler"
 import mdcInit from "./components/mdcInit"
 import Pjax from "pjax"
 import getHexFilter from "./modules/hexFilter"
+import rgb2hex from "./modules/rgb2hex"
 
 window.onscroll = function () {
   headerBarScrollHandler()
@@ -17,7 +18,8 @@ window.onscroll = function () {
 
 // TODO: global configuration
 // TODO: transparent before calculation been done!
-let themeColorFilter = getHexFilter('#fcb8ab')
+let themePrimaryColor = rgb2hex(getComputedStyle(document.querySelector('footer')).backgroundColor)
+let themeColorFilter = getHexFilter(themePrimaryColor)
 
 let InitFun = function () {
   coverImgIni()
@@ -35,10 +37,11 @@ window.onload = function () {
 
   let pjax = new Pjax({
     elements: "a", // default is "a[href], form[action]"
-    selectors: ["title", ".root"],
+    selectors: ["title", "#root"],
     cacheBust: true
   })
 
+  console.log('pjax:loaded')
   function pjaxReload() {
     console.log('pjax:complete')
     if (window.location.pathname == "/") {

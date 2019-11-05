@@ -20,7 +20,7 @@ module.exports = [{
     port: 8080, //服务器端口号
     host: '0.0.0.0',
     // proxy: {}, //代理列表
-    // compress: true,
+    compress: true,
     // historyApiFallback: true, //开启服务器history重定向模式
   },
   module: {
@@ -39,7 +39,7 @@ module.exports = [{
             // 现在的情况是 dev 时要手动 cp -r ./src/img ./dist
             // build 正常
             name: '../images/[name].[ext]'
-            // outputPath: './images',
+            // outputPath: './images', 
           },
         },
       },
@@ -108,8 +108,15 @@ module.exports = [{
   // },
   plugins: [
     new HtmlWebpackPlugin({
+      filename: 'index.html',
       template: './src/index.html',
+      chunks: ['index']
     }),
+    new HtmlWebpackPlugin({
+      filename: 'single.html',
+      template: './src/single.html',
+      chunks: ['single']
+    })
     // new MiniCssExtractPlugin({
     //   // Options similar to the same options in webpackOptions.output
     //   // both options are optional
