@@ -5,7 +5,11 @@ Sakura v2
 
 [Demo](https://mashirozx.github.io/sakura2/dist/)
 
-I'll build the basical templates here, the stylesheets and scripts in `dist` folder should work on WordPress front end as well. 
+ ### Install
+Git Clone/download/upload into `./wp-content/themes/`, then active theme in WordPress dashboard.
+
+### Development
+__DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes under this folder will be replaced after `npm run build`. Develop by changes files in `./src/`.
 
 ```bash
 npm i -g webpack-cli
@@ -18,4 +22,7 @@ npm run build
 
 __Commands must run under Linux!__ Dev server on <http://localhost:8080/>, also host on your public IP, check firewall!
 
-[Notes](./NOTES.md)
+### Contribut
+Won't merge any pull requests during `beta` stage.
+
+[Private Notebook](./NOTES.md)
