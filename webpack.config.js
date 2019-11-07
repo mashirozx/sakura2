@@ -3,7 +3,7 @@ const autoprefixer = require('autoprefixer');
 const TerserPlugin = require('terser-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // still not work...
 // const imgOutputPath = process.env.ENV_MODE === "build" ? 'images/[name].[ext]' : '../images/[name].[ext]';
@@ -47,16 +47,26 @@ module.exports = [{
       {
         test: /\.scss$/,
         use: [
-          //MiniCssExtractPlugin.loader,
+          // no need with MiniCssExtractPlugin
+          // {
+          //   loader: 'file-loader',
+          //   options: {
+          //     name: './css/bundle.css',
+          //     // outputPath: './css',
+          //   },
+          // },
+          // bug with file-loader: https://github.com/webpack-contrib/css-loader/issues/864#issuecomment-445815198
+          // {
+          //   loader: 'extract-loader'
+          // },
           {
-            loader: 'file-loader',
-            options: {
-              name: './css/bundle.css',
-              // outputPath: './css',
-            },
-          },
-          {
-            loader: 'extract-loader'
+            loader: MiniCssExtractPlugin.loader,
+            // options: {
+            //   // you can specify a publicPath here
+            //   // by default it uses publicPath in webpackOptions.output
+            //   publicPath: '../',
+            //   hmr: process.env.NODE_ENV === 'development',
+            // },
           },
           {
             loader: 'css-loader'
@@ -118,11 +128,11 @@ module.exports = [{
     //   template: './src/single.html',
     //   chunks: ['single']
     // })
-    // new MiniCssExtractPlugin({
-    //   // Options similar to the same options in webpackOptions.output
-    //   // both options are optional
-    //   filename: "[name].css",
-    //   chunkFilename: "[name]_[hash].css"
-    // })
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "css/bundle.css",
+      // chunkFilename: "[id].css"
+    })
   ]
 }];
