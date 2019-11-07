@@ -22,7 +22,7 @@ npm run build
 
 __Commands must run under Linux!__ Dev server on <http://localhost:8080/>, also host on your public IP, check firewall!
 
-### Contribut
+### Contribution
 Won't merge any pull requests during `beta` stage.
 
 [Private Notebook](./NOTES.md)
