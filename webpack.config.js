@@ -97,6 +97,11 @@ module.exports = [{
         toType: 'file',
       },
       {
+        from: './src/screenshot.png',
+        to: './screenshot.png',
+        toType: 'file',
+      },
+      {
         from: './src/*.html',
         to: './[name].[ext]',
         toType: 'template',
