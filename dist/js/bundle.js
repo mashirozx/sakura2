@@ -8171,13 +8171,13 @@ let scrollAction = {
 
 /***/ 0:
 /*!*****************************************************!*\
-  !*** multi ./src/scss/index.scss ./src/ts/index.ts ***!
+  !*** multi ./src/ts/index.ts ./src/scss/index.scss ***!
   \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./src/scss/index.scss */"./src/scss/index.scss");
-module.exports = __webpack_require__(/*! /home/sakura2/src/ts/index.ts */"./src/ts/index.ts");
+__webpack_require__(/*! ./src/ts/index.ts */"./src/ts/index.ts");
+module.exports = __webpack_require__(/*! ./src/scss/index.scss */"./src/scss/index.scss");
 
 
 /***/ })

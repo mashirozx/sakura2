@@ -14,7 +14,7 @@ footer {
         width: 100%;
         background-position: center;
         background-size: auto 100%;
-        background-image: url($img-wave-svg);
+        background-image: url(../images/wave.svg);
 
         @media screen and (min-width: $tablet-min-width) {
             height: 30px;

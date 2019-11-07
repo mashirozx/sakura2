@@ -1,13 +1,17 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const TerserPlugin = require('terser-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+// still not work...
+// const imgOutputPath = process.env.ENV_MODE === "build" ? 'images/[name].[ext]' : '../images/[name].[ext]';
 
 module.exports = [{
   mode: "development", // "production" | "development" | "none"
   entry: {
-    main: ['./src/scss/index.scss', path.resolve(__dirname, './src/ts/index.ts')]
+    main: ['./src/ts/index.ts', './src/scss/index.scss']
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -35,9 +39,6 @@ module.exports = [{
             // name(file) {
             //   return './images/[name].[ext]';
             // },
-            // 有毒💢
-            // 现在的情况是 dev 时要手动 cp -r ./src/img ./dist
-            // build 正常
             name: '../images/[name].[ext]'
             // outputPath: './images', 
           },
@@ -66,7 +67,6 @@ module.exports = [{
               plugins: () => [autoprefixer()]
             }
           },
-          // tooooooo slow!
           {
             loader: 'sass-loader',
             options: {
@@ -76,13 +76,6 @@ module.exports = [{
               },
             }
           },
-          // source-map not supported in fast-sass-loader!
-          // {
-          //   loader: 'fast-sass-loader',
-          //   options: {
-          //     includePaths: ['./node_modules']
-          //   }
-          // },
         ]
       },
       {
@@ -107,16 +100,24 @@ module.exports = [{
   //   })],
   // },
   plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: './src/index.html',
-      chunks: ['index']
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'single.html',
-      template: './src/single.html',
-      chunks: ['single']
-    })
+    new CopyPlugin([
+      // { from: './src/images', to: './images' },
+      {
+        from: './src/*.html',
+        to: './[name].[ext]',
+        toType: 'template',
+      },
+    ]),
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   template: './src/index.html',
+    //   chunks: ['index']
+    // }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'single.html',
+    //   template: './src/single.html',
+    //   chunks: ['single']
+    // })
     // new MiniCssExtractPlugin({
     //   // Options similar to the same options in webpackOptions.output
     //   // both options are optional
