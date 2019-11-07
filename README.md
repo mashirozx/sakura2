@@ -5,12 +5,16 @@ Sakura v2
 
 [Demo](https://mashirozx.github.io/sakura2/dist/)
 
+__This is a developing repo, do not install in production environment!__
+
  ### Install
-Git Clone/download/upload into `./wp-content/themes/`, then active theme in WordPress dashboard.
+Clone/download/upload into `./wp-content/themes/`, then active theme in WordPress dashboard.
 
 ### Development
-__DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes under this folder will be replaced after `npm run build`. Develop by changes files in `./src/`.
+__DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes in this folder will be replaced after `npm run build`. Develop by changing files in `./src/`.
 
+
+### Compile
 ```bash
 npm i -g webpack-cli
 npm install
