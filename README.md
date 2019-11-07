@@ -10,16 +10,12 @@ I'll build the basical templates here, the stylesheets and scripts in `dist` fol
 ```bash
 npm i -g webpack-cli
 npm install
-# copy image
-cp -r ./src/images ./dist
-# or
-./do.sh
 # Run dev server
 npm start
 # Build
 npm run build
 ```
 
-Dev server on <http://localhost:8080/>, also host on your public IP, check firewall!
+__Commands must run under Linux!__ Dev server on <http://localhost:8080/>, also host on your public IP, check firewall!
 
 [Notes](./NOTES.md)
