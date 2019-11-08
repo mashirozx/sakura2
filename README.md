@@ -18,8 +18,8 @@ __DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes in this folder will be 
 ```bash
 npm i -g webpack-cli
 npm install
-# Run dev server
-npm start
+# Dynamic comiple (--watch file changes)
+npm run dev
 # Build
 npm run build
 ```
