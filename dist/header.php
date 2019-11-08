@@ -33,7 +33,7 @@
           <span class="mdc-top-app-bar__title">Sakura</span>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-          <a href="./" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">home</a>
+          <a href="<?php echo esc_url( home_url() ); ?>" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">home</a>
           <a href="#" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">print</a>
           <a href="#" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">bookmark</a>
         </section>

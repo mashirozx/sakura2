@@ -17,6 +17,10 @@
             flex-flow: row nowrap;
             justify-content: space-between;
 
+            &.reverse {
+                flex-flow: row-reverse nowrap;
+            }
+
             .post-info {
                 width: 45%;
                 height: 100%;
@@ -31,6 +35,10 @@
                     .post-title {
                         margin: 0;
                         color: $font-color-normal;
+
+                        a {
+                            color: $font-color-normal;
+                        }
                     }
 
                     .post-date,
@@ -42,11 +50,19 @@
                         i {
                             font-size: 12px;
                         }
+
+                        a {
+                            color: $font-color-light;
+                        }
                     }
 
                     .post-abstract {
                         margin: 20px 0;
                         color: $font-color-light;
+                    }
+
+                    a {
+                        text-decoration: none;
                     }
                 }
 
