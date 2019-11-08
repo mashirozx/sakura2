@@ -24,7 +24,7 @@ npm run dev
 npm run build
 ```
 
-__Commands must run under Linux!__ Dev server on <http://localhost:8080/>, also host on your public IP, check firewall!
+__Commands only tested on Linux__, but should also work in other platforms.
 
 ### Contribution
 Won't merge any pull requests during `beta` stage.

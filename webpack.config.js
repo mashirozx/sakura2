@@ -2,6 +2,7 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const RemovePlugin = require('remove-files-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Chunks2JsonPlugin = require('chunks-2-json-webpack-plugin');
 
@@ -106,6 +107,11 @@ module.exports = [{
         toType: 'file',
       },
       {
+        from: './images/',
+        to: './images/[name].[ext]',
+        toType: 'template',
+      },
+      {
         from: './src/*.html',
         to: './[name].[ext]',
         toType: 'template',
@@ -121,6 +127,22 @@ module.exports = [{
         test: /src\/php\/([^/]+)\/(.+)\.php$/,
       }
     ]),
+    new RemovePlugin({
+      /**
+       * Before compilation removes entire `dist` folder.
+       */
+      before: {
+        include: ['./dist']
+      },
+
+      /**
+       * After compilation removes all files in `dist/styles` folder,
+       * that have `.map` type.
+       */
+      after: {
+        include: ['./images']
+      }
+    }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
