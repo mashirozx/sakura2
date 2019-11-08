@@ -1,45 +1,93 @@
 <?php get_header(); ?>
 
-	<main role="main" aria-label="Content">
-		<!-- section -->
-		<section>
+<div class="header-top">
+  <!--index cover image-->
+  <figure data="mark" id="cover-img-container">
+    <div data="layer" id="img-view" data-depth="0.5">
+      <img data="cover" id="cover-img" src="https://view.moezx.cc/images/2019/10/21/1zuypi4mkggq6js5lqxt3sjaa.jpg">
+    </div>
+  </figure>
+  <div class="cover-video-container"></div>
+</div>
 
-			<h1><?php the_title(); ?></h1>
+<!--transparent area-->
+<div id="header-top-after" class="header-top-after">
+  <!--wave decoration-->
+  <div id="header-top-after-deco" class="header-top-after-deco"></div>
+</div>
 
-		<?php if ( have_posts()) : while ( have_posts() ) : the_post(); ?>
+<div class="page-content">
+  <aside class="side-bar-left">left</aside>
+  <section class="main-center">
+    <div class="post-list">
+      <article class="markdown">
+        <h1>HTML that looks like markdown</h1>
 
-			<!-- article -->
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+        <p>When this section is styled by <code>markdown.css</code> it looks like plain-text, despite being
+          HTML.
+          Inspect it with firebug or click on &lt;HTML/&gt; to see the markup.</p>
 
-				<?php the_content(); ?>
+        <p>A <strong>strong tag</strong> and an <em>em tag</em> get styled like so.</p>
+        <p>How about a link to <a href="https://2heng.xin">my site</a>?</p>
 
-				<?php comments_template( '', true ); // Remove if you don't want comments. ?>
+        <h2>H2 header</h2>
 
-				<br class="clear">
+        <h3>Lists</h3>
+        <ul>
+          <li>they look like this</li>
+          <li>it’s how you’d format them in pure markdown, if you took the time to indent when it wrapped to a
+            new
+            line.</li>
+        </ul>
 
-				<?php edit_post_link(); ?>
+        <h3>Ordered lists</h3>
+        <ol>
+          <li>here’s one line from a numbered list</li>
+          <li>here’s another</li>
+          <li>in markdown, the actual numbers don’t matter—you can toggle this with the class <a href="#"
+              onclick="$('body').toggleClass('markdown-ones');return false"><code>markdown-ones</code></a>
+          </li>
+        </ol>
 
-			</article>
-			<!-- /article -->
+        <h3>Block quotes</h3>
+        <blockquote>
+          This is a blockquote that extends<br>
+          to multiple lines.<br><br>
+          With repeating email-style angle brackets.
+        </blockquote>
 
-		<?php endwhile; ?>
+        <h3>Code blocks</h3>
+        <pre><code>(function() {
+  console.log('code blocks indent four spaces');
+})()</code></pre>
 
-		<?php else : ?>
+        <h3>Different headers</h3>
 
-			<!-- article -->
-			<article>
+        <h4>h4 header</h4>
+        <h5>h5 header</h5>
+        <h6>h6 header</h6>
 
-				<h2><?php esc_html_e( 'Sorry, nothing to display.', 'html5blank' ); ?></h2>
+        <hr>
 
-			</article>
-			<!-- /article -->
+        <p>That’s an hr above. It just works!</p>
 
-		<?php endif; ?>
+        <p>
+          However, images will still look like images. Deal with it.
+        </p>
 
-		</section>
-		<!-- /section -->
-	</main>
+        <p>
+          <img alt="kitten" src="https://view.moezx.cc/images/2019/10/21/518j34fw8n6p02epy36nqz8vy.jpg">
+        </p>
 
-<?php get_sidebar(); ?>
+        <p>
+          Made by <a href="https://2heng.xin">Mashiro</a> /<br>
+          aka <a href="https://twitter.com/2hengxin">@2hengxin</a> /<br>
+          code on <a href="https://github.com/mashirozx/sakura2">github</a>
+        </p>
+      </article>
+    </div>
+  </section>
+  <aside class="side-bar-right">right</aside>
+</div>
 
 <?php get_footer(); ?>

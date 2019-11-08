@@ -2,6 +2,7 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const RemovePlugin = require('remove-files-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Chunks2JsonPlugin = require('chunks-2-json-webpack-plugin');
 
@@ -14,7 +15,7 @@ module.exports = [{
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: './js/bundle.js'
+    filename: './js/bundle_[hash].js'
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -43,7 +44,7 @@ module.exports = [{
             // name(file) {
             //   return './images/[name].[ext]';
             // },
-            name: '../images/[name].[ext]'
+            name: '../images/[hash].[ext]'
             // outputPath: './images', 
           },
         },
@@ -106,10 +107,15 @@ module.exports = [{
         toType: 'file',
       },
       {
-        from: './src/*.html',
-        to: './[name].[ext]',
+        from: './src/images/',
+        to: './images/[hash].[ext]',
         toType: 'template',
       },
+      // {
+      //   from: './src/*.html',
+      //   to: './[name].[ext]',
+      //   toType: 'template',
+      // },
       {
         from: './src/php/*.php',
         to: './[name].[ext]',
@@ -121,10 +127,18 @@ module.exports = [{
         test: /src\/php\/([^/]+)\/(.+)\.php$/,
       }
     ]),
+    new RemovePlugin({
+      before: {
+        include: ['./dist', './images']
+      },
+      after: {
+        include: ['./images']
+      }
+    }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: "./css/bundle.css",
+      filename: "./css/bundle_[hash].css",
       // chunkFilename: "[id].css"
     }),
     new Chunks2JsonPlugin({
