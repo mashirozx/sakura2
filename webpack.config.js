@@ -26,6 +26,11 @@ module.exports = [{
     compress: true,
     // historyApiFallback: true, 
   },
+  watchOptions: {
+    aggregateTimeout: 300,
+    //poll: 1000, // specifying a poll interval in milliseconds
+    ignored: /node_modules/
+  },
   module: {
     rules: [{
         test: /\.(png|jpg|gif|svg)$/,
@@ -90,8 +95,7 @@ module.exports = [{
   //   })],
   // },
   plugins: [
-    new CopyPlugin([
-      {
+    new CopyPlugin([{
         from: './src/package.less',
         to: './style.css',
         toType: 'file',
@@ -110,6 +114,11 @@ module.exports = [{
         from: './src/php/*.php',
         to: './[name].[ext]',
         toType: 'template',
+      },
+      {
+        from: './src/php/*/*',
+        to: './[1]/[2].[ext]',
+        test: /src\/php\/([^/]+)\/(.+)\.php$/,
       }
     ]),
     new MiniCssExtractPlugin({
