@@ -53,7 +53,7 @@
     "start": "webpack-dev-server",
     "release": "cp -r dist docs/dist && cp *.html docs && cleancss dist/bundle.css -o docs/dist/bundle.css",
     "release-win": "cleancss dist/bundle.css -o docs/dist/bundle.css",
-    "build": "rm -rf dist && cross-env ENV_MODE=build webpack --progress && mv images dist",
+    "build": "rm -rf dist && cross-env ENV_MODE=build webpack --progress git&& mv images dist",
     "clean": "rm -rf dist"
   },
   "author": "mashirozx",
