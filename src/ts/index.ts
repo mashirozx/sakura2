@@ -18,7 +18,8 @@ window.onscroll = function () {
 
 // TODO: global configuration
 // TODO: transparent before calculation been done!
-let themePrimaryColor = rgb2hex(getComputedStyle(document.querySelector('footer')).backgroundColor)
+// let themePrimaryColor = rgb2hex(window.getComputedStyle(document.querySelector('footer')).backgroundColor)
+let themePrimaryColor = '#fcb8ab'
 let themeColorFilter = getHexFilter(themePrimaryColor)
 
 let InitFun = function () {

@@ -1,51 +1,42 @@
 <!doctype html>
-<html <?php language_attributes(); ?> class="no-js">
-	<head>
-		<meta charset="<?php bloginfo( 'charset' ); ?>">
-		<title><?php wp_title( '' ); ?><?php if ( wp_title( '', false ) ) { echo ' : '; } ?><?php bloginfo( 'name' ); ?></title>
+<html <?php language_attributes();?> class="no-js">
 
-		<link href="//www.google-analytics.com" rel="dns-prefetch">
-		<link href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/icons/favicon.ico" rel="shortcut icon">
-		<link href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/icons/touch.png" rel="apple-touch-icon-precomposed">
-		<link rel="alternate" type="application/rss+xml" title="<?php bloginfo( 'name' ); ?>" href="<?php bloginfo( 'rss2_url' ); ?>" />
+<head>
+  <meta charset="<?php bloginfo('charset');?>">
+  <title><?php wp_title('');?><?php if (wp_title('', false)) {echo ' : ';}?><?php bloginfo('name');?>
+  </title>
 
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="<?php bloginfo( 'description' ); ?>">
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  <link href="<?php echo esc_url(get_template_directory_uri()); ?>/img/icons/favicon.ico" rel="shortcut icon">
+  <link href="<?php echo esc_url(get_template_directory_uri()); ?>/img/icons/touch.png"
+    rel="apple-touch-icon-precomposed">
+  <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name');?>"
+    href="<?php bloginfo('rss2_url');?>" />
 
-		<?php wp_head(); ?>
-		<script>
-		// conditionizr.com
-		// configure environment tests
-		conditionizr.config({
-			assets: '<?php echo esc_url( get_template_directory_uri() ); ?>',
-			tests: {}
-		});
-		</script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="<?php bloginfo('description');?>">
 
-	</head>
-	<body <?php body_class(); ?>>
+  <?php wp_head();?>
 
-		<!-- wrapper -->
-		<div class="wrapper">
+</head>
 
-			<!-- header -->
-			<header class="header clear" role="banner">
+<body <?php body_class();?>>
 
-					<!-- logo -->
-					<div class="logo">
-						<a href="<?php echo esc_url( home_url() ); ?>">
-							<!-- svg logo - toddmotto.com/mastering-svg-use-for-a-retina-web-fallbacks-with-png-script -->
-							<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/logo.svg" alt="Logo" class="logo-img">
-						</a>
-					</div>
-					<!-- /logo -->
-
-					<!-- nav -->
-					<nav class="nav" role="navigation">
-						<?php html5blank_nav(); ?>
-					</nav>
-					<!-- /nav -->
-
-			</header>
-			<!-- /header -->
+  <!-- wrapper (pjax container) -->
+  <div id="root" class="wrapper">
+    <header id="nav-header" class="mdc-top-app-bar mdc-top-app-bar--dense">
+      <!--nav mune-->
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+          <span class="mdc-top-app-bar__title">Sakura</span>
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+          <a href="./" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">home</a>
+          <a href="#" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">print</a>
+          <a href="#" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">bookmark</a>
+        </section>
+      </div>
+    </header>
+    <!-- /header -->

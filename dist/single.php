@@ -1,71 +1,93 @@
 <?php get_header(); ?>
 
-	<main role="main" aria-label="Content">
-	<!-- section -->
-	<section>
+<div class="header-top">
+  <!--index cover image-->
+  <figure data="mark" id="cover-img-container">
+    <div data="layer" id="img-view" data-depth="0.5">
+      <img data="cover" id="cover-img" src="https://view.moezx.cc/images/2019/10/21/1zuypi4mkggq6js5lqxt3sjaa.jpg">
+    </div>
+  </figure>
+  <div class="cover-video-container"></div>
+</div>
 
-	<?php if ( have_posts() ) : while (have_posts() ) : the_post(); ?>
+<!--transparent area-->
+<div id="header-top-after" class="header-top-after">
+  <!--wave decoration-->
+  <div id="header-top-after-deco" class="header-top-after-deco"></div>
+</div>
 
-		<!-- article -->
-		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<div class="page-content">
+  <aside class="side-bar-left">left</aside>
+  <section class="main-center">
+    <div class="post-list">
+      <article class="markdown">
+        <h1>HTML that looks like markdown</h1>
 
-			<!-- post thumbnail -->
-			<?php if ( has_post_thumbnail() ) : // Check if Thumbnail exists. ?>
-				<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-					<?php the_post_thumbnail(); // Fullsize image for the single post. ?>
-				</a>
-			<?php endif; ?>
-			<!-- /post thumbnail -->
+        <p>When this section is styled by <code>markdown.css</code> it looks like plain-text, despite being
+          HTML.
+          Inspect it with firebug or click on &lt;HTML/&gt; to see the markup.</p>
 
-			<!-- post title -->
-			<h1>
-				<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-			</h1>
-			<!-- /post title -->
+        <p>A <strong>strong tag</strong> and an <em>em tag</em> get styled like so.</p>
+        <p>How about a link to <a href="https://2heng.xin">my site</a>?</p>
 
-			<!-- post details -->
-			<span class="date">
-				<time datetime="<?php the_time( 'Y-m-d' ); ?> <?php the_time( 'H:i' ); ?>">
-					<?php the_date(); ?> <?php the_time(); ?>
-				</time>
-			</span>
-			<span class="author"><?php esc_html_e( 'Published by', 'html5blank' ); ?> <?php the_author_posts_link(); ?></span>
-			<span class="comments"><?php if ( comments_open( get_the_ID() ) ) comments_popup_link( __( 'Leave your thoughts', 'html5blank' ), __( '1 Comment', 'html5blank' ), __( '% Comments', 'html5blank' ) ); ?></span>
-			<!-- /post details -->
+        <h2>H2 header</h2>
 
-			<?php the_content(); // Dynamic Content. ?>
+        <h3>Lists</h3>
+        <ul>
+          <li>they look like this</li>
+          <li>it’s how you’d format them in pure markdown, if you took the time to indent when it wrapped to a
+            new
+            line.</li>
+        </ul>
 
-			<?php the_tags( __( 'Tags: ', 'html5blank' ), ', ', '<br>' ); // Separated by commas with a line break at the end. ?>
+        <h3>Ordered lists</h3>
+        <ol>
+          <li>here’s one line from a numbered list</li>
+          <li>here’s another</li>
+          <li>in markdown, the actual numbers don’t matter—you can toggle this with the class <a href="#"
+              onclick="$('body').toggleClass('markdown-ones');return false"><code>markdown-ones</code></a>
+          </li>
+        </ol>
 
-			<p><?php esc_html_e( 'Categorised in: ', 'html5blank' ); the_category( ', ' ); // Separated by commas. ?></p>
+        <h3>Block quotes</h3>
+        <blockquote>
+          This is a blockquote that extends<br>
+          to multiple lines.<br><br>
+          With repeating email-style angle brackets.
+        </blockquote>
 
-			<p><?php esc_html_e( 'This post was written by ', 'html5blank' ); the_author(); ?></p>
+        <h3>Code blocks</h3>
+        <pre><code>(function() {
+  console.log('code blocks indent four spaces');
+})()</code></pre>
 
-			<?php edit_post_link(); // Always handy to have Edit Post Links available. ?>
+        <h3>Different headers</h3>
 
-			<?php comments_template(); ?>
+        <h4>h4 header</h4>
+        <h5>h5 header</h5>
+        <h6>h6 header</h6>
 
-		</article>
-		<!-- /article -->
+        <hr>
 
-	<?php endwhile; ?>
+        <p>That’s an hr above. It just works!</p>
 
-	<?php else : ?>
+        <p>
+          However, images will still look like images. Deal with it.
+        </p>
 
-		<!-- article -->
-		<article>
+        <p>
+          <img alt="kitten" src="https://view.moezx.cc/images/2019/10/21/518j34fw8n6p02epy36nqz8vy.jpg">
+        </p>
 
-			<h1><?php esc_html_e( 'Sorry, nothing to display.', 'html5blank' ); ?></h1>
-
-		</article>
-		<!-- /article -->
-
-	<?php endif; ?>
-
-	</section>
-	<!-- /section -->
-	</main>
-
-<?php get_sidebar(); ?>
+        <p>
+          Made by <a href="https://2heng.xin">Mashiro</a> /<br>
+          aka <a href="https://twitter.com/2hengxin">@2hengxin</a> /<br>
+          code on <a href="https://github.com/mashirozx/sakura2">github</a>
+        </p>
+      </article>
+    </div>
+  </section>
+  <aside class="side-bar-right">right</aside>
+</div>
 
 <?php get_footer(); ?>

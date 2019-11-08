@@ -12,7 +12,8 @@ define('SAKURA_DEBUG', false);
     External Modules/Files
 \*------------------------------------*/
 
-// Load any external files you have here
+require_once 'modules/webpack-conf.php';
+require_once 'modules/disable-wp-emoji.php';
 
 /*------------------------------------*\
     Theme Support
@@ -91,46 +92,30 @@ function html5blank_nav() {
 // Load scripts (header.php)
 function sakura_header_scripts() {
     if ( $GLOBALS['pagenow'] != 'wp-login.php' && ! is_admin() ) {
-        if ( SAKURA_DEBUG ) {
-            // Remove jQuery
-            wp_deregister_script( 'jquery' );
-            // Get resource from manifest list
-            // load from url in dev server?
-            $manifest = json_decode(file_get_contents(get_template_directory() . "/manifest.json"), true);
-            // Scripts minify
-            wp_register_script( 'bundle-js', get_template_directory_uri() . realpath('/dist/' . $manifest['main']['js']), array(), '1.0.0' );
-            // Enqueue Scripts
-            wp_enqueue_script( 'bundle-js' );
-
-        // If production
-        } else {
-            // Remove jQuery
-            wp_deregister_script( 'jquery' );
-            // Get resource from manifest list
-            $manifest = json_decode(file_get_contents(get_template_directory() . "/manifest.json"), true);
-            // Scripts minify
-            wp_register_script( 'bundle-js', get_template_directory_uri() . realpath('/dist/' . $manifest['main']['js']), array(), '1.0.0' );
-            // Enqueue Scripts
-            wp_enqueue_script( 'bundle-js' );
-        }
+        // Remove jQuery
+        wp_deregister_script( 'jquery' );
+        // Scripts minify
+        wp_register_script( 'bundle-js', get_template_directory_uri() . join_paths('/', MANIFEST['main']['js'][0]), array(), '1.0.0' );
+        // Enqueue Scripts
+        wp_enqueue_script( 'bundle-js' );
     } 
 }
 
-// Load HTML5 Blank styles
+// Load styles
 function sakura_styles() {
-    if ( SAKURA_DEBUG ) {
-        $manifest = json_decode(file_get_contents(get_template_directory() . "/manifest.json"), true);
-        // Custom CSS
-        wp_register_style( 'sakura_style', get_template_directory_uri() . realpath('/dist/' . $manifest['main']['css']), array(), '1.0' );
+    // TODO add options!
+    wp_deregister_style( 'wp-block-library' ); // Gutenberg CSS
+    
+    // Icon fonts
+    wp_register_style( 'MaterialIcons', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), '1.0' );
+    wp_enqueue_style( 'MaterialIcons' );
+    wp_register_style( 'SakuraIcons', 'https://at.alicdn.com/t/font_679578_dgipmwt51qb.css', array(), '1.0' );
+    wp_enqueue_style( 'SakuraIcons' );
 
-        // Register CSS
-        wp_enqueue_style( 'sakura_style' );
-    } else {
-        // Custom CSS
-        wp_register_style( 'sakura_style', get_template_directory_uri() . realpath('/dist/' . $manifest['main']['css']), array(), '1.0' );
-        // Register CSS
-        wp_enqueue_style( 'sakura_style' ); 
-    }
+    // Custom CSS
+    wp_register_style( 'sakura_style', get_template_directory_uri() . join_paths('/', MANIFEST['main']['css'][0]), array(), '1.0' );
+    // Register CSS
+    wp_enqueue_style( 'sakura_style' );
 }
 
 // Register HTML5 Blank Navigation

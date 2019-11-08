@@ -15,7 +15,7 @@ module.exports = [{
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: './js/bundle.js'
+    filename: './js/bundle_[hash].js'
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -44,7 +44,7 @@ module.exports = [{
             // name(file) {
             //   return './images/[name].[ext]';
             // },
-            name: '../images/[name].[ext]'
+            name: '../images/[hash].[ext]'
             // outputPath: './images', 
           },
         },
@@ -107,15 +107,15 @@ module.exports = [{
         toType: 'file',
       },
       {
-        from: './images/',
-        to: './images/[name].[ext]',
+        from: './src/images/',
+        to: './images/[hash].[ext]',
         toType: 'template',
       },
-      {
-        from: './src/*.html',
-        to: './[name].[ext]',
-        toType: 'template',
-      },
+      // {
+      //   from: './src/*.html',
+      //   to: './[name].[ext]',
+      //   toType: 'template',
+      // },
       {
         from: './src/php/*.php',
         to: './[name].[ext]',
@@ -128,17 +128,9 @@ module.exports = [{
       }
     ]),
     new RemovePlugin({
-      /**
-       * Before compilation removes entire `dist` folder.
-       */
       before: {
-        include: ['./dist']
+        include: ['./dist', './images']
       },
-
-      /**
-       * After compilation removes all files in `dist/styles` folder,
-       * that have `.map` type.
-       */
       after: {
         include: ['./images']
       }
@@ -146,7 +138,7 @@ module.exports = [{
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: "./css/bundle.css",
+      filename: "./css/bundle_[hash].css",
       // chunkFilename: "[id].css"
     }),
     new Chunks2JsonPlugin({
