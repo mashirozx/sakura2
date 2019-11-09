@@ -3,20 +3,18 @@
 <?php get_template_part( 'layout/header-top' ); ?>
 
 <div class="page-content">
-  <aside class="side-bar-left">left</aside>
+  <aside class="side-bar-left"></aside>
   <section class="main-center">
     <div class="post-list">
       <!--post thumb list-->
 
-      <h1><?php esc_html_e( 'Latest Posts', 'sakura' ); ?></h1>
+      <?php get_template_part( 'layout/post-list-loop' ); ?>
 
-			<?php get_template_part( 'loop' ); ?>
+			<?php get_template_part( 'layout/pagination' ); ?>
 
-			<?php get_template_part( 'pagination' ); ?>
-
-      <!--post-list end-->
+      <!--post thumb list end-->
   </section>
-  <aside class="side-bar-right">right</aside>
+  <aside class="side-bar-right"></aside>
 </div>
 
 <?php get_footer();?>

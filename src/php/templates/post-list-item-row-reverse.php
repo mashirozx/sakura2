@@ -1,7 +1,6 @@
-<!--thumb right template-->
 <article id="post-<?php the_ID();?>" <?php post_class('mdc-card post-thumb-item');?>>
   <div class="mdc-card__primary-action mdc-ripple-upgraded primary-action">
-    <div class="content">
+    <div class="content reverse">
       <div class="post-thumb">
         <a href="<?php the_permalink(); ?>" class="thumb-img-box" title="<?php the_title_attribute(); ?>">
           <img src="<?php echo get_post_thumb_url('large') ?>">
@@ -39,4 +38,3 @@
     </div>
   </div>
 </article>
-<!--thumb right template end-->

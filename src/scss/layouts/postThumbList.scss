@@ -30,11 +30,15 @@
                 justify-content: space-between;
 
                 .text {
-                    margin: 30px;
+                    margin: 30px 30px 0;
 
                     .post-title {
                         margin: 0;
                         color: $font-color-normal;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
 
                         a {
                             color: $font-color-normal;
@@ -57,8 +61,12 @@
                     }
 
                     .post-abstract {
-                        margin: 20px 0;
+                        margin: 20px 0 0;
                         color: $font-color-light;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 3;
                     }
 
                     a {
