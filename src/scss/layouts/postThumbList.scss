@@ -17,6 +17,10 @@
             flex-flow: row nowrap;
             justify-content: space-between;
 
+            &.reverse {
+                flex-flow: row-reverse nowrap;
+            }
+
             .post-info {
                 width: 45%;
                 height: 100%;
@@ -26,11 +30,19 @@
                 justify-content: space-between;
 
                 .text {
-                    margin: 30px;
+                    margin: 30px 30px 0;
 
                     .post-title {
                         margin: 0;
                         color: $font-color-normal;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+
+                        a {
+                            color: $font-color-normal;
+                        }
                     }
 
                     .post-date,
@@ -42,11 +54,23 @@
                         i {
                             font-size: 12px;
                         }
+
+                        a {
+                            color: $font-color-light;
+                        }
                     }
 
                     .post-abstract {
-                        margin: 20px 0;
+                        margin: 20px 0 0;
                         color: $font-color-light;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 3;
+                    }
+
+                    a {
+                        text-decoration: none;
                     }
                 }
 

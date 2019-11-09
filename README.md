@@ -10,10 +10,6 @@ __This is a developing repo, do not install in production environment!__
  ### Install
 Clone/download/upload into `./wp-content/themes/`, then active theme in WordPress dashboard.
 
-### Development
-__DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes in this folder will be replaced after `npm run build`. Develop by changing files in `./src/`.
-
-
 ### Compile
 ```bash
 npm i -g webpack-cli
@@ -24,9 +20,40 @@ npm run dev
 npm run build
 ```
 
-__Commands only tested on Linux__, but should also work in other platforms.
+__Commands only tested on Linux__, but should also work on other platforms.
+
+### Development
+__DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes in this folder will be replaced after `npm run build`. Develope by changing files in `./src/`.
+
+```
+.
+├── dist               // Compiled files (*DO NOT SAVE HERE*)
+│   ├── css            // Stylesheets (compiled)
+│   ├── js             // JavaScript (compiled)
+│   ├── images         // Images (compiled)
+│   ├── *.php          // PHP files (compiled)
+│   ├── manifest.json  // Webpack manifest resources list
+│   └── style.css      // Wordpress theme info
+├── src                // Source code (develope in this folder)
+│   ├── scss           // CSS source code (SASS)
+│   ├── ts             // JavaScript source code (TypeScript)
+│   ├── images         // Images resources
+│   ├── php            // PHP source code
+│   └── package.less   // Wordpress theme info (header of style.css)
+├── package.json       // npm configuration
+├── tsconfig.json      // TypeScript configuration
+└── webpack.config.js  // Webpack configuration
+```
 
 ### Contribution
-Won't merge any pull requests during `beta` stage.
+Pull requests welcomed.
 
-[Private Notebook](./NOTES.md)
+Git commit guidelines: [the Angular guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
+
+Code comment guidelines: [the TypeScript guidelines](https://github.com/unional/typescript-guidelines/blob/master/pages/default/draft/comments.md)
+
+### Author
+Mashiro <https://2heng.xin>
+
+### License
+MIT

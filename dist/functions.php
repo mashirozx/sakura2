@@ -215,18 +215,18 @@ function html5wp_pagination() {
     ) );
 }
 
-// Create 20 Word Callback for Index page Excerpts, call using html5wp_excerpt('html5wp_index');
-function html5wp_index( $length ) {
+// Create 20 Word Callback for Index page Excerpts, call using sakura_wp_excerpt('sakura_wp_index');
+function sakura_wp_index( $length ) {
     return 20;
 }
 
-// Create 40 Word Callback for Custom Post Excerpts, call using html5wp_excerpt('html5wp_custom_post');
-function html5wp_custom_post( $length ) {
+// Create 40 Word Callback for Custom Post Excerpts, call using sakura_wp_excerpt('sakura_wp_custom_post');
+function sakura_wp_custom_post( $length ) {
     return 40;
 }
 
 // Create the Custom Excerpts callback
-function html5wp_excerpt( $length_callback = '', $more_callback = '' ) {
+function sakura_wp_excerpt( $length_callback = '', $more_callback = '' ) {
     global $post;
     if ( function_exists( $length_callback ) ) {
         add_filter( 'excerpt_length', $length_callback );
@@ -237,14 +237,20 @@ function html5wp_excerpt( $length_callback = '', $more_callback = '' ) {
     $output = get_the_excerpt();
     $output = apply_filters( 'wptexturize', $output );
     $output = apply_filters( 'convert_chars', $output );
-    $output = '<p>' . $output . '</p>';
     echo esc_html( $output );
 }
 
 // Custom View Article link to Post
-function html5_blank_view_article( $more ) {
+function sakura_view_article( $more ) {
     global $post;
     return '... <a class="view-article" href="' . get_permalink( $post->ID ) . '">' . esc_html_e( 'View Article', 'html5blank' ) . '</a>';
+}
+
+// Default post thumbnail
+function get_post_thumb_url( $size ) {
+    // TODO: full sizes of sizes
+    $default = "https://view.moezx.cc/images/2019/10/21/5e65o9lxtbvht2tdjvpgsmarw.jpg";
+    return has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID() , $size ) : $default;
 }
 
 // Remove Admin bar
@@ -356,7 +362,7 @@ add_filter( 'wp_nav_menu_args', 'my_wp_nav_menu_args' ); // Remove surrounding <
 add_filter( 'the_category', 'remove_category_rel_from_category_list' ); // Remove invalid rel attribute
 add_filter( 'the_excerpt', 'shortcode_unautop' ); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 add_filter( 'the_excerpt', 'do_shortcode' ); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
-add_filter( 'excerpt_more', 'html5_blank_view_article' ); // Add 'View Article' button instead of [...] for Excerpts
+//add_filter( 'excerpt_more', 'sakura_view_article' ); // Add 'View Article' button instead of [...] for Excerpts
 add_filter( 'show_admin_bar', 'remove_admin_bar' ); // Remove Admin bar
 add_filter( 'style_loader_tag', 'html5_style_remove' ); // Remove 'text/css' from enqueued stylesheet
 add_filter( 'post_thumbnail_html', 'remove_thumbnail_dimensions', 10 ); // Remove width and height dynamic attributes to thumbnails

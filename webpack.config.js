@@ -129,7 +129,7 @@ module.exports = [{
     ]),
     new RemovePlugin({
       before: {
-        include: ['./dist', './images']
+        include: ['./dist']
       },
       after: {
         include: ['./images']
