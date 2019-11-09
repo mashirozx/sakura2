@@ -22,8 +22,8 @@ npm run build
 
 __Commands only tested on Linux__, but should also work on other platforms.
 
-### Development
-__DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes in this folder will be replaced after `npm run build`. Develope by changing files in `./src/`.
+### Develop
+__DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes in this folder will be replaced after `npm run build`. Develop by changing files in `./src/`.
 
 ```
 .
@@ -34,7 +34,7 @@ __DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes in this folder will be 
 │   ├── *.php          // PHP files (compiled)
 │   ├── manifest.json  // Webpack manifest resources list
 │   └── style.css      // Wordpress theme info
-├── src                // Source code (develope in this folder)
+├── src                // Source code (develop inside this folder)
 │   ├── scss           // CSS source code (SASS)
 │   ├── ts             // JavaScript source code (TypeScript)
 │   ├── images         // Images resources
@@ -45,7 +45,7 @@ __DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes in this folder will be 
 └── webpack.config.js  // Webpack configuration
 ```
 
-### Contribution
+### Contribute
 Pull requests welcomed.
 
 Git commit guidelines: [the Angular guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
