@@ -3,7 +3,7 @@
 <?php get_template_part( 'layout/header-top' ); ?>
 
 <div class="page-content">
-  <aside class="side-bar-left"></aside>
+  <?php get_template_part('layout/sidebar-left'); ?>
   <section class="main-center">
     <div class="post-list">
       <!--post thumb list-->
@@ -14,7 +14,7 @@
 
       <!--post thumb list end-->
   </section>
-  <aside class="side-bar-right"></aside>
+  <?php get_template_part('layout/sidebar-right'); ?>
 </div>
 
 <?php get_footer();?>
