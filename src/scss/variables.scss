@@ -9,6 +9,7 @@ $mdc-theme-on-secondary: #442b2d;
 
 /* font color */
 $font-color-super-light:#ffffff;
+$font-color-middle-light:#efefef;
 $font-color-light:#888888;
 $font-color-normal: #504e4e;
 $font-color-dark:#333333;
@@ -18,4 +19,7 @@ $font-color-super-dark:#000000;
 $tablet-min-width: 761px;
 
 /* img files */
-// $img-wave-svg : "../images/wave.svg";
+$img-wave-svg: "../images/wave.svg";
+
+/* sized */
+$nav-header-height: 50px;

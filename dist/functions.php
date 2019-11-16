@@ -5,14 +5,20 @@
  * Custom functions, support, custom post types and more.
  */
 
-// require_once 'modules/is-debug.php';
+/*------------------------------------*\
+    Define Global Constants
+\*------------------------------------*/
+
+// Debug mode
 define('SAKURA_DEBUG', false);
+// Get webpack manifest file 
+define('MANIFEST', json_decode(file_get_contents(get_template_directory() . "/manifest.json"), true));
 
 /*------------------------------------*\
     External Modules/Files
 \*------------------------------------*/
 
-require_once 'modules/webpack-conf.php';
+require_once 'modules/utils.php';
 require_once 'modules/disable-wp-emoji.php';
 
 /*------------------------------------*\
@@ -58,7 +64,7 @@ if ( function_exists( 'add_theme_support' ) ) {
     add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
 
     // Localisation Support.
-    load_theme_textdomain( 'html5blank', get_template_directory() . '/languages' );
+    load_theme_textdomain( 'sakura', get_template_directory() . '/languages' );
 }
 
 /*------------------------------------*\

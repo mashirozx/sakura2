@@ -25,7 +25,7 @@
     width: 100%;
     background-position: center;
     background-size: auto 100%;
-    background-image: url(../images/wave.svg);
+    background-image: url($img-wave-svg);
     // bug or whatever????
     // https://github.com/webpack-contrib/css-loader/issues/864
     // TODO: https://github.com/webpack-contrib/mini-css-extract-plugin

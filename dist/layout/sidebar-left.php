@@ -1,1 +1,1 @@
-<aside class="side-bar-left">lefttt</aside>
+<aside class="side-bar-left"></aside>

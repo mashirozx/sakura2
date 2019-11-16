@@ -1,16 +1,15 @@
-@import "./variables.scss";
+@import "./variables";
 
-@import "./components/normalize.scss";
-@import "./initial.scss";
+@import "./components/normalize";
+@import "./components/mdc";
+@import "./components/pjax";
 
-@import "./components/mdc.scss";
+@import "./layouts/header";
+@import "./layouts/footer";
+@import "./layouts/coverImage";
+@import "./layouts/pageContent";
+@import "./layouts/postThumbList";
+@import "./layouts/postFeature";
 
-@import "./layouts/header.scss";
-@import "./layouts/footer.scss";
-@import "./layouts/coverImage.scss";
-@import "./layouts/pageContent.scss";
-@import "./layouts/postThumbList.scss";
-@import "./components/pjax.scss";
-
-@import "./markdown-theme/markdown.scss";
-// @import "./markdown-theme/github.scss";
+@import "./markdown-theme/markdown";
+// @import "./markdown-theme/github";
