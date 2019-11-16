@@ -10,9 +10,9 @@ if (have_posts()) {
 		// TODO: sticky condition.
 
 		if ($list_id % 2 == 0) {
-			get_template_part( 'templates/post-list-item', 'row' );
+			get_template_part( 'templates/post-list-item', 'sakura' );
 		} else {
-			get_template_part( 'templates/post-list-item', 'row-reverse' );
+			get_template_part( 'templates/post-list-item', 'sakura_reverse' );
 		}
 	} 
 } else {

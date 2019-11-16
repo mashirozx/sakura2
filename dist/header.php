@@ -19,10 +19,9 @@
 </head>
 
 <body>
-
   <!-- wrapper (pjax container) -->
   <div id="root" class="wrapper">
-    <header id="nav-header" class="mdc-top-app-bar mdc-top-app-bar--dense">
+    <header id="nav-header" class="mdc-top-app-bar mdc-top-app-bar--dense nav-header">
       <!--nav mune-->
       <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">

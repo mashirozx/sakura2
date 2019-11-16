@@ -44,7 +44,7 @@ __DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes in this folder will be 
 ```
 
 ### Contribute
-Pull requests welcomed.
+Pull requests welcomed. Comments and commit tags in English, please.
 
 Git commit guidelines: [the Angular guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
 
