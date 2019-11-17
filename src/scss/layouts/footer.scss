@@ -15,11 +15,12 @@ footer {
         background-position: center;
         background-size: auto 100%;
         background-image: url($img-wave-svg);
+        height: 30px;
+        position: absolute;
+        top: -30px;
 
-        @media screen and (min-width: $tablet-min-width) {
-            height: 30px;
-            position: absolute;
-            top: -30px;
+        @media screen and (max-width: $tablet-min-width) {
+            display: none;
         }
     }
 

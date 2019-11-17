@@ -7,6 +7,12 @@ $mdc-theme-secondary: #feeae6;
 $mdc-theme-on-primary: #442b2d;
 $mdc-theme-on-secondary: #442b2d;
 
+// $mdc-shape-small-component-radius: 12px 4px;
+// $mdc-shape-large-component-radius: 8px;
+
+// @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+// $mdc-typography-font-family: unquote("Josefin Sans, sans-serif");
+
 /* font color */
 $font-color-super-light:#ffffff;
 $font-color-middle-light:#efefef;
@@ -15,11 +21,13 @@ $font-color-normal: #504e4e;
 $font-color-dark:#333333;
 $font-color-super-dark:#000000;
 
-/* Tablet min width */
-$tablet-min-width: 761px;
+/* Tablet min width (iPad Pro), we should hide sidebar here */
+$desktop-min-width: 1024px;
+/* Tablet min width (iPad), the post list thumb title would wrap here */
+$tablet-min-width: 800px;
 
-/* img files */
+/* Image files */
 $img-wave-svg: "../images/wave.svg";
 
-/* sized */
+/* uncategorized sizes */
 $nav-header-height: 50px;

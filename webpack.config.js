@@ -122,7 +122,7 @@ module.exports = [{
         toType: 'template',
       },
       {
-        from: './src/php/*/*',
+        from: './src/php/*/*.php',
         to: './[1]/[2].[ext]',
         test: /src\/php\/([^/]+)\/(.+)\.php$/,
       }
