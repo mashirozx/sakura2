@@ -5,12 +5,14 @@
  * @license MIT
  */
 
-import coverImgIni from "./modules/coverImgInit"
+// import coverImgIni from "./modules/coverImgInit"
 import headerBarScrollHandler from "./modules/headerBarScrollHandler"
 import mdcInit from "./components/mdcInit"
 import Pjax from "pjax"
 import getHexFilter from "./modules/hexFilter"
+import Parallax from 'parallax-js'
 import rgb2hex from "./modules/rgb2hex"
+import vhCheck from 'vh-check'
 
 window.onscroll = function () {
   headerBarScrollHandler()
@@ -22,10 +24,18 @@ window.onscroll = function () {
 let themePrimaryColor = '#fcb8ab'
 let themeColorFilter = getHexFilter(themePrimaryColor)
 
+vhCheck()
+
 let InitFun = function () {
-  coverImgIni()
+  // coverImgIni()
   mdcInit()
-  
+
+  let coverImgContainer = <HTMLElement>document.querySelector(".parallax-wrapper")
+  if (typeof (coverImgContainer) !== 'undefined' && coverImgContainer !== null) {
+    let scene = document.querySelector('.parallax-wrapper')
+    let parallaxInstance = new Parallax(scene);
+  }
+
   let footerBefore = <HTMLElement>document.querySelector("#footer-before")
   if (typeof (footerBefore) !== 'undefined' && footerBefore !== null) {
     // TODO: set theme color function!

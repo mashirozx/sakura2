@@ -9,16 +9,34 @@
   width: 100%;
   height: 100%;
 
-  figure {
+  .img-wrapper {
     width: 100%;
+    height: 100%;
     margin: 0;
     overflow: hidden;
+
+    .img-view {
+      width: 100%;
+      height: 100%;
+
+      .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.1);
+      }
+    }
+
+    @media screen and (max-aspect-ratio: 1/1) {
+      height: 50%;
+    }
   }
 
 }
 
 .header-top-after {
   width: 100%;
+  height: calc(100vh - var(--vh-offset, 0px));
 
   &-deco {
     display: block;
@@ -26,14 +44,30 @@
     background-position: center;
     background-size: auto 100%;
     background-image: url($img-wave-svg);
-    // bug or whatever????
-    // https://github.com/webpack-contrib/css-loader/issues/864
-    // TODO: https://github.com/webpack-contrib/mini-css-extract-plugin
+    height: 30px;
+    position: absolute;
+    bottom: 0;
 
-    @media screen and (min-width: $tablet-min-width) {
+    @media screen and (max-width: $tablet-min-width) {
+      width: 150%;
       height: 30px;
-      position: absolute;
-      bottom: 0;
+      background: white;
+      left: -25%;
+      border-radius: 100% 100% 0 0;
+      bottom: -20px;
+    }
+  }
+
+  @media screen and (max-aspect-ratio: 1/1) {
+    height: calc((100vh - var(--vh-offset, 0px)) * .5);
+
+    &-deco {
+      top: calc((100vh - var(--vh-offset, 0px)) * .5 - 30px);
+      bottom: auto;
+
+      @media screen and (max-width: $tablet-min-width) {
+        top: calc((100vh - var(--vh-offset, 0px)) * .5 - 15px);
+      }
     }
   }
 }

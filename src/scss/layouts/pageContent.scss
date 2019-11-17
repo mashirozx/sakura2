@@ -16,7 +16,12 @@
     .main-center {
         margin: 0;
         height: 100%;
-        width: 800px;
+        width: $tablet-min-width;
+        max-width: 100%;
+
+        .markdown {
+            padding: 0 10px;
+        }
     }
 
     .side-bar-left {
@@ -25,5 +30,14 @@
 
     .side-bar-right {
         width: 100px;
+    }
+
+    @media screen and (max-width: $desktop-min-width) {
+        justify-content: center;
+
+        .side-bar-left,
+        .side-bar-right {
+            display: none;
+        }
     }
 }
