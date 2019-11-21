@@ -1,7 +1,7 @@
 Sakura v2
 ====
 
-[![Demo](https://shader.2heng.xin/badge/Demo-dev.2heng.xin-critical?logo=envato)](https://dev.2heng.xin) [![Build Status](https://dev.azure.com/moezhx/sakura2/_apis/build/status/mashirozx.sakura2?branchName=master)](https://dev.azure.com/moezhx/sakura2/_build/latest?definitionId=1&branchName=master) [![webpack](https://shader.2heng.xin/badge/webpack-4.41.2-9cf?logo=webpack)](https://webpack.js.org/) [![wordpress](https://shader.2heng.xin/badge/WordPress-5.2.3-blue?logo=wordpress)](https://wordpress.org) [![typescript](https://shader.2heng.xin/badge/TypeScript-3.6.4-294E80?logo=typescript)](https://www.typescriptlang.org/) [![php](https://shader.2heng.xin/badge/PHP-7.2-8892BF?logo=php)](https://www.php.net/)
+[![Demo](https://shader.2heng.xin/badge/Demo-dev.2heng.xin-critical?logo=envato)](https://dev.2heng.xin) [![Build Status](https://dev.azure.com/moezhx/sakura2/_apis/build/status/mashirozx.sakura2?branchName=master)](https://dev.azure.com/moezhx/sakura2/_build/latest?definitionId=1&branchName=master) [![webpack](https://shader.2heng.xin/badge/webpack-4.41.2-9cf?logo=webpack)](https://webpack.js.org/) [![wordpress](https://shader.2heng.xin/badge/WordPress-5.3-blue?logo=wordpress)](https://wordpress.org) [![typescript](https://shader.2heng.xin/badge/TypeScript-3.6.4-294E80?logo=typescript)](https://www.typescriptlang.org/) [![php](https://shader.2heng.xin/badge/PHP-7.2-8892BF?logo=php)](https://www.php.net/)
 
 __This is a developing repo, do not install in production environment!__
 
