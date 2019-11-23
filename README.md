@@ -37,8 +37,8 @@ __DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes inside this folder will
 │   ├── ts             // JavaScript source code (TypeScript)
 │   ├── images         // Images resources
 │   ├── php            // PHP source code
-│   └── package.less   // Wordpress theme info (header of style.css)
-├── package.json       // npm configuration
+│   └── package.scss   // Wordpress theme info (header of style.css)
+├── package.json       // Node.js configuration
 ├── tsconfig.json      // TypeScript configuration
 └── webpack.config.js  // Webpack configuration
 ```
