@@ -6,13 +6,13 @@ Sakura v2
 __This is a developing repo, do not install in production environment!__
 
  ### Install
-Clone/download/upload into `./wp-content/themes/`, then active theme in WordPress dashboard.
+Clone/download into `./wp-content/themes/`, install the must installed plugins ([WPGraphQL](https://github.com/wp-graphql/wp-graphql), [WPGraphQL JWT Authentication](https://github.com/wp-graphql/wp-graphql-jwt-authentication)), then active the theme in WordPress dashboard after compile.
 
 ### Compile
 ```bash
 npm i -g webpack-cli
 npm install
-# Dynamic comiple (--watch file changes)
+# Dynamic compile (--watch file changes)
 npm run dev
 # Build
 npm run build
@@ -44,7 +44,7 @@ __DO NOT MODIFY OR SAVE IN `./dist/`__, all your changes in this folder will be 
 ```
 
 ### Contribute
-Pull requests welcomed. Comments and commit tags in English, please.
+Pull requests welcomed. Code comments and commit tags in English, please.
 
 Git commit guidelines: [the Angular guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
 

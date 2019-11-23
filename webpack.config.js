@@ -97,7 +97,7 @@ module.exports = [{
   // },
   plugins: [
     new CopyPlugin([{
-        from: './src/package.less',
+        from: './src/package.scss',
         to: './style.css',
         toType: 'file',
       },

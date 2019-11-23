@@ -15,11 +15,15 @@ define('SAKURA_DEBUG', false);
 define('MANIFEST', json_decode(file_get_contents(get_template_directory() . "/manifest.json"), true));
 
 /*------------------------------------*\
-    External Modules/Files
+    External Modules
 \*------------------------------------*/
 
-require_once 'modules/utils.php';
-require_once 'modules/disable-wp-emoji.php';
+/*------------------------------------*\
+    External Utils
+\*------------------------------------*/
+
+require_once 'utils/functions.php';
+require_once 'utils/disable-wp-emoji.php';
 
 /*------------------------------------*\
     Theme Support
