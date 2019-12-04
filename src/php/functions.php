@@ -18,6 +18,8 @@ define('MANIFEST', json_decode(file_get_contents(get_template_directory() . "/ma
     External Modules
 \*------------------------------------*/
 
+// require 'vendor/autoload.php';
+
 /*------------------------------------*\
     External Utils
 \*------------------------------------*/

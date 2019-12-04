@@ -1,0 +1,5 @@
+{
+    "require": {
+        "wp-graphql/wp-graphql": "^0.4.2"
+    }
+}
