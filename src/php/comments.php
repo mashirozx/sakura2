@@ -1,24 +1,29 @@
 <div id="comments" class="comments">
-	<?php if ( post_password_required() ) : ?>
-	<p><?php esc_html_e( 'Post is password protected. Enter the password to view any comments.', 'html5blank' ); ?></p>
+	<?php if (post_password_required()): ?>
+	<p><?php esc_html_e('Post is password protected. Enter the password to view any comments.', 'html5blank');?></p>
 </div>
 
-	<?php return; endif; ?>
+	<?php return;endif;?>
 
-<?php if ( have_comments() ) : ?>
+<?php if (have_comments()): ?>
 
-	<h2><?php comments_number(); ?></h2>
+	<h2><?php comments_number();?></h2>
 
-	<ul>
-		<?php wp_list_comments( 'type=comment&callback=html5blankcomments' ); // Custom callback in functions.php. ?>
-	</ul>
+	<!-- TODO: also generate a copy in php side for SEO -->
+	<ul id="comment-list-ul" class="comment-list"></ul>
 
-<?php elseif ( ! comments_open() && ! is_page() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
+	<template id="comment-list-li-template">
+		<li>
+			<img class="avatar">
+			<div class="name"></div>
+			<div class="content"><div>
+		</li>
+	</template>
 
-	<p><?php esc_html_e( 'Comments are closed here.', 'html5blank' ); ?></p>
+<?php elseif (!comments_open() && !is_page() && post_type_supports(get_post_type(), 'comments')): ?>
 
-<?php endif; ?>
+	<p><?php esc_html_e('Comments are closed here.', 'sakura');?></p>
 
-<?php comment_form(); ?>
+<?php endif;?>
 
 </div>

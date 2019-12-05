@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 class getPostCommentByPostId {
   private postId: number
   private MaxChildrenLevel: number
+  public query: object
 
   /**
    * Get post comment bay wp post id through GraphQL
@@ -16,6 +17,7 @@ class getPostCommentByPostId {
   public constructor(postId: number, MaxChildrenLevel) {
     this.postId = postId
     this.MaxChildrenLevel = MaxChildrenLevel
+    this.gqlstring()
   }
 
   private queryChildren() {
@@ -38,30 +40,28 @@ children {
       queryHeader = addTabs(childrenHeader + queryHeader, 2)
       queryFooter = addTabs(queryFooter + childrenFooter, 2)
     }
-    return addTabs(queryHeader + queryFooter, 2)
+    return addTabs(queryHeader + queryFooter, 3)
   }
 
-  /**
-   * @return {any} GraphQL query json string
-   */
-  public query() {
-    let result: object
-    const client: ApolloClient = new ApolloClient()
-    client.query({
+  // TODO: GraphQL Schema to Typescript interface?
+  private gqlstring(): void {
+    this.query = {
       query: gql`
-query GET_POST($postId: Int) {
+query GET_POST($postId: Int, $first: Int, $after: String) {
   postBy(postId: $postId) {
     id
     postId
-    title
-    date
-    uri
-    content
-  }
-  comments {
-    edges {
-      node {
-        ...CommentFields${this.queryChildren()}
+    comments(first: $first, after: $after) {
+      edges {
+        node {
+          ...CommentFields${this.queryChildren()}
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
       }
     }
   }
@@ -73,7 +73,7 @@ fragment CommentFields on Comment {
   content(format: RENDERED)
   commentId
   author {
-    ... on CommentAuthor {
+    ... on User {
       email
       name
       url
@@ -81,18 +81,13 @@ fragment CommentFields on Comment {
   }
   authorIp
 }
-`,
+      `,
       variables: {
-        "postId": this.postId
+        "postId": 1,
+        "first": 5,
+        "after": null
       },
-    })
-      .then(data => {
-        result = data
-      }) // 异步好烦
-      // .then(data => console.log(data))
-      .catch(error => console.log(error))
-
-    return result
+    }
   }
 }
 
