@@ -9,31 +9,37 @@ const getCommentData = function (callback: Function) {
     .catch(error => console.log(error))
 }
 
-const pushNewCommentItem = function (data: object) {
+/**
+  <li class="comment-item">
+			<div class="avatar"><img src=""></div>
+			<div class="author"><a class="name" href="#"></a></div>
+			<div class="reply">Reply</div>
+			<div class="mate"><span class="time"></span></div>
+			<div class="content"></div>
+			<div class="like"><i class="iconfont icon-like-o"></i> <span class="num">100</span></div>
+			<div class="dislike"><i class="iconfont icon-dislike-o"></i> <span class="num">10</span></div>
+			<div class="share"><i class="iconfont icon-forward"></i></div>
+			<div class="more"><i class="iconfont icon-more-dots"></i></div>
+			<div class="child">child</div>
+		</li>
+ */
+const pushNewCommentItem = function (node: object) {
   let li = document.querySelector('#comment-list-li-template'),
     ul = document.querySelector('#comment-list-ul')
 
-  li.content.querySelector('.name').textContent = data.name
-  li.content.querySelector('.content').innerHTML = data.content.trim()
+  li.content.querySelector('.name').textContent = node.author.name
+  li.content.querySelector('.time').textContent = node.date
+  li.content.querySelector('.content').innerHTML = node.content.trim()
 
-  let clone = document.importNode(li.content, true)
+  const clone = document.importNode(li.content, true)
   ul.appendChild(clone)
 }
 
 const getCommentDataCallback = function (data: object) {
   //single item data
-  interface CommentItem {
-    name: string,
-    content: string
-  }
-
   for (let edge: object in data.data.postBy.comments.edges) {
-    let node: object = data.data.postBy.comments.edges[edge].node
-    let stata: CommentItem = {
-      name: node.author.name,
-      content: node.content
-    }
-    pushNewCommentItem(stata)
+    const node: object = data.data.postBy.comments.edges[edge].node
+    pushNewCommentItem(node)
   }
 }
 

@@ -26,6 +26,7 @@ define('MANIFEST', json_decode(file_get_contents(get_template_directory() . "/ma
 
 require_once 'utils/functions.php';
 require_once 'utils/disable-wp-emoji.php';
+// require_once 'utils/graphql.php';
 
 /*------------------------------------*\
     Theme Support
@@ -121,7 +122,7 @@ function sakura_styles() {
     // Icon fonts
     wp_register_style( 'MaterialIcons', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), '1.0' );
     wp_enqueue_style( 'MaterialIcons' );
-    wp_register_style( 'SakuraIcons', 'https://at.alicdn.com/t/font_679578_dgipmwt51qb.css', array(), '1.0' );
+    wp_register_style( 'SakuraIcons', 'https://at.alicdn.com/t/font_679578_9p0ydgvimss.css', array(), '1.0' );
     wp_enqueue_style( 'SakuraIcons' );
 
     // Custom CSS

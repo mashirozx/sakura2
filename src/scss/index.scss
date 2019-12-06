@@ -1,18 +1,23 @@
+/*varbles*/
 @import "./variables";
 
+/*env init*/
 @import "./components/normalize";
 @import "./layouts/ini";
 
-
+/*components*/
 @import "./components/mdc";
 @import "./components/pjax";
 
+/*layouts*/
 @import "./layouts/header";
 @import "./layouts/footer";
 @import "./layouts/coverImage";
 @import "./layouts/pageContent";
 @import "./layouts/postThumbList";
 @import "./layouts/postFeature";
+@import "./layouts/comment.scss";
 
+/*themes*/
 @import "./markdown-theme/markdown";
 // @import "./markdown-theme/github";

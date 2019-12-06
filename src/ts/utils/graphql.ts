@@ -78,6 +78,11 @@ fragment CommentFields on Comment {
       name
       url
     }
+    ... on CommentAuthor {
+      email
+      url
+      name
+    }
   }
   authorIp
 }
