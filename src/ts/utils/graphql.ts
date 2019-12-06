@@ -69,22 +69,19 @@ query GET_POST($postId: Int, $first: Int, $after: String) {
 
 fragment CommentFields on Comment {
   date
-  agent
   content(format: RENDERED)
   commentId
-  author {
-    ... on User {
-      email
-      name
-      url
-    }
-    ... on CommentAuthor {
-      email
-      url
-      name
-    }
+  mate {
+    name
+    url
+    avatar
+    ua
+    location
+    level
+    role
+    like
+    dislike
   }
-  authorIp
 }
       `,
       variables: {

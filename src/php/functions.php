@@ -26,7 +26,7 @@ define('MANIFEST', json_decode(file_get_contents(get_template_directory() . "/ma
 
 require_once 'utils/functions.php';
 require_once 'utils/disable-wp-emoji.php';
-// require_once 'utils/graphql.php';
+require_once 'utils/graphql.php';
 
 /*------------------------------------*\
     Theme Support

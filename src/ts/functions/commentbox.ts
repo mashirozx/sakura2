@@ -9,27 +9,20 @@ const getCommentData = function (callback: Function) {
     .catch(error => console.log(error))
 }
 
-/**
-  <li class="comment-item">
-			<div class="avatar"><img src=""></div>
-			<div class="author"><a class="name" href="#"></a></div>
-			<div class="reply">Reply</div>
-			<div class="mate"><span class="time"></span></div>
-			<div class="content"></div>
-			<div class="like"><i class="iconfont icon-like-o"></i> <span class="num">100</span></div>
-			<div class="dislike"><i class="iconfont icon-dislike-o"></i> <span class="num">10</span></div>
-			<div class="share"><i class="iconfont icon-forward"></i></div>
-			<div class="more"><i class="iconfont icon-more-dots"></i></div>
-			<div class="child">child</div>
-		</li>
- */
 const pushNewCommentItem = function (node: object) {
   let li = document.querySelector('#comment-list-li-template'),
     ul = document.querySelector('#comment-list-ul')
 
-  li.content.querySelector('.name').textContent = node.author.name
-  li.content.querySelector('.time').textContent = node.date
   li.content.querySelector('.content').innerHTML = node.content.trim()
+  li.content.querySelector('.time').textContent = node.date
+
+  li.content.querySelector('.name').textContent = node.mate.name
+  li.content.querySelector('.avatar img').setAttribute('src', node.mate.avatar)
+  li.content.querySelector('a.avatar').setAttribute('href', node.mate.url)
+  li.content.querySelector('a.name').setAttribute('href', node.mate.url)
+  li.content.querySelector('.location').textContent = node.mate.location
+  li.content.querySelector('.like .num').textContent = node.mate.like
+  li.content.querySelector('.dislike .num').textContent = node.mate.dislike
 
   const clone = document.importNode(li.content, true)
   ul.appendChild(clone)
@@ -59,31 +52,63 @@ const dev = function (callback: Function) {
         "comments": {
           "edges": [{
             "node": {
+              "date": "2019-12-06 12:55:17",
+              "content": "<p>test \u4e2d\u6587<\/p>\n",
+              "commentId": 26,
+              "mate": {
+                "name": "\u5abd`\u5979\u5a87\u786a",
+                "url": "https:\/\/2heng.xin",
+                "avatar": "https:\/\/secure.gravatar.com\/avatar\/8901d7fe1c34079b81d15b96fc5d933d?s=96&d=mm&r=g",
+                "ua": "Chrome 70 Windows 10",
+                "location": "Shanghai, China",
+                "level": 6,
+                "role": 9,
+                "like": 100,
+                "dislike": 10,
+                "__typename": "CommentMate"
+              },
+              "__typename": "Comment",
+              "children": {
+                "nodes": [],
+                "__typename": "CommentToCommentConnection"
+              }
+            },
+            "__typename": "PostToCommentConnectionEdge"
+          }, {
+            "node": {
               "date": "2019-12-05 15:15:21",
-              "agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/78.0.3904.108 Safari\/537.36",
               "content": "<p>dsgssdg<\/p>\n",
               "commentId": 20,
-              "author": {
-                "email": "adadam@qq.com",
-                "name": "mashiro",
-                "url": null,
-                "__typename": "User"
+              "mate": {
+                "name": "mashiro\u4e2d\u6587",
+                "url": "",
+                "avatar": "https:\/\/secure.gravatar.com\/avatar\/cd2b3a164c977539712929f66cad335c?s=96&d=mm&r=g",
+                "ua": "Chrome 70 Windows 10",
+                "location": "Shanghai, China",
+                "level": 6,
+                "role": 9,
+                "like": 100,
+                "dislike": 10,
+                "__typename": "CommentMate"
               },
-              "authorIp": "101.87.249.108",
               "__typename": "Comment",
               "children": {
                 "nodes": [{
                   "date": "2019-12-05 15:30:27",
-                  "agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/78.0.3904.108 Safari\/537.36",
                   "content": "<p>re:fsadgfbad<\/p>\n",
                   "commentId": 24,
-                  "author": {
-                    "email": "adadam@qq.com",
-                    "name": "mashiro",
-                    "url": null,
-                    "__typename": "User"
+                  "mate": {
+                    "name": "mashiro\u4e2d\u6587",
+                    "url": "",
+                    "avatar": "https:\/\/secure.gravatar.com\/avatar\/cd2b3a164c977539712929f66cad335c?s=96&d=mm&r=g",
+                    "ua": "Chrome 70 Windows 10",
+                    "location": "Shanghai, China",
+                    "level": 6,
+                    "role": 9,
+                    "like": 100,
+                    "dislike": 10,
+                    "__typename": "CommentMate"
                   },
-                  "authorIp": "101.87.249.108",
                   "__typename": "Comment",
                   "children": {
                     "nodes": [],
@@ -91,16 +116,20 @@ const dev = function (callback: Function) {
                   }
                 }, {
                   "date": "2019-12-05 15:30:19",
-                  "agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/78.0.3904.108 Safari\/537.36",
                   "content": "<p>re:24325<\/p>\n",
                   "commentId": 23,
-                  "author": {
-                    "email": "adadam@qq.com",
+                  "mate": {
                     "name": "mashiro",
-                    "url": null,
-                    "__typename": "User"
+                    "url": "",
+                    "avatar": "https:\/\/secure.gravatar.com\/avatar\/cd2b3a164c977539712929f66cad335c?s=96&d=mm&r=g",
+                    "ua": "Chrome 70 Windows 10",
+                    "location": "Shanghai, China",
+                    "level": 6,
+                    "role": 9,
+                    "like": 100,
+                    "dislike": 10,
+                    "__typename": "CommentMate"
                   },
-                  "authorIp": "101.87.249.108",
                   "__typename": "Comment",
                   "children": {
                     "nodes": [],
@@ -108,30 +137,38 @@ const dev = function (callback: Function) {
                   }
                 }, {
                   "date": "2019-12-05 15:29:56",
-                  "agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/78.0.3904.108 Safari\/537.36",
                   "content": "<p>reply233<\/p>\n",
                   "commentId": 21,
-                  "author": {
-                    "email": "adadam@qq.com",
+                  "mate": {
                     "name": "mashiro",
-                    "url": null,
-                    "__typename": "User"
+                    "url": "",
+                    "avatar": "https:\/\/secure.gravatar.com\/avatar\/cd2b3a164c977539712929f66cad335c?s=96&d=mm&r=g",
+                    "ua": "Chrome 70 Windows 10",
+                    "location": "Shanghai, China",
+                    "level": 6,
+                    "role": 9,
+                    "like": 100,
+                    "dislike": 10,
+                    "__typename": "CommentMate"
                   },
-                  "authorIp": "101.87.249.108",
                   "__typename": "Comment",
                   "children": {
                     "nodes": [{
                       "date": "2019-12-05 15:30:09",
-                      "agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/78.0.3904.108 Safari\/537.36",
                       "content": "<p>re:re:2333<\/p>\n",
                       "commentId": 22,
-                      "author": {
-                        "email": "adadam@qq.com",
+                      "mate": {
                         "name": "mashiro",
-                        "url": null,
-                        "__typename": "User"
+                        "url": "",
+                        "avatar": "https:\/\/secure.gravatar.com\/avatar\/cd2b3a164c977539712929f66cad335c?s=96&d=mm&r=g",
+                        "ua": "Chrome 70 Windows 10",
+                        "location": "Shanghai, China",
+                        "level": 6,
+                        "role": 9,
+                        "like": 100,
+                        "dislike": 10,
+                        "__typename": "CommentMate"
                       },
-                      "authorIp": "101.87.249.108",
                       "__typename": "Comment",
                       "children": {
                         "nodes": [],
@@ -148,16 +185,20 @@ const dev = function (callback: Function) {
           }, {
             "node": {
               "date": "2019-12-05 15:15:18",
-              "agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/78.0.3904.108 Safari\/537.36",
               "content": "<p>asfadsfgasg<\/p>\n",
               "commentId": 19,
-              "author": {
-                "email": "adadam@qq.com",
+              "mate": {
                 "name": "mashiro",
-                "url": null,
-                "__typename": "User"
+                "url": "",
+                "avatar": "https:\/\/secure.gravatar.com\/avatar\/cd2b3a164c977539712929f66cad335c?s=96&d=mm&r=g",
+                "ua": "Chrome 70 Windows 10",
+                "location": "Shanghai, China",
+                "level": 6,
+                "role": 9,
+                "like": 100,
+                "dislike": 10,
+                "__typename": "CommentMate"
               },
-              "authorIp": "101.87.249.108",
               "__typename": "Comment",
               "children": {
                 "nodes": [],
@@ -168,16 +209,20 @@ const dev = function (callback: Function) {
           }, {
             "node": {
               "date": "2019-12-05 15:15:15",
-              "agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/78.0.3904.108 Safari\/537.36",
               "content": "<p>asfasfas<\/p>\n",
               "commentId": 18,
-              "author": {
-                "email": "adadam@qq.com",
+              "mate": {
                 "name": "mashiro",
-                "url": null,
-                "__typename": "User"
+                "url": "",
+                "avatar": "https:\/\/secure.gravatar.com\/avatar\/cd2b3a164c977539712929f66cad335c?s=96&d=mm&r=g",
+                "ua": "Chrome 70 Windows 10",
+                "location": "Shanghai, China",
+                "level": 6,
+                "role": 9,
+                "like": 100,
+                "dislike": 10,
+                "__typename": "CommentMate"
               },
-              "authorIp": "101.87.249.108",
               "__typename": "Comment",
               "children": {
                 "nodes": [],
@@ -188,36 +233,20 @@ const dev = function (callback: Function) {
           }, {
             "node": {
               "date": "2019-12-05 15:15:12",
-              "agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/78.0.3904.108 Safari\/537.36",
               "content": "<p>safassfs<\/p>\n",
               "commentId": 17,
-              "author": {
-                "email": "adadam@qq.com",
+              "mate": {
                 "name": "mashiro",
-                "url": null,
-                "__typename": "User"
+                "url": "",
+                "avatar": "https:\/\/secure.gravatar.com\/avatar\/cd2b3a164c977539712929f66cad335c?s=96&d=mm&r=g",
+                "ua": "Chrome 70 Windows 10",
+                "location": "Shanghai, China",
+                "level": 6,
+                "role": 9,
+                "like": 100,
+                "dislike": 10,
+                "__typename": "CommentMate"
               },
-              "authorIp": "101.87.249.108",
-              "__typename": "Comment",
-              "children": {
-                "nodes": [],
-                "__typename": "CommentToCommentConnection"
-              }
-            },
-            "__typename": "PostToCommentConnectionEdge"
-          }, {
-            "node": {
-              "date": "2019-12-05 15:15:08",
-              "agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/78.0.3904.108 Safari\/537.36",
-              "content": "<p>adfasf<\/p>\n",
-              "commentId": 16,
-              "author": {
-                "email": "adadam@qq.com",
-                "name": "mashiro",
-                "url": null,
-                "__typename": "User"
-              },
-              "authorIp": "101.87.249.108",
               "__typename": "Comment",
               "children": {
                 "nodes": [],
@@ -227,10 +256,10 @@ const dev = function (callback: Function) {
             "__typename": "PostToCommentConnectionEdge"
           }],
           "pageInfo": {
-            "endCursor": "YXJyYXljb25uZWN0aW9uOjE2",
+            "endCursor": "YXJyYXljb25uZWN0aW9uOjE3",
             "hasNextPage": true,
             "hasPreviousPage": false,
-            "startCursor": "YXJyYXljb25uZWN0aW9uOjIw",
+            "startCursor": "YXJyYXljb25uZWN0aW9uOjI2",
             "__typename": "WPPageInfo"
           },
           "__typename": "PostToCommentConnection"

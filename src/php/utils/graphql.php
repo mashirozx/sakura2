@@ -1,89 +1,72 @@
 <?php
-add_action( 'graphql_register_types', 'register_pet_types' );
+add_action('graphql_register_types', 'register_comment_mate_type');
 
-function register_pet_types() {
-    register_graphql_object_type( 'Dog', [
-      'description' => __( "Man's best friend", 'your-textdomain' ),
-      'fields' => [
-        'name' => [
-            'type' => 'String',
-            'description' => __( 'The name of the dog', 'your-textdomain' ),
+function register_comment_mate_type()
+{
+    register_graphql_object_type('CommentMate', [
+        'description' => __("Get the comment mate.", 'sakura'),
+        'fields' => [
+            'name' => [
+                'type' => 'String',
+                'description' => __('The name of the comment author', 'sakura'),
+            ],
+            'avatar' => [
+                'type' => 'String',
+                'description' => __('The avatar of the comment author', 'sakura'),
+            ],
+            'url' => [
+                'type' => 'String',
+                'description' => __('The url of the comment author', 'sakura'),
+            ],
+            'ua' => [
+                'type' => 'String',
+                'description' => __('The user agent of the comment author', 'sakura'),
+            ],
+            'location' => [
+                'type' => 'String',
+                'description' => __('The IP location of the comment author', 'sakura'),
+            ],
+            'level' => [
+                'type' => 'Integer',
+                'description' => __('The level (by comment) of the comment author', 'sakura'),
+            ],
+            'role' => [
+                'type' => 'Integer',
+                'description' => __('The user role in wordpress of the comment author', 'sakura'),
+            ],
+            'like' => [
+                'type' => 'Integer',
+                'description' => __('The like count of the comment', 'sakura'),
+            ],
+            'dislike' => [
+                'type' => 'Integer',
+                'description' => __('The dislike count of the comment', 'sakura'),
+            ],
         ],
-        'breed' => [
-            'type' => 'String',
-            'description' => __( 'The Breed of the dog', 'your-textdomain' ),
-        ],
-        'age' => [
-            'type' => 'Integer',
-            'description' => __( 'The age, in years, of the dog', 'your-textdomain' ),
-        ],
-      ],
-    ] );
-
-    register_graphql_object_type( 'Cat', [
-      'description' => __( "Not man's best friend...", 'your-textdomain' ),
-      'fields' => [
-        'name' => [
-            'type' => 'String',
-            'description' => __( 'The name of the cat', 'your-textdomain' ),
-        ],
-        'age' => [
-            'type' => 'Integer',
-            'description' => __( 'The age, in years, of the cat', 'your-textdomain' ),
-        ],
-        'isHighOnCatnip' => [
-          'type' => 'Boolean',
-          'description' => __( 'Whether the cat is high on Catnip.', 'your-textdomain' ),
-        ]
-      ],
-    ] );
+    ]);
 }
 
-register_graphql_union_type( 'PetUnion', [
-  'types'       => [
-    \\WPGraphQL\\TypeRegistry::get_type( 'Dog' ),
-    \\WPGraphQL\\TypeRegistry::get_type( 'Cat' )
-  ],
-  'resolveType' => function( $pet ) {
-    // Here we receive the object or array that's being resolved by the field
-    // and we can determine what Type to return
-    $type = null;
-    switch( $pet['type'] ) {
-      case 'dog':
-        $type = \\WPGraphQL\\TypeRegistry::get_type( 'Dog' );
-        break;
-      case 'cat':
-        $type = \\WPGraphQL\\TypeRegistry::get_type( 'Dog' );
-        break;
-    }
-    return $type;
-  }
-] );
+add_action('graphql_register_types', 'register_comment_mate_field');
 
-add_action( 'graphql_register_types', function() {
+function register_comment_mate_field()
+{
+    register_graphql_field('Comment', 'mate', [
+        'description' => __('The comment mate', 'sakura'),
+        'type' => 'CommentMate',
+        'resolve' => function (\WPGraphQL\Model\Comment $comment, $args, $depth) {
+            $comment_ID = $comment->commentId;
+            return [
+                'name' => get_comment_author($comment_ID),
+                'avatar' => get_avatar_url($comment->commentAuthorEmail),
+                'url' => get_comment_author_url($comment_ID),
+                'ua' => 'Chrome 70 Windows 10',
+                'location' => 'Shanghai, China',
+                'level' => 6,
+                'role' => 9,
+                'like' => 100,
+                'dislike' => 10,
+            ];
+        },
+    ]);
 
-  register_graphql_field( 'RootQuery', 'myPets', [
-     'description' => __( 'My pets (could be dogs or cats)', 'your-textdomain' ),
-     'type' => [ 'list_of' => 'PetUnion' ],
-     'resolve' => function() {
-         // You would probably get data from a database or remote API here, but we're
-         // just going to return hard coded data
-         $pets = [
-           [
-             'type' => 'dog',
-             'name' => 'Bender',
-             'age' => 3,
-             'breed' => 'Golden Retriever',
-           ],
-           [
-             'type' => 'cat',
-             'name' => 'Speckles',
-             'age' => 2,
-             'isHighOnCatnip' => true,
-           ],
-         ];
- 
-         return $pets;
-     }
-  ] );
- });
+}
