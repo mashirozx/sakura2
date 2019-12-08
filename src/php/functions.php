@@ -28,6 +28,8 @@ require_once 'utils/functions.php';
 require_once 'utils/disable-wp-emoji.php';
 require_once 'utils/graphql.php';
 
+require_once 'classes/comment-child.php';
+
 /*------------------------------------*\
 Theme Support
 \*------------------------------------*/
