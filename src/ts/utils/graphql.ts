@@ -5,11 +5,12 @@ export default class ApoloQuery {
   private callback: Function
 
   /**
-   * Do an ApoloQuery
+   * Do an ApoloQuery  
+   * **Do not forget the exotic function object in callback function:** `.bind(this)`
    * @author Mashiro
    * @since 4.0
    * @param {any}      query      gql query object
-   * @param {Function} callback   the callback function
+   * @param {Function} callback   the callback function.
    */
   public constructor(
     query: object,

@@ -85,8 +85,8 @@ function register_comment_mate_field()
                 'dislike' => 10,
                 // CURRENTLY WPGRAPHQL DOESNOT SUPPORT A [Integer] TYPE,
                 // SO WE USE A STRING HERE
-                'child' => json_encode($comment_child->comment_child_id_list),
-                'childPre' => json_encode($comment_child->comment_child_preview),
+                'child' => json_encode($comment_child->get_id_list()),
+                'childPre' => json_encode($comment_child->get_preview_list()),
             ];
         },
     ]);
@@ -98,20 +98,128 @@ function register_comment_mate_field()
  * @author Mashiro
  * @license MIT
  * @property int    $comment_ID
- * @property array  $comment_child_id_list
- * @property array  $comment_child_preview
+ * @property array  $id_list
+ * @property array  $preview_list
+ * @property array  $detail_list
+ * @property int    $page_size
+ * @property int    $target_page
+ * @property int    $page_count
+ * @property int    $child_amount
  */
 class CommentChild
 {
     public $comment_ID;
-    public $comment_child_id_list;
-    public $comment_child_preview;
+    private $id_list;
+    private $preview_list;
+    private $detail_list;
 
-    public function __construct($comment_ID)
+    // *how many children you want in a query? (defaut show all = $child_amount)
+    private $page_size;
+    // *which page you are going to request? (default show last page)
+    private $target_page;
+    // the total page number
+    private $page_count;
+    // how many child comments in total?
+    private $child_amount;
+
+    /**
+     * Get a comment's child comments as mate
+     * @since 4.0
+     * @param int  $comment_ID
+     * @param int  $page_size
+     * @param int  $target_page
+     */
+    public function __construct($comment_ID, $page_size = null, $target_page = null)
     {
         $this->comment_ID = $comment_ID;
-        $this->comment_child_id_list = $this->get_the_child_id_list($this->comment_ID);
-        $this->comment_child_preview = $this->get_the_child_preview($this->comment_child_id_list);
+
+        $this->page_size = !empty($page_size) ? $page_size : null;
+        $this->target_page = !empty($target_page) ? $target_page : null;
+    }
+
+    public function get_id_list()
+    {
+        $this->id_list = $this->get_the_child_id_list($this->comment_ID);
+        return $this->id_list;
+    }
+
+    public function get_preview_list()
+    {
+        $this->preview = $this->get_the_child_preview($this->id_list);
+        return $this->preview;
+    }
+
+    public function get_detail_list()
+    {
+        $child_generic = $this->get_the_child_generic($this->comment_ID);
+
+        $this->child_amount = count($child_generic);
+
+        $this->page_size = $this->page_size ? $this->page_size : $this->child_amount;
+
+        $this->page_count = intval($this->child_amount / $this->page_size) + 1;
+
+        $this->target_page = $this->target_page ? $this->target_page : 1;
+
+        $detail = array();
+
+        $start_cursor = $this->page_size * ($this->target_page - 1);
+        $end_cursor = $start_cursor + $this->page_size;
+
+        // for ($cursor = $start_cursor; $cursor < $end_cursor; $cursor++) {
+        //     $each = $child_generic[$cursor];
+        //     $detail = array_merge($detail, array(
+        //         'id' => $each->comment_ID,
+        //         'parent' => $each->comment_parent,
+        //         'name' => $each->comment_author,
+        //         'avatar' => get_avatar_url($each->comment_author_email),
+        //         'url' => $each->comment_author($each->comment_author_url),
+        //         'content' => get_comment_text($each->comment_ID),
+        //         'date' => get_comment_date('', $each->comment_ID),
+        //         'ua' => 'Chrome 70 Windows 10',
+        //         'location' => 'Shanghai, China',
+        //         'level' => 6,
+        //         'role' => 9,
+        //         'like' => 100,
+        //         'dislike' => 10,
+        //     ));
+        // }
+
+        // $output = array(
+        //     'page_size' => $this->page_size,
+        //     'target_page' => $this->target_page,
+        //     'page_count' => $this->page_count,
+        //     'child_amount' => $this->child_amount,
+        //     'detail_list' => $detail_list,
+        // );
+
+        return $child_generic;
+
+    }
+
+    /**
+     * SQL query for the child generic
+     * @since 4.0
+     */
+    private function pushChildGeneric($child_generic_all, $child_ID)
+    {
+        global $wpdb;
+        $child_generic = $wpdb->get_results("SELECT * FROM $wpdb->comments WHERE comment_parent = $child_ID");
+        $child_generic_all = array_merge($child_generic_all, $child_generic);
+
+        if (!empty($child_generic->comment_ID)) {
+            foreach ($child_generic->comment_ID as $child_ID) {
+                $this->pushChildGeneric($child_generic_all, $child_ID);
+            }
+        }
+
+        return $child_generic_all;
+    }
+
+    private function get_the_child_generic($comment_ID)
+    {
+        $child_generic_all = array();
+        return $this->pushChildGeneric($child_generic_all, $comment_ID);
     }
 
     /**
@@ -179,23 +287,31 @@ class CommentChild
     /**
      * Get the earliest 3 comments (if exist) to preview
      */
-    private function get_the_child_preview($comment_child_id_list)
+    private function get_the_child_preview($id_list)
     {
         $preview = array();
-        if (count($comment_child_id_list) > 3) {
-            for ($i = 0; $i <= 2; $i++) {
-                $preview[$i] = $this->pushChildPre($comment_child_id_list, $i);
+        if (count($id_list) > 3) {
+            for ($i = 0; $i < 3; $i++) {
+                $preview[$i] = $this->pushChildPre($id_list, $i);
             }
 
-        } elseif (count($comment_child_id_list) == 0) {
+        } elseif (count($id_list) == 0) {
             return $preview;
 
         } else {
-            for ($i = 0; $i <= count($comment_child_id_list) - 1; $i++) {
-                $preview[$i] = $this->pushChildPre($comment_child_id_list, $i);
+            for ($i = 0; $i < count($id_list); $i++) {
+                $preview[$i] = $this->pushChildPre($id_list, $i);
             }
         }
 
         return $preview;
     }
 }
+
+$test = new CommentChild(26);
+var_dump($test->get_detail_list()[0]);
+echo $test->get_detail_list()[0]->comment_ID;
+
+// global $wpdb;
+// $generic = $wpdb->get_results("SELECT * FROM $wpdb->comments WHERE comment_parent = 26");
+// var_dump($generic[0]);

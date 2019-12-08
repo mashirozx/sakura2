@@ -1,5 +1,4 @@
 import ApoloQuery from './graphql'
-import gql from 'graphql-tag'
 import getCommentListByPostId from '../graphql/getCommentListByPostId.gql'
 
 interface node {
