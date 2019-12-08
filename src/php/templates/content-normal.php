@@ -3,7 +3,7 @@
   <?php get_template_part('layout/sidebar', 'left'); ?>
   <section class="main-center">
     <?php //get_template_part('layout/post-feature', 'fit'); ?>
-    <article class="markdown">
+    <article class="markdown post-content" id="post-content" data-post-id="<?php the_ID() ?>">
       <?php the_content(); ?>
     </article>
 

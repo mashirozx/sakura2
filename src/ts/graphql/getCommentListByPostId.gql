@@ -1,0 +1,39 @@
+query GET_POST($postId: Int, $first: Int, $after: String) {
+  postBy(postId: $postId) {
+    id
+    postId
+    comments(first: $first, after: $after) {
+      edges {
+        node {
+          ...CommentFields
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+  }
+}
+
+fragment CommentFields on Comment {
+  date
+  content(format: RENDERED)
+  commentId
+  mate {
+    name
+    url
+    avatar
+    ua
+    date
+    location
+    level
+    role
+    like
+    dislike
+    child
+    childPre
+  }
+}
