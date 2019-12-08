@@ -1,71 +1,76 @@
 /*comment list*/
-.comment-item {
-  display: grid;
-  grid-template-columns: 60px repeat(3, 50px) auto 50px;
-  grid-template-rows: 25px 25px auto 25px auto;
-  grid-template-areas:
-    'avatar author author author author reply'
-    'avatar mate mate mate mate reply'
-    '. content content content content content'
-    '. like dislike share . more'
-    '. child child child child child';
+.comment-list {
+  padding: 0;
 
-  >.avatar {
-    grid-area: avatar;
+  .comment-item,
+  .comment-child {
+    display: grid;
+    grid-template-columns: 60px repeat(3, 50px) auto 50px;
+    grid-template-rows: 25px 25px auto 25px auto;
+    grid-template-areas:
+      'avatar author author author author reply'
+      'avatar mate mate mate mate reply'
+      '. content content content content content'
+      '. like dislike share . more'
+      '. child child child child child';
 
-    img {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
+    >.avatar {
+      grid-area: avatar;
+
+      img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+      }
     }
-  }
 
-  >.author {
-    grid-area: author;
-    color: $font-color-gray;
+    >.author {
+      grid-area: author;
+      color: $font-color-gray;
 
-    a.name {
-      text-decoration: none;
-      color: $font-color-pink;
+      a.name {
+        text-decoration: none;
+        color: $font-color-pink;
+      }
     }
-  }
 
-  >.reply {
-    grid-area: reply;
-  }
+    >.reply {
+      grid-area: reply;
+    }
 
-  >.mate {
-    grid-area: mate;
-    color: $font-color-gray;
-  }
+    >.mate {
+      grid-area: mate;
+      color: $font-color-gray;
+    }
 
-  >.content {
-    grid-area: content;
-    color: $font-color-normal;
-  }
+    >.content {
+      grid-area: content;
+      color: $font-color-normal;
+    }
 
-  >.like {
-    grid-area: like;
-    color: $font-color-gray;
-  }
+    >.like {
+      grid-area: like;
+      color: $font-color-gray;
+    }
 
-  >.dislike {
-    grid-area: dislike;
-    color: $font-color-gray;
-  }
+    >.dislike {
+      grid-area: dislike;
+      color: $font-color-gray;
+    }
 
-  >.share {
-    grid-area: share;
-    color: $font-color-gray;
-  }
+    >.share {
+      grid-area: share;
+      color: $font-color-gray;
+    }
 
-  >.more {
-    grid-area: more;
-    color: $font-color-gray;
-  }
+    >.more {
+      grid-area: more;
+      color: $font-color-gray;
+    }
 
-  >.child {
-    grid-area: child;
-    background-color: darkgray;
+    >.child {
+      grid-area: child;
+      background-color: darkgray;
+    }
   }
 }

@@ -6,7 +6,7 @@ Sakura v2
 __This repo is under developement, do not active in production environment!__
 
  ### Install
-Clone/download into `./wp-content/themes/`, install the depended plugins (currently need two plugins for GraphQL API support: [WPGraphQL](https://github.com/wp-graphql/wp-graphql), [WPGraphQL JWT Authentication](https://github.com/wp-graphql/wp-graphql-jwt-authentication)), then active the theme in WordPress dashboard after compiling.
+Clone/download into `./wp-content/themes/`, install the depended plugin [WPGraphQL](https://github.com/wp-graphql/wp-graphql) (for GraphQL API support), then active the theme in WordPress dashboard after compiling.
 
 ### Compile
 ```bash

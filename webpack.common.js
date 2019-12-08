@@ -15,7 +15,7 @@ module.exports = [{
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: './js/bundle_[hash].js'
+    filename: './js/[hash].js'
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -129,7 +129,7 @@ module.exports = [{
       }
     }),
     new MiniCssExtractPlugin({
-      filename: "./css/bundle_[hash].css",
+      filename: "./css/[hash].css",
     }),
     new Chunks2JsonPlugin({
       outputDir: 'dist/',

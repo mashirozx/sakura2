@@ -58,7 +58,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cross-env ENV_MODE=build webpack --progress",
     "dev": "cross-env ENV_MODE=build webpack --progress --watch",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "push": "npm run build && bash push.sh"
   },
   "author": "mashirozx",
   "license": "MIT"
