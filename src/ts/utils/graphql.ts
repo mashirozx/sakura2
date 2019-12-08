@@ -96,6 +96,7 @@ class getPostCommentByPostId {
             url
             avatar
             ua
+            date
             location
             level
             role

@@ -12,6 +12,7 @@ interface commentMate {
   url: string
   avatar: string
   ua: string
+  date: string
   location: string
   level: number
   role: number
@@ -22,9 +23,7 @@ interface commentMate {
 }
 
 interface childPre {
-  [index: number]: number;
-  length: number;
-  callee: childPreNode;
+  [index: number]: childPreNode
 }
 
 interface childPreNode {
@@ -33,6 +32,7 @@ interface childPreNode {
   url: string
   avatar: string
   content: string
+  date: string
   ua: string
   location: string
   level: number
@@ -44,27 +44,44 @@ interface childPreNode {
   parent: number
 }
 
-const createCommentChild = function (child: object): DocumentFragment {
-  let newDiv = document.createElement("div");
-  let newContent = document.createTextNode("Hi there and greetings!");
-  newDiv.appendChild(newContent);
+const createCommentChild = function (childPre: childPre): Element {
+  // create a div named .child-pre
+  let childPreviev: Element = document.createElement('div')
+  childPreviev.classList.add('child-pre')
+
+  // loop to append preview
+  for (let i in childPre) {
+    let li: HTMLTemplateElement = document.querySelector('#comment-child-li-template'),
+      clone: DocumentFragment = document.importNode(li.content, true),
+      data = childPre[i]
+
+    clone.querySelector('.content').innerHTML = data.content.trim()
+    clone.querySelector('.time').textContent = data.date
+    clone.querySelector('.name').textContent = data.name
+    clone.querySelector('.avatar img').setAttribute('src', data.avatar)
+    clone.querySelector('a.avatar').setAttribute('href', data.url)
+    clone.querySelector('a.name').setAttribute('href', data.url)
+    clone.querySelector('.location').textContent = data.location
+    clone.querySelector('.like .num').textContent = String(data.like)
+    clone.querySelector('.dislike .num').textContent = String(data.dislike)
+
+    childPreviev.appendChild(clone)
+  }
+
+  return childPreviev
 }
 
-const pushCommentChild = function (childDiv: HTMLElement, child: [number?]): HTMLElement {
-  return childDiv
-}
-
+// push comment item li to the ul
 const pushNewCommentItem = function (node: node) {
   let ul: HTMLElement = document.querySelector('#comment-list-ul'),
     li: HTMLTemplateElement = document.querySelector('#comment-list-li-template'),
     clone: DocumentFragment = document.importNode(li.content, true),
     mate: commentMate = node.mate,
-    // child: [number?] = JSON.parse(mate.child),
+    child: [number?] = JSON.parse(mate.child),
     childPre: childPre = JSON.parse(mate.childPre)
 
   clone.querySelector('.content').innerHTML = node.content.trim()
-  clone.querySelector('.time').textContent = node.date
-
+  clone.querySelector('.time').textContent = mate.date
   clone.querySelector('.name').textContent = mate.name
   clone.querySelector('.avatar img').setAttribute('src', mate.avatar)
   clone.querySelector('a.avatar').setAttribute('href', mate.url)
@@ -74,13 +91,23 @@ const pushNewCommentItem = function (node: node) {
   clone.querySelector('.dislike .num').textContent = String(mate.dislike)
 
   let childDiv: HTMLElement = clone.querySelector('.child')
-  if (childPre === undefined || childPre.length == 0) {
+  if (child === undefined || child.length == 0) {
     // if has no child comment
     childDiv.remove()
   } else {
     // if has child
-    childDiv.setAttribute('data-child', mate.child)
-    let childContent: DocumentFragment = createCommentChild(childPre)
+    let childContent: Element = createCommentChild(childPre)
+
+    // add collapse
+    if (child.length > 3) {
+      let collapse: Element = document.createElement('div'),
+        collapseText: string = `<strong>${child.length}</strong> replies in total, \
+          <span class="open" data-child="${mate.child}">click to view</span>`
+
+      collapse.classList.add('child-collapse')
+      collapse.innerHTML = collapseText.trim()
+      childContent.appendChild(collapse)
+    }
     childDiv.appendChild(childContent)
   }
   ul.appendChild(clone)
@@ -89,7 +116,7 @@ const pushNewCommentItem = function (node: node) {
 const getCommentDataCallback = function (data: object) {
   //single item data
   for (let edge: object in data.data.postBy.comments.edges) {
-    const node: object = data.data.postBy.comments.edges[edge].node
+    const node: node = data.data.postBy.comments.edges[edge].node
     pushNewCommentItem(node)
   }
 }

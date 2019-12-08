@@ -38,6 +38,10 @@ function register_comment_mate_type()
                 'type' => 'Integer',
                 'description' => __('The user role in wordpress of the comment author', 'sakura'),
             ],
+            'date' => [
+                'type' => 'String',
+                'description' => __('Formated date of the comment', 'sakura'),
+            ],
             'like' => [
                 'type' => 'Integer',
                 'description' => __('The like count of the comment', 'sakura'),
@@ -73,6 +77,7 @@ function register_comment_mate_field()
                 'avatar' => get_avatar_url($comment->commentAuthorEmail),
                 'url' => get_comment_author_url($comment_ID),
                 'ua' => 'Chrome 70 Windows 10',
+                'date' => get_comment_date('', $comment_ID),
                 'location' => 'Shanghai, China',
                 'level' => 6,
                 'role' => 9,
@@ -160,6 +165,7 @@ class CommentChild
             'avatar' => get_avatar_url(get_comment_author_email($id)),
             'url' => get_comment_author_url($id),
             'content' => get_comment_text($id),
+            'date' => get_comment_date('', $id),
             'ua' => 'Chrome 70 Windows 10',
             'location' => 'Shanghai, China',
             'level' => 6,

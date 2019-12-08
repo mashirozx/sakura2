@@ -29,7 +29,7 @@
 	</template>
 
 	<template id="comment-child-li-template">
-		<li class="comment-child">
+		<li class="comment-pre">
 			<a class="avatar"><img class="user-avatar"></a>
 			<div class="author"><a class="name"></a></div>
 			<div class="reply">Reply</div>
@@ -44,7 +44,7 @@
 
 <?php elseif (!comments_open() && !is_page() && post_type_supports(get_post_type(), 'comments')): ?>
 
-	<p><?php esc_html_e('Comments are closed here.', 'sakura');?></p>
+	<p><?php esc_html_e('Comments are closed here.', 'sakura'); ?></p>
 
 <?php endif;?>
 

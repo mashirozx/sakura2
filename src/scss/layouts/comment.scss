@@ -3,6 +3,7 @@
   padding: 0;
 
   .comment-item,
+  .comment-pre,
   .comment-child {
     display: grid;
     grid-template-columns: 60px repeat(3, 50px) auto 50px;
@@ -70,7 +71,6 @@
 
     >.child {
       grid-area: child;
-      background-color: darkgray;
     }
   }
 }
