@@ -63,7 +63,7 @@ export default class PageNavigationBar {
         wrapper.appendChild(this.new_ele('previous', '« Previous', this.current - 1))
       }
       else if (this.list[i] === -2)
-        wrapper.appendChild(this.new_ele('next', '« Next', this.current + 1))
+        wrapper.appendChild(this.new_ele('next', 'Next »', this.current + 1))
       else if (this.list[i] === 0)
         wrapper.appendChild(this.new_ele('ellipsis', '...', 0))
       else if (this.list[i] === this.current)
@@ -78,27 +78,27 @@ export default class PageNavigationBar {
   }
 
   private main() {
+    if (this.current > 1) this.list.push(-1)
+
+    //before
     if (this.current < 5) {
-      for (let i = 1; i <= this.current; i++)
-        this.list.push(i)
+      for (let i = 1; i <= this.current; i++) this.list.push(i)
     } else {
-      this.list.push(-1)
       this.list.push(1)
       this.list.push(0)
-      this.list.push(this.current - 2)
-      this.list.push(this.current - 1)
       this.list.push(this.current)
     }
 
+    //after
     if ((this.total - this.current + 1) < 5) {
-      for (let i = this.current + 1; i <= this.total; i++)
-        this.list.push(i)
+      for (let i = this.current + 1; i <= this.total; i++) this.list.push(i)
     } else {
       this.list.push(this.current + 1)
       this.list.push(this.current + 2)
       this.list.push(0)
       this.list.push(this.total)
-      this.list.push(-2)
     }
+
+    if (this.current < this.total) this.list.push(-2)
   }
 }

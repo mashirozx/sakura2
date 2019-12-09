@@ -90,8 +90,8 @@ class CommentChild
 
         $start_cursor = $this->page_size * ($this->target_page - 1);
 
-        if (($this->child_amount - $start_cursor) < $this->page_size) {
-            $end_cursor = $this->child_amount - $start_cursor;
+        if (($this->child_amount - $start_cursor + 1) < $this->page_size) {
+            $end_cursor = $this->child_amount;
         } else {
             $end_cursor = $start_cursor + $this->page_size;
         }
@@ -132,7 +132,7 @@ class CommentChild
     private function pushChildGeneric($child_generic_all, $child_ID)
     {
         global $wpdb;
-        $child_generic = $wpdb->get_results("SELECT * FROM $wpdb->comments WHERE comment_parent = $child_ID");
+        $child_generic = $wpdb->get_results("SELECT * FROM $wpdb->comments WHERE comment_parent = $child_ID AND comment_approved = 1");
         $child_generic_all = array_merge($child_generic_all, $child_generic);
 
         if (!empty($child_generic->comment_ID)) {
@@ -157,7 +157,7 @@ class CommentChild
     private function pushChildId($child_list_all, $child_ID)
     {
         global $wpdb;
-        $child_array = $wpdb->get_col("SELECT comment_ID FROM $wpdb->comments WHERE comment_parent = $child_ID");
+        $child_array = $wpdb->get_col("SELECT comment_ID FROM $wpdb->comments WHERE comment_parent = $child_ID AND comment_approved = 1");
         $child_list_all = array_merge($child_list_all, $child_array);
 
         if (!empty($child_array)) {

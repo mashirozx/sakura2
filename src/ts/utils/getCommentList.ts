@@ -91,7 +91,7 @@ export default class GetCommentList {
   private pageSize: number
   private targetPage: number
 
-  private detailListContainer: Element
+  // private detailListContainer: Element
 
   /**
      * Get post comment bay wp post id through GraphQL
@@ -167,6 +167,7 @@ export default class GetCommentList {
       childPre: childPre = JSON.parse(mate.childPre)
 
     clone.querySelector('.comment-item').setAttribute('data-comment-id', String(node.commentId))
+    clone.querySelector('.comment-item').setAttribute('id', `comment-item-${node.commentId}`)
     clone.querySelector('.content').innerHTML = (node.content ? node.content : '').trim()
     clone.querySelector('.time').textContent = mate.date
     clone.querySelector('.name').textContent = mate.name
@@ -214,8 +215,8 @@ export default class GetCommentList {
 
   private collapse(element: HTMLElement) {
     // div.child
-    this.detailListContainer = element.parentElement.parentElement.parentElement
-    let commentId: number = Number(this.detailListContainer.parentElement.getAttribute('data-comment-id'))
+    let detailListContainer = element.parentElement.parentElement.parentElement
+    let commentId: number = Number(detailListContainer.parentElement.getAttribute('data-comment-id'))
 
     // bug: 不能共用，必须传参！
     this.commentId = commentId
@@ -225,7 +226,7 @@ export default class GetCommentList {
     client.do()
   }
 
-  private childTurnToPage(element: HTMLElement, commentId: number) {
+  private childTurnToPage(element: HTMLElement, commentId: number,detailListContainer:Element) {
     let targetPage = Number(element.getAttribute('data-nav'))
     this.commentId = commentId
     this.targetPage = targetPage
@@ -240,21 +241,22 @@ export default class GetCommentList {
       pageCount = childDetail.pageCount,
       pageSize = childDetail.pageSize,
       targetPage = childDetail.targetPage,
-      childDataList: childItem[] = JSON.parse(detailList)
+      childDataList: childItem[] = JSON.parse(detailList),
+      detailListContainer:Element = document.querySelector(`#comment-item-${commentId} .child`)
 
     /**
      * remove older content
      * TODO: add a loading page here
      */
-    while (this.detailListContainer.firstChild) {
-      this.detailListContainer.removeChild(this.detailListContainer.firstChild)
+    while (detailListContainer.firstChild) {
+      detailListContainer.removeChild(detailListContainer.firstChild)
     }
 
     /**
      * append child detail ul to div.child
      */
     let childContent: Element = this.createCommentChild(childDataList)
-    this.detailListContainer.appendChild(childContent)
+    detailListContainer.appendChild(childContent)
 
     /**
      * append the navigation
@@ -262,12 +264,12 @@ export default class GetCommentList {
     let nav: PageNavigationBar = new PageNavigationBar(targetPage, pageCount),
       navDOM: Element = nav.dom
     navDOM.setAttribute('id', `comment-nav-${commentId}`)
-    this.detailListContainer.appendChild(navDOM)
+    detailListContainer.appendChild(navDOM)
 
     let buttons: NodeList = document.querySelectorAll(`#comment-nav-${commentId} button`)
 
     for (let i = 0; i < buttons.length; i++) {
-      buttons[i].addEventListener('click', this.childTurnToPage.bind(this, buttons[i], commentId), false)
+      buttons[i].addEventListener('click', this.childTurnToPage.bind(this, buttons[i], commentId,detailListContainer), false)
     }
   }
 
