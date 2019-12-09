@@ -1,9 +1,27 @@
+/**
+ * page nav bar plugin
+ * @since 4.0
+ * @author Mashiro
+ * @license MIT
+ * @property {number} current
+ * @property {number} total
+ * @property {number[]} list  0 for ..., -1 for previous, -2 for next
+ * @property {Element} dom    The DOM Element
+ */
 export default class PageNavigationBar {
   public current: number
   public total: number
   public list: number[]
   public dom: Element
 
+  /**
+   * page nav bar plugin
+   * @since 4.0
+   * @author Mashiro
+   * @license MIT
+   * @param {number} current  current page number
+   * @param {number} total    total page number
+   */
   public constructor(current: number, total: number) {
     this.current = current
     this.total = total
