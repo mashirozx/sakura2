@@ -1,5 +1,6 @@
 query GET_COMMENT_CHILD($commentId: Int, $pageSize: Int, $targetPage: Int) {
-  commentBy {
+  commentBy(commentId: $commentId) {
+    commentId
     childDetail(commentId: $commentId, pageSize: $pageSize, targetPage: $targetPage) {
       childAmount
       pageCount

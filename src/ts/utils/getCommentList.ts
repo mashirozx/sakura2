@@ -1,10 +1,12 @@
 import ApoloQuery from './graphql'
+import PageNavigationBar from './pageNavigationBar'
 import getCommentListByPostId from '../graphql/getCommentListByPostId.gql'
 import getCommentChildListById from '../graphql/getCommentChildListById.gql'
 
 interface commentDetail {
   data: {
     commentBy: {
+      commentId: number
       childDetail: {
         childAmount: number,
         pageCount: number,
@@ -138,7 +140,7 @@ export default class GetCommentList {
         clone: DocumentFragment = document.importNode(li.content, true),
         data = childPre[i]
 
-      clone.querySelector('.content').innerHTML = data.content.trim()
+      clone.querySelector('.content').innerHTML = (data.content ? data.content : '').trim()
       clone.querySelector('.time').textContent = data.date
       clone.querySelector('.name').textContent = data.name
       clone.querySelector('.avatar img').setAttribute('src', data.avatar)
@@ -165,7 +167,7 @@ export default class GetCommentList {
       childPre: childPre = JSON.parse(mate.childPre)
 
     clone.querySelector('.comment-item').setAttribute('data-comment-id', String(node.commentId))
-    clone.querySelector('.content').innerHTML = node.content.trim()
+    clone.querySelector('.content').innerHTML = (node.content ? node.content : '').trim()
     clone.querySelector('.time').textContent = mate.date
     clone.querySelector('.name').textContent = mate.name
     clone.querySelector('.avatar img').setAttribute('src', mate.avatar)
@@ -194,7 +196,7 @@ export default class GetCommentList {
             <span class="open" id="open-comment-${node.commentId}" data-child="${mate.child}">click to view</span>`
 
         collapse.classList.add('child-collapse')
-        collapse.innerHTML = collapseText.trim()
+        collapse.innerHTML = (collapseText ? collapseText : '').trim()
         childContent.appendChild(collapse)
       }
       childDiv.appendChild(childContent)
@@ -215,14 +217,7 @@ export default class GetCommentList {
     this.detailListContainer = element.parentElement.parentElement.parentElement
     let commentId: number = Number(this.detailListContainer.parentElement.getAttribute('data-comment-id'))
 
-    // let commentChild:Element =this.creatCommentChild(commentId)
-    // parent.appendChild(commentChild)
-
-    while (this.detailListContainer.firstChild) {
-      this.detailListContainer.removeChild(this.detailListContainer.firstChild)
-    }
-    // TODO: add a loading page here
-
+    // bug: 不能共用，必须传参！
     this.commentId = commentId
     this.pageSize = 5
     this.targetPage = null
@@ -230,16 +225,50 @@ export default class GetCommentList {
     client.do()
   }
 
+  private childTurnToPage(element: HTMLElement, commentId: number) {
+    let targetPage = Number(element.getAttribute('data-nav'))
+    this.commentId = commentId
+    this.targetPage = targetPage
+    let client: ApoloQuery = new ApoloQuery(this.gql_getCommentChildListById(), this.getCommentChildCallback.bind(this))
+    client.do()
+  }
+
   private getCommentChildCallback(commentDetail: commentDetail) {
-    let childDetail = commentDetail.data.commentBy.childDetail,
+    let commentId = commentDetail.data.commentBy.commentId,
+      childDetail = commentDetail.data.commentBy.childDetail,
       detailList = childDetail.detailList,
+      pageCount = childDetail.pageCount,
       pageSize = childDetail.pageSize,
       targetPage = childDetail.targetPage,
       childDataList: childItem[] = JSON.parse(detailList)
 
-    let childContent: Element = this.createCommentChild(childDataList)
+    /**
+     * remove older content
+     * TODO: add a loading page here
+     */
+    while (this.detailListContainer.firstChild) {
+      this.detailListContainer.removeChild(this.detailListContainer.firstChild)
+    }
 
+    /**
+     * append child detail ul to div.child
+     */
+    let childContent: Element = this.createCommentChild(childDataList)
     this.detailListContainer.appendChild(childContent)
+
+    /**
+     * append the navigation
+     */
+    let nav: PageNavigationBar = new PageNavigationBar(targetPage, pageCount),
+      navDOM: Element = nav.dom
+    navDOM.setAttribute('id', `comment-nav-${commentId}`)
+    this.detailListContainer.appendChild(navDOM)
+
+    let buttons: NodeList = document.querySelectorAll(`#comment-nav-${commentId} button`)
+
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', this.childTurnToPage.bind(this, buttons[i], commentId), false)
+    }
   }
 
   private createCommentChild(childDataList: childItem[]): Element {
@@ -253,7 +282,7 @@ export default class GetCommentList {
         clone: DocumentFragment = document.importNode(li.content, true),
         data = childDataList[i]
 
-      clone.querySelector('.content').innerHTML = data.content.trim()
+      clone.querySelector('.content').innerHTML = (data.content ? data.content : '').trim()
       clone.querySelector('.time').textContent = data.date
       clone.querySelector('.name').textContent = data.name
       clone.querySelector('.avatar img').setAttribute('src', data.avatar)

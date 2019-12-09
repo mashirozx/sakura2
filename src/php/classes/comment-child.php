@@ -89,7 +89,12 @@ class CommentChild
         $detail = array();
 
         $start_cursor = $this->page_size * ($this->target_page - 1);
-        $end_cursor = $start_cursor + $this->page_size;
+
+        if (($this->child_amount - $start_cursor) < $this->page_size) {
+            $end_cursor = $this->child_amount - $start_cursor;
+        } else {
+            $end_cursor = $start_cursor + $this->page_size;
+        }
 
         for ($cursor = $start_cursor; $cursor < $end_cursor; $cursor++) {
             $each = $child_generic[$cursor];

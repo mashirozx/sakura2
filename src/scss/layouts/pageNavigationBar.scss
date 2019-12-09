@@ -1,0 +1,17 @@
+.page-navigation {
+  .button-wrapper {
+    >button {
+      .mdc-button__label {
+        text-transform: capitalize;
+      }
+
+      min-width: auto;
+
+      &.current {
+        .mdc-button__label {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
