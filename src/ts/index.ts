@@ -5,7 +5,6 @@
  * @license MIT
  */
 
-// import coverImgIni from "./modules/coverImgInit"
 import headerBarScrollHandler from "./modules/headerBarScrollHandler"
 import mdcInit from "./components/mdcInit"
 import Pjax from "pjax"
@@ -13,22 +12,17 @@ import getHexFilter from "./modules/hexFilter"
 import Parallax from 'parallax-js'
 import rgb2hex from "./modules/rgb2hex"
 import vhCheck from 'vh-check'
+import postPageInit from './functions/postPageInit'
 
-window.onscroll = function () {
-  headerBarScrollHandler()
-}
-
-// TODO: global configuration
-// TODO: transparent before calculation been done!
-// let themePrimaryColor = rgb2hex(window.getComputedStyle(document.querySelector('footer')).backgroundColor)
-let themePrimaryColor = '#fcb8ab'
-let themeColorFilter = getHexFilter(themePrimaryColor)
-
-vhCheck()
-
-let InitFun = function () {
-  // coverImgIni()
+let GlobalInit = function () {
+  // TODO: global configuration
+  // TODO: transparent before calculation been done!
+  // let themePrimaryColor = rgb2hex(window.getComputedStyle(document.querySelector('footer')).backgroundColor)
+  let themePrimaryColor = '#fcb8ab'
+  let themeColorFilter = getHexFilter(themePrimaryColor)
+  vhCheck()
   mdcInit()
+  postPageInit()
 
   let coverImgContainer = <HTMLElement>document.querySelector(".parallax-wrapper")
   if (typeof (coverImgContainer) !== 'undefined' && coverImgContainer !== null) {
@@ -41,25 +35,29 @@ let InitFun = function () {
     // TODO: set theme color function!
     footerBefore.style.filter = themeColorFilter
   }
-}
-
-window.onload = function () {
-  InitFun()
 
   let pjax = new Pjax({
     elements: "a", // default is "a[href], form[action]"
     selectors: ["title", "#root"],
     cacheBust: true
   })
+  document.addEventListener('pjax:complete', PjaxReload)
+}
 
-  function pjaxReload() {
-    // console.log('pjax:complete')
-    if (window.location.pathname == "/") {
-      console.log(`home!`)
-    } else {
-      console.log(`not home!`)
-    }
-    InitFun()
+let PjaxReload = function () {
+  // console.log('pjax:complete')
+  if (window.location.pathname == "/") {
+    console.log(`home!`)
+  } else {
+    console.log(`not home!`)
   }
-  document.addEventListener('pjax:complete', pjaxReload)
+  GlobalInit()
+}
+
+window.onload = function () {
+  GlobalInit()
+}
+
+window.onscroll = function () {
+  headerBarScrollHandler()
 }

@@ -1,0 +1,11 @@
+query GET_COMMENT_CHILD($commentId: Int, $pageSize: Int, $targetPage: Int) {
+  commentBy {
+    childDetail(commentId: $commentId, pageSize: $pageSize, targetPage: $targetPage) {
+      childAmount
+      pageCount
+      pageSize
+      targetPage
+      detailList
+    }
+  }
+}
