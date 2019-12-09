@@ -71,7 +71,13 @@ class CommentChild
         $this->page_size = $this->page_size ? $this->page_size : $this->child_amount;
 
         if ($this->child_amount == 0) {
-            $this->page_count = 0;
+            return array(
+                'page_size' => 0,
+                'target_page' => 0,
+                'page_count' => 0,
+                'child_amount' => 0,
+                'detail_list' => array(),
+            );
         } elseif ($this->child_amount % $this->page_size == 0) {
             $this->page_count = $this->child_amount / $this->page_size;
         } else {

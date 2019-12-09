@@ -42,6 +42,34 @@
 		</li>
 	</template>
 
+	<div class="mdc-chip-set" role="grid">
+		<div class="mdc-chip" role="row">
+			<div class="mdc-chip__ripple"></div>
+			<span role="gridcell">
+				<span role="button" tabindex="0" class="mdc-chip__text">Chip One</span>
+			</span>
+		</div>
+		<div class="mdc-chip" role="row">
+			<div class="mdc-chip__ripple"></div>
+			<span role="gridcell">
+				<span role="button" tabindex="-1" class="mdc-chip__text">Chip Two</span>
+			</span>
+		</div>
+		
+		<div class="mdc-chip" role="row">
+			<div class="mdc-chip__ripple"></div>
+			<span role="gridcell">
+				<span role="button" tabindex="0" class="mdc-chip__text">Chip One</span>
+			</span>
+		</div>
+		<div class="mdc-chip" role="row">
+			<div class="mdc-chip__ripple"></div>
+			<span role="gridcell">
+				<span role="button" tabindex="-1" class="mdc-chip__text">Chip Two</span>
+			</span>
+		</div>
+	</div>
+
 <?php elseif (!comments_open() && !is_page() && post_type_supports(get_post_type(), 'comments')): ?>
 
 	<p><?php esc_html_e('Comments are closed here.', 'sakura'); ?></p>
