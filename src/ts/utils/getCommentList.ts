@@ -218,7 +218,6 @@ export default class GetCommentList {
     let detailListContainer = element.parentElement.parentElement.parentElement
     let commentId: number = Number(detailListContainer.parentElement.getAttribute('data-comment-id'))
 
-    // bug: 不能共用，必须传参！
     this.commentId = commentId
     this.pageSize = 5
     this.targetPage = null
@@ -226,12 +225,14 @@ export default class GetCommentList {
     client.do()
   }
 
-  private childTurnToPage(element: HTMLElement, commentId: number,detailListContainer:Element) {
+  private childTurnToPage(element: HTMLElement, commentId: number, detailListContainer: Element) {
     let targetPage = Number(element.getAttribute('data-nav'))
     this.commentId = commentId
     this.targetPage = targetPage
-    let client: ApoloQuery = new ApoloQuery(this.gql_getCommentChildListById(), this.getCommentChildCallback.bind(this))
-    client.do()
+    if (targetPage !== undefined && targetPage !== 0) {
+      let client: ApoloQuery = new ApoloQuery(this.gql_getCommentChildListById(), this.getCommentChildCallback.bind(this))
+      client.do()
+    }
   }
 
   private getCommentChildCallback(commentDetail: commentDetail) {
@@ -242,7 +243,7 @@ export default class GetCommentList {
       pageSize = childDetail.pageSize,
       targetPage = childDetail.targetPage,
       childDataList: childItem[] = JSON.parse(detailList),
-      detailListContainer:Element = document.querySelector(`#comment-item-${commentId} .child`)
+      detailListContainer: Element = document.querySelector(`#comment-item-${commentId} .child`)
 
     /**
      * remove older content
@@ -269,7 +270,7 @@ export default class GetCommentList {
     let buttons: NodeList = document.querySelectorAll(`#comment-nav-${commentId} button`)
 
     for (let i = 0; i < buttons.length; i++) {
-      buttons[i].addEventListener('click', this.childTurnToPage.bind(this, buttons[i], commentId,detailListContainer), false)
+      buttons[i].addEventListener('click', this.childTurnToPage.bind(this, buttons[i], commentId, detailListContainer), false)
     }
   }
 

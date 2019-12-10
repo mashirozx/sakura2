@@ -71,7 +71,7 @@ function register_comment_mate_field()
         'type' => 'CommentMate',
         'resolve' => function (\WPGraphQL\Model\Comment $comment, $args, $depth) {
             $comment_ID = $comment->commentId;
-            $comment_child = new CommentChild($comment_ID);
+            $comment_child = new GetCommentChild($comment_ID);
             return [
                 'name' => get_comment_author($comment_ID),
                 'avatar' => get_avatar_url($comment->commentAuthorEmail),
@@ -163,6 +163,7 @@ function register_comment_by_field()
         'type' => 'childDetail',
         'args' => [
             // TODO: how to pass args from parent field?
+            // look here: https://github.com/wp-graphql/wp-graphql/blob/2fe8ba8e18b89e824376e76119065ef2ff9aaef2/src/Data/Connection/CommentConnectionResolver.php#L126
             'commentId' => [
                 'type' => 'Int',
                 'description' => __('Get the comment by its database ID', 'sakura'),
@@ -180,7 +181,7 @@ function register_comment_by_field()
             $comment_ID = $args['commentId'];
             $pageSize = !empty($args['pageSize']) ? $args['pageSize'] : null;
             $targetPage = !empty($args['targetPage']) ? $args['targetPage'] : null;
-            $comment_child = new CommentChild($comment_ID, $pageSize, $targetPage);
+            $comment_child = new GetCommentChild($comment_ID, $pageSize, $targetPage);
             $detail = $comment_child->get_detail_list();
             return [
                 'pageSize' => $detail['page_size'],

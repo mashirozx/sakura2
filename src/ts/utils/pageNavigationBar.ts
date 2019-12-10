@@ -86,6 +86,8 @@ export default class PageNavigationBar {
     } else {
       this.list.push(1)
       this.list.push(0)
+      this.list.push(this.current-2)
+      this.list.push(this.current-1)
       this.list.push(this.current)
     }
 

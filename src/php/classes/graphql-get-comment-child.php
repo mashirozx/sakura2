@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Get a comment's child comments as mate
  * @since 4.0
@@ -13,7 +14,7 @@
  * @property int    $page_count
  * @property int    $child_amount
  */
-class CommentChild
+class GetCommentChild
 {
     public $comment_ID;
     private $id_list;
