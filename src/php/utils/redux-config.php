@@ -547,7 +547,7 @@
                 'title'    => __( 'CSS Code', 'sakura' ),
                 'subtitle' => __( 'Paste your CSS code here.', 'sakura' ),
                 'mode'     => 'css',
-                'theme'    => 'monokai',
+                'theme'    => 'github',
                 'desc'     => 'Possible modes can be found at <a href="' . 'http://' . 'ace.c9.io" target="_blank">' . 'http://' . 'ace.c9.io/</a>.',
                 'default'  => "#header{\n   margin: 0 auto;\n}"
             ),
