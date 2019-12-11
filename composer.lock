@@ -338,47 +338,6 @@
             "description": "Internal MaxMind Web Service API",
             "homepage": "https://github.com/maxmind/web-service-common-php",
             "time": "2018-02-12T22:31:54+00:00"
-        },
-        {
-            "name": "redux-framework/redux-framework",
-            "version": "3.6.16",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/reduxframework/redux-framework.git",
-                "reference": "76c0f81090da6e5e20f56327370ca1583e07e391"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/reduxframework/redux-framework/zipball/76c0f81090da6e5e20f56327370ca1583e07e391",
-                "reference": "76c0f81090da6e5e20f56327370ca1583e07e391",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "php": ">=5.2.0"
-            },
-            "type": "wordpress-plugin",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Team Redux"
-                }
-            ],
-            "description": "Redux is a simple, truly extensible options framework for WordPress themes and plugins.",
-            "homepage": "http://reduxframework.com",
-            "keywords": [
-                "Settings",
-                "customizer",
-                "framework",
-                "options",
-                "plugin",
-                "redux",
-                "wordpress"
-            ],
-            "time": "2019-11-14T17:27:13+00:00"
         }
     ],
     "packages-dev": [],
