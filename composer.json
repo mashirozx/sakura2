@@ -1,5 +1,13 @@
 {
+    "name": "mashirozx/sakura2",
+    "description": "WordPress theme Sakura",
+    "type": "wordpress-theme",
+    "license": "MIT",
+    "authors": [{
+        "name": "Mashiro",
+        "email": "moezhx@outlook.com"
+    }],
     "require": {
-        "wp-graphql/wp-graphql": "^0.4.2"
+        "geoip2/geoip2": "^2.9"
     }
 }

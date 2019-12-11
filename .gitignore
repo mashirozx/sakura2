@@ -5,3 +5,6 @@ pull.bat
 push.sh
 pull.sh
 vendor
+
+# *.dat
+# *.mmndb
