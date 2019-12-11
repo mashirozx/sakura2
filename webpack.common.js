@@ -118,6 +118,11 @@ module.exports = [{
         from: './src/php/*/*.php',
         to: './[1]/[2].[ext]',
         test: /src\/php\/([^/]+)\/(.+)\.php$/,
+      },
+      {
+        from: './src/php/*/*/*.php',
+        to: './[1]/[2]/[3].[ext]',
+        test: /src\/php\/([^/]+)\/([^/]+)\/(.+)\.php$/,
       }
     ]),
     new RemovePlugin({

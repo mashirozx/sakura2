@@ -1,5 +1,11 @@
 <?php
 
+namespace Sakura\Classes;
+
+use Sakura\Classes\GetIpLocation;
+use Sakura\Classes\GetCommentChildList;
+use WP_Comment_Query;
+
 class GetCommentList
 {
     /**
@@ -59,6 +65,13 @@ class GetCommentList
     public $number;
 
     /**
+     * the post id
+     *
+     * @var bool
+     */
+    public $show_preview;
+
+    /**
      * ConnectionResolver constructor.
      * @since 4.0
      *
@@ -71,9 +84,51 @@ class GetCommentList
         $this->post_id = $postId;
         $this->page_size = $pageSize;
         $this->target_page = $targetPage;
+        $this->show_preview = true;
         $this->comments_count = $this->get_post_comments_count();
         $this->calculate();
         $this->comments_array = $this->get_post_comments();
+    }
+
+    /**
+     * get the formed comment detail array
+     *
+     * @return array
+     */
+    public function get_comments_formed_array()
+    {
+        $comments_formed_array = [];
+        $comments_array = $this->comments_array;
+        foreach ($comments_array as $comment_array) {
+            $role = $comment_array->user_id ? get_userdata($comment_array->user_id)->roles : 'visitor';
+            $like = get_comment_meta($comment_array->comment_ID, 'like', false);
+            $dislike = get_comment_meta($comment_array->comment_ID, 'dislike', false);
+            $comment_formed_array = array(
+                'comment_ID' => intval($comment_array->comment_ID),
+                'comment_parent' => intval($comment_array->comment_parent),
+                'comment_author' => $comment_array->comment_author,
+                'comment_author_avatar' => get_avatar_url($comment_array->comment_author_email),
+                'url' => $comment_array->comment_author_url,
+                'content' => $comment_array->comment_content,
+                'date' => $comment_array->comment_date,
+                'ua' => GetUserAgent::get_html($comment_array->comment_agent),
+                'location' => GetIpLocation::get_location($comment_array->comment_author_IP, 'geoip2'),
+                'level' => 6,
+                'role' => $role,
+                'like' => $like ? $like : 0,
+                'dislike' => $dislike ? $dislike : 0,
+            );
+
+            if ($this->show_preview) {
+                $preview = new GetCommentChildList($comment_array->comment_ID, 3, 1);
+                $preview_list = $preview->get_comments_formed_array();
+                $comment_formed_array['preview'] = $preview_list;
+            }
+
+            array_push($comments_formed_array, $comment_formed_array);
+        }
+
+        return $comments_formed_array;
     }
 
     /**
@@ -140,7 +195,8 @@ class GetCommentList
      *
      * @return array
      */
-    public function get_post_comments() {
+    public function get_post_comments()
+    {
         $args = array(
             'post_id' => $this->post_id,
             'parent' => 0,
@@ -156,6 +212,3 @@ class GetCommentList
         return $comments;
     }
 }
-
-// $test = new GetCommentList(1, 2, 2);
-// var_dump($test->comments_array);

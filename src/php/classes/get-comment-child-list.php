@@ -1,5 +1,10 @@
 <?php
 
+namespace Sakura\Classes;
+
+use WP_Comment_Query;
+use Sakura\Classes\GetCommentList;
+
 class GetCommentChildList extends GetCommentList
 {
     /**
@@ -29,6 +34,7 @@ class GetCommentChildList extends GetCommentList
         $this->comment_id = $commentId;
         $this->page_size = $pageSize;
         $this->target_page = $targetPage;
+        $this->show_preview = false;
         $this->child_id_list = $this->get_child_id_list();
         $this->comments_count = $this->get_child_comments_count();
         $this->calculate();
@@ -116,6 +122,3 @@ class GetCommentChildList extends GetCommentList
         return $comments;
     }
 }
-
-// $test = new GetCommentChildList(26, 5, 2);
-// var_dump($test->comments_array);

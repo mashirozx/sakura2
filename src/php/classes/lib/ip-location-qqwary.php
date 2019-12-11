@@ -1,4 +1,7 @@
 <?php
+
+namespace Sakura\Classes\Lib;
+
 /**
  * IP 地理位置查询 
  * https://github.com/itbdw/ip-database/blob/master/src/IpLocation.php
@@ -8,7 +11,7 @@
  *
  * @package itbdw\IpLocation
  */
-class IpLocation
+class QqIpLocation
 {
     private static $instance;
     /**
@@ -113,7 +116,7 @@ class IpLocation
     }
     private function init($filepath)
     {
-        $filename = __DIR__ . '/../../data/qqwry.dat';
+        $filename = __DIR__ . '/../../../data/qqwry.dat';
         if ($filepath) {
             $filename = $filepath;
         }

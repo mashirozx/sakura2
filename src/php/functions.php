@@ -21,11 +21,13 @@ External Modules
 require_once __DIR__.'/../vendor/autoload.php';
 // require_once __DIR__. '/../vendor/redux-framework/ReduxCore/framework.php';
 
+require_once 'classes/lib/ip-location-qqwary.php';
+require_once 'classes/get-ip-location.php';
+require_once 'classes/get-user-agent.php';
 require_once 'classes/graphql-register-types.php';
 require_once 'classes/grapgql-register-fields.php';
 require_once 'classes/get-comment-list.php';
 require_once 'classes/get-comment-child-list.php';
-require_once 'classes/ip-location-qqwary.php';
 
 /*------------------------------------*\
 External Utils
@@ -35,7 +37,6 @@ require_once 'utils/redux-config.php';
 require_once 'utils/disable-wp-emoji.php';
 require_once 'utils/tools.php';
 require_once 'utils/graphql.php';
-require_once 'utils/ip-location.php';
 
 /*------------------------------------*\
 Theme Support

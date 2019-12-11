@@ -6,12 +6,15 @@ Sakura v2
 __This repo is under developement, do not active in production environment!__
 
  ### Install
-Clone/download into `./wp-content/themes/`, install the depended plugin [WPGraphQL](https://github.com/wp-graphql/wp-graphql) (for GraphQL API support), then active the theme in WordPress dashboard after compiling.
+Clone/download into `./wp-content/themes/`, install the depended plugins [WPGraphQL](https://github.com/wp-graphql/wp-graphql) (for GraphQL API support) and [Redux Framework](https://cn.wordpress.org/plugins/redux-framework/) (for options framework support), then active the theme in WordPress dashboard after compiling.
 
 ### Compile
 ```bash
+# Install dependencies
 npm i -g webpack-cli
 npm install
+curl -sS https://getcomposer.org/installer | php
+php composer.phar install
 # Dynamical compile (--watch file changes)
 npm run dev
 # Build

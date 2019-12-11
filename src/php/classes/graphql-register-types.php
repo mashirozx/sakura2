@@ -1,14 +1,50 @@
 <?php
+
+namespace Sakura\Classes;
+
 class GraphqlRegisterTypes
 {
 
     public function __construct()
     {
-        add_filter('graphql_register_types', array($this, 'register_comment_mate_type'), 10);
+        add_filter('graphql_register_types', array($this, 'register_comment_list_type'), 10);
     }
 
     /**
-     * register commentMate type
+     * register commentList type
+     * @since 4.0
+     */
+    public static function register_comment_list_type()
+    {
+        register_graphql_object_type('commentList', [
+            'description' => __("Get the comment list by its database ID or post database ID", 'sakura'),
+            'fields' => [
+                'id' => [
+                    'type' => 'Integer',
+                    'description' => __('The database id of the post/comment.', 'sakura'),
+                ],
+                'pageSize' => [
+                    'type' => 'Integer',
+                    'description' => __('How many comments to show in a page?', 'sakura'),
+                ],
+                'totalPage' => [
+                    'type' => 'Integer',
+                    'description' => __('How many page in total?', 'sakura'),
+                ],
+                'targetPage' => [
+                    'type' => 'Integer',
+                    'description' => __('Which page of comments your want?', 'sakura'),
+                ],
+                'comments' => [
+                    'type' => 'String',
+                    'description' => __('The comment list array, json encoded.', 'sakura'),
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * register commentMate type (drop)
      * @since 4.0
      */
     public static function register_comment_mate_type()
@@ -23,7 +59,7 @@ class GraphqlRegisterTypes
             ],
         ]);
 
-        register_graphql_object_type('commentByCommentId', [
+        register_graphql_object_type('commentChildListById', [
             'description' => __("Get the comment by its database ID", 'sakura'),
             'fields' => [
                 'commentId' => [
@@ -33,7 +69,7 @@ class GraphqlRegisterTypes
             ],
         ]);
 
-        register_graphql_object_type('commentListItem', [
+        register_graphql_object_type('commentItem', [
             'description' => __("Get the comment mate.", 'sakura'),
             'fields' => [
                 'authorName' => [
