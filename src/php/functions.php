@@ -18,8 +18,7 @@ define('MANIFEST', json_decode(file_get_contents(get_template_directory() . "/ma
 External Modules
 \*------------------------------------*/
 
-require_once __DIR__.'/../vendor/autoload.php';
-// require_once __DIR__. '/../vendor/redux-framework/ReduxCore/framework.php';
+require_once __DIR__.'/../includes/vendor/autoload.php';
 
 require_once 'classes/lib/ip-location-qqwary.php';
 require_once 'classes/get-ip-location.php';
@@ -33,10 +32,13 @@ require_once 'classes/get-comment-child-list.php';
 External Utils
 \*------------------------------------*/
 
-require_once 'utils/redux-config.php';
-require_once 'utils/disable-wp-emoji.php';
 require_once 'utils/tools.php';
-require_once 'utils/graphql.php';
+require_once 'utils/disable-wp-emoji.php';
+require_once 'utils/admin.php';
+require_once 'utils/redux-config.php';
+require_once 'utils/redux-demo-config.php';
+require_once 'utils/graphql-init.php';
+require_once 'utils/debug.php';
 
 /*------------------------------------*\
 Theme Support

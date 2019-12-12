@@ -84,7 +84,7 @@ class GraphqlRegisterFields
             'resolve' => function ($source, $args, $context, $info) {
                 $comment_child = new GetCommentChildList($args['commentId'], $args['pageSize'], $args['targetPage']);
                 return [
-                    'id' => $comment_child->comment_id,
+                    'wpDbId' => $comment_child->comment_id,
                     'pageSize' => $comment_child->page_size,
                     'totalPage' => $comment_child->total_page,
                     'targetPage' => $comment_child->target_page,
@@ -125,7 +125,7 @@ class GraphqlRegisterFields
             'resolve' => function ($source, $args, $context, $info) {
                 $comment_child = new GetCommentList($args['postId'], $args['pageSize'], $args['targetPage']);
                 return [
-                    'id' => $comment_child->postId,
+                    'wpDbId' => $comment_child->post_id,
                     'pageSize' => $comment_child->page_size,
                     'totalPage' => $comment_child->total_page,
                     'targetPage' => $comment_child->target_page,

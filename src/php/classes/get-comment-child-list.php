@@ -2,8 +2,8 @@
 
 namespace Sakura\Classes;
 
-use WP_Comment_Query;
 use Sakura\Classes\GetCommentList;
+use WP_Comment_Query;
 
 class GetCommentChildList extends GetCommentList
 {
@@ -97,7 +97,13 @@ class GetCommentChildList extends GetCommentList
      */
     private function get_child_comments_count()
     {
-        return count($this->child_id_list);
+        $count = count($this->child_id_list);
+        if ($count == 0) {
+            $this->has_comment = false;
+        } else {
+            $this->has_comment = true;
+        }
+        return $count;
     }
 
     /**

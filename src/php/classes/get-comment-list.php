@@ -2,8 +2,8 @@
 
 namespace Sakura\Classes;
 
-use Sakura\Classes\GetIpLocation;
 use Sakura\Classes\GetCommentChildList;
+use Sakura\Classes\GetIpLocation;
 use WP_Comment_Query;
 
 class GetCommentList
@@ -72,6 +72,11 @@ class GetCommentList
     public $show_preview;
 
     /**
+     * @var boolen
+     */
+    public $has_comment;
+
+    /**
      * ConnectionResolver constructor.
      * @since 4.0
      *
@@ -97,6 +102,9 @@ class GetCommentList
      */
     public function get_comments_formed_array()
     {
+        if (!$this->has_comment) {
+            return array();
+        }
         $comments_formed_array = [];
         $comments_array = $this->comments_array;
         foreach ($comments_array as $comment_array) {
@@ -111,18 +119,29 @@ class GetCommentList
                 'url' => $comment_array->comment_author_url,
                 'content' => $comment_array->comment_content,
                 'date' => $comment_array->comment_date,
-                'ua' => GetUserAgent::get_html($comment_array->comment_agent),
-                'location' => GetIpLocation::get_location($comment_array->comment_author_IP, 'geoip2'),
+                'ua' => GetUserAgent::get_json($comment_array->comment_agent),
+                'location' => GetIpLocation::get_location($comment_array->comment_author_IP),
                 'level' => 6,
                 'role' => $role,
                 'like' => $like ? $like : 0,
                 'dislike' => $dislike ? $dislike : 0,
+                'child' => array(
+                    'has_comment' => false,
+                    'child_count' => null,
+                    'preview_list' => array(),
+                ),
             );
 
             if ($this->show_preview) {
+                // TOTO: how many to preview, and by what order
                 $preview = new GetCommentChildList($comment_array->comment_ID, 3, 1);
                 $preview_list = $preview->get_comments_formed_array();
-                $comment_formed_array['preview'] = $preview_list;
+                $comment_formed_array['child'] = array_merge(array(
+                    'has_comment' => $preview->has_comment,
+                    'child_count' => $preview->comments_count,
+                    'preview_list' => $preview->get_comments_formed_array(),
+                ));
+                $comment_formed_array['preview'];
             }
 
             array_push($comments_formed_array, $comment_formed_array);
@@ -151,6 +170,13 @@ class GetCommentList
         );
 
         $count = $wpdb->get_var($query);
+
+        if ($count == 0) {
+            $this->has_comment = false;
+        } else {
+            $this->has_comment = true;
+        }
+
         return $count;
     }
 

@@ -19,7 +19,7 @@ class GraphqlRegisterTypes
         register_graphql_object_type('commentList', [
             'description' => __("Get the comment list by its database ID or post database ID", 'sakura'),
             'fields' => [
-                'id' => [
+                'wpDbId' => [
                     'type' => 'Integer',
                     'description' => __('The database id of the post/comment.', 'sakura'),
                 ],

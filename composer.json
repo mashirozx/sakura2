@@ -5,9 +5,12 @@
     "license": "MIT",
     "authors": [{
         "name": "Mashiro",
-        "email": "moezhx@outlook.com"
+        "email": "adadam@qq.com"
     }],
     "require": {
         "geoip2/geoip2": "^2.9"
+    },
+    "config": {
+        "vendor-dir": "includes/vendor"
     }
 }
