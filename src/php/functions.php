@@ -21,10 +21,13 @@ External Modules
 require_once __DIR__.'/../includes/vendor/autoload.php';
 
 require_once 'classes/lib/ip-location-qqwary.php';
+require_once 'classes/error.php';
 require_once 'classes/get-ip-location.php';
 require_once 'classes/get-user-agent.php';
+require_once 'classes/comments-post-handle.php';
 require_once 'classes/graphql-register-types.php';
-require_once 'classes/grapgql-register-fields.php';
+require_once 'classes/graphql-register-fields.php';
+require_once 'classes/graphql-register-mutate.php';
 require_once 'classes/get-comment-list.php';
 require_once 'classes/get-comment-child-list.php';
 

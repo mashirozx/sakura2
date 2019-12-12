@@ -5,7 +5,7 @@
  * 
  * @param string $id
  * @throw Exception
- * @return mixed string|int|bool|null
+ * @return mixed string|int|boolen|null
  */
 function sakura_options(string $id)
 {

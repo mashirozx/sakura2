@@ -41,7 +41,7 @@ class GetIpLocation
         } else {
             $location .= '';
         }
-        
+
         $location .= $record->country->names[$lang];
 
         return $location;
@@ -70,9 +70,9 @@ class GetIpLocation
         $db = $db ? sakura_options('ip_database') : 1;
         try {
             if (sakura_options('ip_database') == 1) {
-                return self::get_ip_location_qqwarry($ip);
-            } else {
                 return self::get_ip_location_geoip2($ip, sakura_options('geo_ip_local'));
+            } else {
+                return self::get_ip_location_qqwarry($ip);
             }
         } catch (Exception $e) {
             return '';

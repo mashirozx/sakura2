@@ -1,13 +1,28 @@
 <?php
+
+// write_log('THIS IS THE START OF MY CUSTOM DEBUG');
 /**
- * debug here
+ * play here
  */
 # Silence is golden.
+use Sakura\Classes\CommentsPostHandle;
+if (!is_admin()) {
 
-use Sakura\Classes\GetIpLocation;
+    $commentdata = array(
+        // wp_handle_comment_submission()
+        'comment_post_ID' => 1,
+        'author' => 'testtt',
+        'email' => 'geanguanzx@gmail.com',
+        'url' => 'htpps://2heng.xin',
+        'comment' => 'nonce test 12sdafsa',
+        'comment_parent' => 0,
+        '_wp_unfiltered_html_comment' => '92646303hg',
+    );
 
-if (!is_admin()){
+    // // wp_insert_comment($commentdata);
 
-  // echo GetIpLocation::get_location('101.87.249.108');
+    // // $ajax_nonce = wp_create_nonce( "wpdocs-special-string" );
+    // // echo $ajax_nonce;
 
+    // var_dump(CommentsPostHandle::get_comment($commentdata));
 }

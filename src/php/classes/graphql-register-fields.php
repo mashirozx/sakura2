@@ -2,8 +2,8 @@
 
 namespace Sakura\Classes;
 
-use Sakura\Classes\GetCommentList;
 use Sakura\Classes\GetCommentChildList;
+use Sakura\Classes\GetCommentList;
 use WPGraphQL\Data\DataSource;
 
 class GraphqlRegisterFields
@@ -11,6 +11,7 @@ class GraphqlRegisterFields
 
     public function __construct()
     {
+        // add_action('graphql_register_types', array($this, 'register_post_comment_field'), 10);
         add_action('graphql_register_types', array($this, 'register_demo_field'), 10);
         add_action('graphql_register_types', array($this, 'register_comment_list_field'), 10);
         add_action('graphql_register_types', array($this, 'register_comment_child_field'), 10);
@@ -22,40 +23,41 @@ class GraphqlRegisterFields
      * a simple demo
      * @since 4.0
      */
-    public static function register_demo_field() {
+    public static function register_demo_field()
+    {
 
-        register_graphql_object_type( 'Sakura', [
-            'description' => __( "wow, a wonderful wordpress theme", 'sakrua' ),
+        register_graphql_object_type('Sakura', [
+            'description' => __("wow, a wonderful wordpress theme", 'sakrua'),
             'fields' => [
-              'name' => [
-                  'type' => 'String',
-                  'description' => __( 'The name of the theme', 'sakrua' ),
-              ],
-              'author' => [
-                  'type' => 'String',
-                  'description' => __( 'The author of the theme', 'sakrua' ),
-              ],
-              'version' => [
-                  'type' => 'String',
-                  'description' => __( 'The version of the theme', 'sakrua' ),
-              ],
+                'name' => [
+                    'type' => 'String',
+                    'description' => __('The name of the theme', 'sakrua'),
+                ],
+                'author' => [
+                    'type' => 'String',
+                    'description' => __('The author of the theme', 'sakrua'),
+                ],
+                'version' => [
+                    'type' => 'String',
+                    'description' => __('The version of the theme', 'sakrua'),
+                ],
             ],
-          ] );
+        ]);
 
-        register_graphql_field( 'RootQuery', 'getTheme', [
-          'description' => __( 'Get a theme', 'sakrua' ),
-          'type' => 'Sakura',
-          'resolve' => function() {
+        register_graphql_field('RootQuery', 'getTheme', [
+            'description' => __('Get a theme', 'sakrua'),
+            'type' => 'Sakura',
+            'resolve' => function () {
 
-            return [
-                'name' => 'Sakura',
-                'author' => 'Mashiro',
-                'version' => wp_get_theme()->get('Version'),
-            ];
-    
-          }
-        ] );
-    
+                return [
+                    'name' => 'Sakura',
+                    'author' => 'Mashiro',
+                    'version' => wp_get_theme()->get('Version'),
+                ];
+
+            },
+        ]);
+
     }
 
     /**

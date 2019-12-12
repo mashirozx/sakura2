@@ -13,6 +13,8 @@
 	<ul id="comment-list-ul" class="comment-list">
 	</ul>
 
+	<?php comment_form(); ?>
+
 	<template id="comment-list-li-template">
 		<li class="comment-item">
 			<a class="avatar"><img class="user-avatar"></a>

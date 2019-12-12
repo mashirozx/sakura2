@@ -1,4 +1,4 @@
-import ApoloQuery from './graphql'
+import ApoloQuery from './graphq-querry'
 import PageNavigationBar from './pageNavigationBar'
 import queryCommentListById from '../graphql/queryCommentListById.gql'
 import queryCommentChildListById from '../graphql/queryCommentChildListById.gql'
@@ -44,7 +44,7 @@ interface Ua {
   browsers: string[]
 }
 
-export default class ShowComments {
+export default class ShowCommentList {
   public constructor(postId: number, pageSize: number, targetPage: number) {
     let list_comment = new ListComments(postId, pageSize, targetPage)
   }
