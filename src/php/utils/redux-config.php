@@ -272,7 +272,7 @@ Redux::setSection($opt_name, array(
             'id' => 'geo_ip_local',
             'type' => 'button_set',
             'title' => __('IP location display language', 'sakura'),
-            'subtitle' => __('Display location in which language.', 'sakura'),
+            'subtitle' => __('Display location in which language if your are using GeoIPLite2.', 'sakura'),
             'desc' => __('GeoIPLite2 support (City, Province, Country) in several languages.', 'sakura'),
             //Must provide key => value pairs for radio options
             'options' => array(

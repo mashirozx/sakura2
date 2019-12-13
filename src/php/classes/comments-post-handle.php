@@ -37,7 +37,7 @@ class CommentsPostHandle
     public static function handle_comment_submission($comment_data)
     {
         $comment = wp_handle_comment_submission($comment_data);
-        
+
         if (is_wp_error($comment)) {
             $data = intval($comment->get_error_data());
             if (!empty($data)) {
@@ -45,7 +45,7 @@ class CommentsPostHandle
                 // throw new Exception(__('Submission Failure: ', 'sakura') . $comment->get_error_message());
                 return array(
                     'succeed' => false,
-                    'message' => __('Submission Failure: ', 'sakura') . $comment->get_error_message(),
+                    'message' => $comment->get_error_message(),
                     'comment' => $comment,
                 );
             } else {
@@ -53,7 +53,7 @@ class CommentsPostHandle
                 // throw new Exception(__('Submission Failure.', 'sakura'));
                 return array(
                     'succeed' => false,
-                    'message' => __('Submission Failure With Unknown Type)', 'sakura'),
+                    'message' => __('Submission failure (Unknown Type).', 'sakura'),
                     'comment' => $comment,
                 );
             }

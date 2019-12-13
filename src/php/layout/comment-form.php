@@ -1,60 +1,50 @@
-<!-- <form action="https://dev.2heng.xin/wp-comments-post.php" method="post" id="commentform" class="comment-form"
-  novalidate="">
-  <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are
-    marked <span class="required">*</span></p>
-  <p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45"
-      rows="8" maxlength="65525" required="required"></textarea></p>
-  <p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author"
-      name="author" type="text" value="" size="30" maxlength="245" required="required"></p>
-  <p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email"
-      name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required="required">
-  </p>
-  <p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30"
-      maxlength="200"></p>
-  <p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent"
-      type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Save my name, email, and website in this
-      browser for the next time I comment.</label></p>
-  <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input
-      type="hidden" name="comment_post_ID" value="1" id="comment_post_ID">
-    <input type="hidden" name="comment_parent" id="comment_parent" value="0">
-  </p>
-</form> -->
-
-<form class="comment-form">
+<!-- <form action="wp-comments-post.php" method="post" id="commentform" novalidate=""> -->
+<form id="commentform" class="comment-form" action="./" method="post" novalidate="">
   <div class="profile">
     <div class="avatar"></div>
     <div class="fields">
-      <div class="author">
-        <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--fullwidth">
-          <input class="mdc-text-field__input" id="text-field-hero-input">
+      <div class="author left">
+        <div
+          class="mdc-text-field mdc-text-field--outlined mdc-text-field--fullwidth mdc-text-field--with-leading-icon mdc-text-field--with-trailing-icon">
+          <i class="material-icons mdc-text-field__icon">face</i>
+          <!-- INPUT: $author -->
+          <input id="author" name="author" type="text" value="" size="30" maxlength="245" required="required"
+            class="mdc-text-field__input">
           <div class="mdc-notched-outline">
             <div class="mdc-notched-outline__leading"></div>
             <div class="mdc-notched-outline__notch">
-              <label for="text-field-hero-input" class="mdc-floating-label">Name</label>
+              <label for="author" class="mdc-floating-label"><?php echo __('Name', 'sakura'); ?></label>
             </div>
             <div class="mdc-notched-outline__trailing"></div>
           </div>
         </div>
       </div>
-      <div class="email">
-        <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--fullwidth">
-          <input class="mdc-text-field__input" id="text-field-hero-input">
+      <div class="email center">
+        <div
+          class="mdc-text-field mdc-text-field--outlined mdc-text-field--fullwidth mdc-text-field--with-leading-icon mdc-text-field--with-trailing-icon">
+          <i class="material-icons mdc-text-field__icon">email</i>
+          <!-- INPUT: $email -->
+          <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes"
+            required="required" class="mdc-text-field__input">
           <div class="mdc-notched-outline">
             <div class="mdc-notched-outline__leading"></div>
             <div class="mdc-notched-outline__notch">
-              <label for="text-field-hero-input" class="mdc-floating-label">Name</label>
+              <label for="email" class="mdc-floating-label"><?php echo __('Email', 'sakura'); ?></label>
             </div>
             <div class="mdc-notched-outline__trailing"></div>
           </div>
         </div>
       </div>
-      <div class="url">
-        <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--fullwidth">
-          <input class="mdc-text-field__input" id="text-field-hero-input">
+      <div class="url right">
+        <div
+          class="mdc-text-field mdc-text-field--outlined mdc-text-field--fullwidth mdc-text-field--with-leading-icon mdc-text-field--with-trailing-icon">
+          <i class="material-icons mdc-text-field__icon">link</i>
+          <!-- INPUT: $url -->
+          <input id="url" name="url" type="url" value="" size="30" maxlength="200" class="mdc-text-field__input">
           <div class="mdc-notched-outline">
             <div class="mdc-notched-outline__leading"></div>
             <div class="mdc-notched-outline__notch">
-              <label for="text-field-hero-input" class="mdc-floating-label">Name</label>
+              <label for="url" class="mdc-floating-label"><?php echo __('URL', 'sakura'); ?></label>
             </div>
             <div class="mdc-notched-outline__trailing"></div>
           </div>
@@ -62,6 +52,32 @@
       </div>
     </div>
   </div>
-  <div class="content"></div>
-  <div class="submit"></div>
+
+  <div class="content">
+    <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth">
+      <!-- TEXTAREA $content -->
+      <textarea id="comment" name="comment" maxlength="65525" required="required" class="mdc-text-field__input" rows="8"
+        cols="40"></textarea>
+      <div class="mdc-notched-outline">
+        <div class="mdc-notched-outline__leading"></div>
+        <div class="mdc-notched-outline__notch">
+          <label for="comment"
+            class="mdc-floating-label"><?php echo __('You are the surprise that I will meet only once in my life.', 'sakura'); ?></label>
+        </div>
+        <div class="mdc-notched-outline__trailing"></div>
+      </div>
+    </div>
+  </div>
+  <div class="submit">
+    <button class="mdc-button mdc-button--outlined">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label"><?php echo __('Submit', 'sakura'); ?></span>
+    </button>
+  </div>
+
+  <div class="hidden">
+    <input type="hidden" name="comment_post_ID" id="comment_post_ID" value="<?php echo the_ID(); ?>">
+    <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+    <input type="hidden" name="nonce" id="nonce" value="<?php echo wp_create_nonce('wp_graphql'); ?>">
+  </div>
 </form>

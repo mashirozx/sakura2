@@ -1,5 +1,6 @@
-import ApoloQuery from './graphq-querry'
+import ApoloQuery from './graphqQuerry'
 import PageNavigationBar from './pageNavigationBar'
+import { CreateComment } from './createComment'
 import queryCommentListById from '../graphql/queryCommentListById.gql'
 import queryCommentChildListById from '../graphql/queryCommentChildListById.gql'
 
@@ -104,7 +105,7 @@ class ListComments {
     this.data = data
     this.total_page = this.data.data.commentListById.totalPage
 
-    let comment_list_ul: HTMLElement = document.getElementById('comment-list-ul')
+    let comment_list_ul: HTMLElement = document.getElementById('comment-list-ul-root')
 
     // decode
     this.comments = JSON.parse(this.data.data.commentListById.comments)
@@ -128,6 +129,9 @@ class ListComments {
         open.addEventListener('click', ListComments.collapse.bind(event), false)
       }
     }
+
+    // add reply event listener
+    CreateComment.reply_to_listener()
 
     // print nav html
     //  - add listener for nav bar
@@ -191,6 +195,7 @@ class ListComments {
 
       // insert data
       li_clone.querySelector('.comment-item').setAttribute('id', `comment-${comment.comment_ID}`)
+      li_clone.querySelector('.reply').setAttribute('data-reply-to', String(comment.comment_ID))
       li_clone.querySelector('.content').innerHTML = (comment.content ? comment.content : '').trim()
       li_clone.querySelector('.time').textContent = comment.date
       li_clone.querySelector('.name').textContent = comment.comment_author
@@ -207,6 +212,8 @@ class ListComments {
         for (let t in preview_html_list) {
           li_clone.querySelector('.comment-list-ul').appendChild(preview_html_list[t])
         }
+        // add event listener to reply
+        CreateComment.reply_to_listener()
 
         // add collapse
         if (comment.child.child_count > 3) {
@@ -308,6 +315,9 @@ class ListCommentChild extends ListComments {
     for (let i in comments_html_list) {
       comment_list_ul.appendChild(comments_html_list[i])
     }
+
+    // Add reply event listener
+    CreateComment.reply_to_listener()
 
     // print nav html
     //  - add listener for nav bar

@@ -1,88 +1,103 @@
 /*comment list*/
-.comment-list {
+.comment-list-ul {
   padding: 0;
 
-  .comment-item,
-  .comment-pre,
-  .comment-child {
-    display: grid;
-    grid-template-columns: 60px repeat(3, 50px) auto 50px;
-    grid-template-rows: 25px 25px auto 25px auto;
-    grid-template-areas:
-      'avatar author author author author reply'
-      'avatar mate mate mate mate reply'
-      '. content content content content content'
-      '. like dislike share . more'
-      '. child child child child child';
+  .comment-item {
+    position: relative;
 
-    >.avatar {
-      grid-area: avatar;
+    .grid {
+      display: grid;
+      grid-template-columns: 60px repeat(3, 50px) auto 50px;
+      grid-template-rows: 25px 25px auto 25px auto;
+      grid-template-areas:
+        'avatar author author author author reply'
+        'avatar mate mate mate mate reply'
+        '. content content content content content'
+        '. like dislike share . more'
+        '. child child child child child';
 
-      img {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
+      >.avatar {
+        grid-area: avatar;
+
+        img {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+        }
+      }
+
+      >.author {
+        grid-area: author;
+        color: $font-color-gray;
+
+        a.name {
+          text-decoration: none;
+          color: $font-color-pink;
+        }
+      }
+
+      >.reply {
+        grid-area: reply;
+      }
+
+      >.mate {
+        grid-area: mate;
+        color: $font-color-gray;
+      }
+
+      >.content {
+        grid-area: content;
+        color: $font-color-normal;
+      }
+
+      >.like {
+        grid-area: like;
+        color: $font-color-gray;
+      }
+
+      >.dislike {
+        grid-area: dislike;
+        color: $font-color-gray;
+      }
+
+      >.share {
+        grid-area: share;
+        color: $font-color-gray;
+      }
+
+      >.more {
+        grid-area: more;
+        color: $font-color-gray;
+      }
+
+      >.child {
+        grid-area: child;
       }
     }
 
-    >.author {
-      grid-area: author;
-      color: $font-color-gray;
-
-      a.name {
-        text-decoration: none;
-        color: $font-color-pink;
-      }
-    }
-
-    >.reply {
-      grid-area: reply;
-    }
-
-    >.mate {
-      grid-area: mate;
-      color: $font-color-gray;
-    }
-
-    >.content {
-      grid-area: content;
-      color: $font-color-normal;
-    }
-
-    >.like {
-      grid-area: like;
-      color: $font-color-gray;
-    }
-
-    >.dislike {
-      grid-area: dislike;
-      color: $font-color-gray;
-    }
-
-    >.share {
-      grid-area: share;
-      color: $font-color-gray;
-    }
-
-    >.more {
-      grid-area: more;
-      color: $font-color-gray;
-    }
-
-    >.child {
-      grid-area: child;
+    .reply-form {
+      position: absolute;
+      width: 600px;
+      height: 300px;
+      right: 0;
+      top: 25px;
+      display: none;
     }
   }
 }
 
 .comment-form {
+  $mdc-input-field-height: 56px;
+  $mdc-input-field-margin-top-bottom: 2px;
+  $mdc-input-field-margin-left-right: 5px;
+  $line-height: $mdc-input-field-height + $mdc-input-field-margin-top-bottom * 2;
+  $mdc-text-area-height: 120px;
+  $mdc-space-between: $mdc-input-field-margin-left-right*2;
   width: 100%;
 
   >.profile {
-    $line-height: 70px;
     width: 100%;
     height: $line-height;
-    background: brown;
     display: -webkit-flex;
     display: flex;
 
@@ -95,17 +110,35 @@
     >.fields {
       width: 100%;
       height: 100%;
-      background: tomato;
       display: -webkit-flex;
       display: flex;
 
       >* {
         width: 100%;
         height: 100%;
+        margin: $mdc-input-field-margin-top-bottom 0;
+
+        input {
+          margin-left: $mdc-input-field-height;
+          width: calc(100% - #{$mdc-input-field-height});
+        }
 
         .mdc-notched-outline {
           top: 0;
         }
+      }
+
+      >.left {
+        margin-right: $mdc-input-field-margin-left-right;
+      }
+
+      >.center {
+        margin-right: $mdc-input-field-margin-left-right;
+        margin-left: $mdc-input-field-margin-left-right;
+      }
+
+      >.right {
+        margin-left: $mdc-input-field-margin-left-right;
       }
     }
 
@@ -113,13 +146,20 @@
 
   >.content {
     width: 100%;
-    height: 50px;
-    background: burlywood;
+
+    .mdc-text-field {
+      margin-top: $mdc-space-between - $mdc-input-field-margin-top-bottom;
+
+      textarea {
+        height: $mdc-text-area-height;
+        min-height: $mdc-input-field-height;
+      }
+    }
+
   }
 
   >.submit {
     width: 100%;
-    height: 50px;
-    background: cadetblue;
+    margin-top: $mdc-space-between;
   }
 }
