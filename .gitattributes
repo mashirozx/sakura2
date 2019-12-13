@@ -1,0 +1,4 @@
+includes/* linguist-vendored=true
+dist/* linguist-generated=true
+docs/* linguist-documentation=true
+data/* linguist-detectable=false

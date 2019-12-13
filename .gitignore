@@ -1,5 +1,5 @@
 node_modules
-dist
+# dist
 push.bat
 pull.bat
 push.sh
