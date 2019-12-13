@@ -19,7 +19,7 @@ class CommentsPostHandle
     /**
      * main
      * @param array $comment_data
-     * @return WP_Comment
+     * @return array('comment': WP_Comment, 'succeed': bool, 'message': string)
      */
     public static function get_comment($comment_data)
     {
@@ -31,23 +31,39 @@ class CommentsPostHandle
     /**
      * main
      * @param array $comment_data
-     * @throw Exception
-     * @return WP_Comment
+     * //@throw Exception
+     * @return array('comment': WP_Comment, 'succeed': bool, 'message': string)
      */
     public static function handle_comment_submission($comment_data)
     {
         $comment = wp_handle_comment_submission($comment_data);
+        
         if (is_wp_error($comment)) {
             $data = intval($comment->get_error_data());
             if (!empty($data)) {
-                write_log('Submission Failure: ' . $comment->get_error_message());
-                throw new Exception(__('Submission Failure: ', 'sakura') . $comment->get_error_message());
+                // Error::log('Submission Failure: ' . $comment->get_error_message());
+                // throw new Exception(__('Submission Failure: ', 'sakura') . $comment->get_error_message());
+                return array(
+                    'succeed' => false,
+                    'message' => __('Submission Failure: ', 'sakura') . $comment->get_error_message(),
+                    'comment' => $comment,
+                );
             } else {
-                write_log('Submission Failure (TYPE: ELSE)');
-                throw new Exception(__('Submission Failure.', 'sakura'));
+                // Error::log('Submission Failure (TYPE: ELSE)');
+                // throw new Exception(__('Submission Failure.', 'sakura'));
+                return array(
+                    'succeed' => false,
+                    'message' => __('Submission Failure With Unknown Type)', 'sakura'),
+                    'comment' => $comment,
+                );
             }
         }
-        return $comment;
+
+        return array(
+            'succeed' => true,
+            'message' => __('Comment Succeed', 'sakura'),
+            'comment' => $comment,
+        );
     }
 
     public static function set_cookie($comment)
