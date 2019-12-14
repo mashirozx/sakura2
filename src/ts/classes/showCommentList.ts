@@ -165,6 +165,7 @@ class ListComments {
     this.target_page = Number(element.getAttribute('data-nav'))
     if (this.target_page !== undefined && this.target_page !== 0) {
       this.main()
+      CreateComment.reset_comment_form()
       CreateComment.reply_to_listener()
     }
   }

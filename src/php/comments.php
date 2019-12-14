@@ -9,9 +9,9 @@
 
 	<h2><?php comments_number();?></h2>
 
-	<?php get_template_part('layout/comment', 'form'); ?>
-
 	<?php get_template_part('layout/comment', 'list'); ?>
+	
+	<?php get_template_part('layout/comment', 'form'); ?>
 
 <?php elseif (!comments_open() && !is_page() && post_type_supports(get_post_type(), 'comments')): ?>
 

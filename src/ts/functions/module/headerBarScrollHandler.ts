@@ -1,14 +1,8 @@
-/**
- * @description Sakura theme module
- * @author Mashiro
- * @since 19/10/31
- * @license MIT
- */
-
-import scrollDirection from "./scrollDirection"
+import scrollDirection from "../util/scrollDirection"
 
 /**
  * Site top bar handler when page scroll
+ * @since 4.0.0
  */
 export default function () {
     let ele: HTMLElement = document.querySelector("#nav-header")

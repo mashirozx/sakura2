@@ -91,6 +91,11 @@
   $mdc-space-between: $mdc-input-field-margin-left-right*2;
   width: 100%;
 
+  >.reply-to-info {
+    width: 100%;
+    display: none;
+  }
+
   >.profile {
     width: 100%;
     height: $line-height;

@@ -1,5 +1,9 @@
 <div class="commetn-form-wrapper">
   <form id="commentform" class="comment-form" action="./" method="post" novalidate="">
+    <div id="reply-to-info" class="reply-to-info">
+      <?php echo __('Replying to', 'sakura'); ?> <a href="#" id="reply-to-link">@<span id="reply-to-author"></span></a>
+      <span id="cancel-reply" class="cancel-reply"><?php echo __('Cancel Reply', 'sakura'); ?></span>
+    </div>
     <div class="profile">
       <div class="avatar"></div>
       <div class="fields">
@@ -24,8 +28,8 @@
             class="mdc-text-field mdc-text-field--outlined mdc-text-field--fullwidth mdc-text-field--with-leading-icon mdc-text-field--with-trailing-icon">
             <i class="material-icons mdc-text-field__icon">email</i>
             <!-- INPUT: $email -->
-            <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes"
-              required="required" class="mdc-text-field__input">
+            <input id="email" name="email" type="email" value="" size="30" maxlength="100"
+              aria-describedby="email-notes" required="required" class="mdc-text-field__input">
             <div class="mdc-notched-outline">
               <div class="mdc-notched-outline__leading"></div>
               <div class="mdc-notched-outline__notch">
@@ -56,8 +60,8 @@
     <div class="content">
       <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth">
         <!-- TEXTAREA $content -->
-        <textarea id="comment" name="comment" maxlength="65525" required="required" class="mdc-text-field__input" rows="8"
-          cols="40"></textarea>
+        <textarea id="comment" name="comment" maxlength="65525" required="required" class="mdc-text-field__input"
+          rows="8" cols="40"></textarea>
         <div class="mdc-notched-outline">
           <div class="mdc-notched-outline__leading"></div>
           <div class="mdc-notched-outline__notch">

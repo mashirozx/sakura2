@@ -97,6 +97,9 @@ export class CreateComment {
    * @param {boolean} keep keep the existing comment text?
    */
   public static reset_comment_form(keep: boolean = true) {
+
+    document.getElementById('reply-to-info').style.display = 'none'
+
     let comment: string = keep ? (<HTMLTextAreaElement>document.getElementById(`comment`)).value : null
     // TODO: use from cookie
     let default_form: CommentForm = {
@@ -116,7 +119,7 @@ export class CreateComment {
   }
 
   /**
-   * listen retcomment comment form button
+   * listen reset comment form button
    * @since 4.0.0
    */
   public static reset_comment_form_button_listener() {
@@ -149,7 +152,7 @@ export class CreateComment {
     like.style.display = 'none'
     dislike.style.display = 'none'
 
-    return li_clone;
+    return li_clone
   }
 
   /**
@@ -178,14 +181,22 @@ export class CreateComment {
 
     target_place.appendChild(comment_form)
     target_place.style.display = 'block'
-    // now to set form data
 
+    // add reply to author name
+    let reply_to_author: string = (<HTMLElement>document.querySelector(`#comment-${to_comment_id} .name`)).innerText
+    document.getElementById(`reply-to-author`).innerText = reply_to_author
+    document.getElementById(`reply-to-link`).setAttribute(`href`, `#comment-${to_comment_id}`)
+    document.getElementById('reply-to-info').style.display = 'block'
+
+    // cancel reply
+    CreateComment.cancel_reply_listener()
+
+    // set form data
     let form_data: CommentForm = {
       'author': (<HTMLInputElement>document.getElementById(`author`)).value,
       'email': (<HTMLInputElement>document.getElementById(`email`)).value,
       'url': (<HTMLInputElement>document.getElementById(`url`)).value,
-      // TODO: get the reply to author name
-      'comment': `reply to @${to_comment_id} ${(<HTMLTextAreaElement>document.getElementById(`comment`)).value}`,
+      'comment': (<HTMLTextAreaElement>document.getElementById(`comment`)).value,
       'comment_post_ID': Number((<HTMLInputElement>document.getElementById(`comment_post_ID`)).value),
       'comment_parent': to_comment_id,
       'nonce': (<HTMLInputElement>document.getElementById(`nonce`)).value
@@ -203,7 +214,11 @@ export class CreateComment {
    * @since 4.0.0
    */
   public static cancel_reply_listener() {
+    document.getElementById('cancel-reply').addEventListener('click', callback, false)
 
+    function callback(event: MouseEvent) {
+      CreateComment.reset_comment_form(true)
+    }
   }
 
   /**
@@ -247,8 +262,7 @@ export class CreateComment {
       this.root_parent = 0
 
     } else {
-      // document.getElementById(`comment-${this.comment_parent}`)
-      let parent: Element = document.querySelector(`#comment-${this.comment_parent}`).parentElement.parentElement
+      let parent: Element = document.querySelector(`#comment-${this.comment_parent}`).parentElement.parentElement.parentElement
 
       if (parent.classList.contains('comment-item')) {
         // if the post replying to has a parent, that means, new one will be a child-child
@@ -261,7 +275,6 @@ export class CreateComment {
     }
 
     // mutation
-    //  - do else by mutate_callback()
     let mutation = this.mutate()
   }
 
@@ -273,11 +286,10 @@ export class CreateComment {
   public mutate_callback(dataJson: PostCallbackData) {
     // handle data
     let data: Data = dataJson.data.postComment
-    console.log(data)
 
     if (!data.succeed) {
       this.error_handle(data)
-      return;
+      return
     }
 
     // generate new element for data
@@ -294,10 +306,12 @@ export class CreateComment {
     }
 
     let last_li = lis[lis.length - 1]
-    if (lis.length > 0)
+    if (lis.length > 0) {
       last_li.parentElement.insertBefore(data_ele, last_li.nextSibling)
-    else
+    }
+    else {
       ul.appendChild(data_ele)
+    }
 
     // reset comment form
     CreateComment.reset_comment_form(false)
