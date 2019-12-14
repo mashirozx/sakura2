@@ -5,5 +5,7 @@ push.bat
 pull.bat
 push.sh
 pull.sh
+package-lock.json
+composer.lock
 # *.dat
 # *.mmndb

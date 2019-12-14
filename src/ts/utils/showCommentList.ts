@@ -165,6 +165,7 @@ class ListComments {
     this.target_page = Number(element.getAttribute('data-nav'))
     if (this.target_page !== undefined && this.target_page !== 0) {
       this.main()
+      CreateComment.reply_to_listener()
     }
   }
 
@@ -311,7 +312,7 @@ class ListCommentChild extends ListComments {
     ListCommentChild.remove_element_child(comment_list_ul)
 
     // print list html
-    let comments_html_list: DocumentFragment[] = ListCommentChild.gen_comment_list_html(this.comments)
+    let comments_html_list = <DocumentFragment[]>ListCommentChild.gen_comment_list_html(this.comments)
     for (let i in comments_html_list) {
       comment_list_ul.appendChild(comments_html_list[i])
     }
