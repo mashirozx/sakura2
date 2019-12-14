@@ -99,6 +99,7 @@ export class CreateComment {
    * Listener for reply button  `CreateComment.reply_to_listener()`
    * call after list build! Not in constructor!
    * show reload every time refresh list
+   * @method {static}
    * @since 4.0.0
    */
   public static reply_to_listener() {
@@ -106,22 +107,19 @@ export class CreateComment {
     // console.log(reply)
     for (let i = 0; i < reply.length; i++) {
       // console.log(i)
-      reply[i].addEventListener('click', CreateComment.reply_to_listener, false)
-
-      // 为什么静态方法没调出来？？
+      reply[i].addEventListener('click', this.reply_to_listener_callback, false)
     }
   }
 
   public static reply_to_listener_callback(event: MouseEvent) {
     let element: Element = event['path'][0]
     let to_comment_id: number = Number(element.getAttribute('data-reply-to'))
-    console.log(to_comment_id)
     let target_place = <HTMLElement>document.querySelector(`#comment-${to_comment_id} .reply-form`)
     let comment_form = <HTMLElement>document.querySelector(`#commentform`)
 
     target_place.appendChild(comment_form)
     target_place.style.display = 'block'
-    // now set form data
+    // now reset form data
   }
 
   /**

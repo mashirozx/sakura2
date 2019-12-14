@@ -1,9 +1,9 @@
 node_modules
-# dist
+dist
+includes/vendor
 push.bat
 pull.bat
 push.sh
 pull.sh
-
 # *.dat
 # *.mmndb
