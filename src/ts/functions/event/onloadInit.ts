@@ -13,13 +13,13 @@ export default function init() {
   // fix vh issue on monile
   vhCheck()
 
-  // mdc init
-  mdcInit()
-
   // pjax init
   pjaxInit()
   
   /* below should also add to pjaxReload */
+
+  // mdc init
+  mdcInit()
 
   // footer wave color
   footerWave()
