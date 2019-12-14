@@ -1,11 +1,25 @@
 <div class="commetn-form-wrapper">
-  <form id="commentform" class="comment-form" action="./" method="post" novalidate="">
+  <form id="commentform" class="comment-form mdc-card" action="./" method="post" novalidate="">
     <div id="reply-to-info" class="reply-to-info">
-      <?php echo __('Replying to', 'sakura'); ?> <a href="#" id="reply-to-link">@<span id="reply-to-author"></span></a>
-      <span id="cancel-reply" class="cancel-reply"><?php echo __('Cancel Reply', 'sakura'); ?></span>
+      <div class="mdc-chip-set" role="grid">
+        <div class="text">
+          <span class="plain"><?php echo __('Replying to', 'sakura'); ?></span>
+          <a href="#" id="reply-to-link" class="mdc-chip" role="row">
+            <div class="mdc-chip__ripple"></div>
+            <span role="gridcell">
+              <span role="button" tabindex="0" class="mdc-chip__text">@<span id="reply-to-author"></span></span>
+            </span>
+          </a>
+        </div>
+        <!-- /! cancel button -->
+        <div id="cancel-reply" class="cancel-reply mdc-button">
+          <span class="mdc-button__ripple"></span>
+          <?php echo __('Cancel Reply', 'sakura'); ?>
+        </div>
+      </div>
     </div>
     <div class="profile">
-      <div class="avatar"></div>
+      <div class="avatar"><img src="<?php echo get_avatar_url(''); ?>"></div>
       <div class="fields">
         <div class="author left">
           <div

@@ -8,6 +8,8 @@
 import { MDCRipple } from '@material/ripple';
 import { MDCTextField } from '@material/textfield';
 import { MDCTopAppBar } from '@material/top-app-bar';
+import { MDCSnackbar } from '@material/snackbar';
+import { MDCChipSet } from '@material/chips';
 
 const Conf = [
     ['.mdc-top-app-bar', MDCTopAppBar],
@@ -19,6 +21,8 @@ const Conf = [
         ],
         MDCRipple
     ],
+    ['.mdc-snackbar', MDCSnackbar],
+    ['.mdc-chip-set', MDCChipSet]
 ]
 
 export default Conf

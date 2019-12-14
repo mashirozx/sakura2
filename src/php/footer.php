@@ -7,18 +7,29 @@
 
 		</div>
 		<!-- /wrapper -->
+		
+		<!-- /snackbar -->
+		<div id="snackbar" class="mdc-snackbar mdc-snackbar--opening mdc-snackbar--closing">
+			<div class="mdc-snackbar__surface">
+				<div id="snackbar-text" class="mdc-snackbar__label" role="status" aria-live="polite">
+				</div>
+				<div class="mdc-snackbar__actions ">
+					<button type="button" id="snackbar-button" class="mdc-button mdc-snackbar__action">
+						<div class="mdc-button__ripple"></div>
+						<div id="snackbar-label" class="mdc-button__label"></div>
+					</button>
+					<button id="snackbar-close" class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+				</div>
+			</div>
+		</div>
 
 		<?php wp_footer();?>
 
 		<!-- analytics -->
-		<script>
-		(function(f,i,r,e,s,h,l){i['GoogleAnalyticsObject']=s;f[s]=f[s]||function(){
-		(f[s].q=f[s].q||[]).push(arguments)},f[s].l=1*new Date();h=i.createElement(r),
-		l=i.getElementsByTagName(r)[0];h.async=1;h.src=e;l.parentNode.insertBefore(h,l)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-XXXXXXXX-XX', 'yourdomain.com');
-		ga('send', 'pageview');
-		</script>
+		<?php if (sakura_options('analytics_code_position') == 'foot') {
+    echo sakura_options('analytics_code');
+}
+?>
 
 	</body>
 </html>

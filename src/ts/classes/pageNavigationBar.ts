@@ -67,7 +67,7 @@ export default class PageNavigationBar {
       else if (this.list[i] === 0)
         wrapper.appendChild(this.new_ele('ellipsis', '...', 0))
       else if (this.list[i] === this.current)
-        wrapper.appendChild(this.new_ele('current', String(this.list[i]), this.list[i]))
+        wrapper.appendChild(this.new_ele('current', String(this.list[i]), 0))
       else
         wrapper.appendChild(this.new_ele('available', String(this.list[i]), this.list[i]))
     }

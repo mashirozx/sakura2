@@ -1,19 +1,24 @@
 /*comment list*/
 .comment-list-ul {
   padding: 0;
+  list-style: none;
 
   .comment-item {
     position: relative;
 
     .grid {
+      $avatar-size: 50px;
+      $avatar-margin-right: 10px;
       display: grid;
-      grid-template-columns: 60px repeat(3, 50px) auto 50px;
-      grid-template-rows: 25px 25px auto 25px auto;
+      grid-template-columns: $avatar-size + $avatar-margin-right repeat(3, 50px) auto 50px;
+      grid-template-rows: $avatar-size/2 $avatar-size/2 auto auto 25px auto auto;
       grid-template-areas:
         'avatar author author author author reply'
         'avatar mate mate mate mate reply'
+        '. mate mate mate mate .'
         '. content content content content content'
         '. like dislike share . more'
+        'form form form form form form'
         '. child child child child child';
 
       >.avatar {
@@ -48,6 +53,8 @@
       >.content {
         grid-area: content;
         color: $font-color-normal;
+        display: inline-block;
+        word-break: break-word;
       }
 
       >.like {
@@ -70,14 +77,22 @@
         color: $font-color-gray;
       }
 
+      >.reply-form {
+        grid-area: form;
+        display: none;
+
+        @media screen and (max-width: $tablet-min-width) {
+          .comment-form {
+            width: calc(100% + $avatar-size + $avatar-margin-right);
+            margin-left: - $avatar-size + $avatar-margin-right;
+          }
+        }
+
+      }
+
       >.child {
         grid-area: child;
       }
-    }
-
-    .reply-form {
-      position: relative;
-      display: none;
     }
   }
 }
@@ -89,11 +104,31 @@
   $line-height: $mdc-input-field-height + $mdc-input-field-margin-top-bottom * 2;
   $mdc-text-area-height: 120px;
   $mdc-space-between: $mdc-input-field-margin-left-right*2;
-  width: 100%;
+  $mobile-avatar-margin: 8px;
+  $mobile-avatar-size: $mdc-input-field-height - $mobile-avatar-margin * 2;
+  $mdc-input-field-border-radius: 4px;
+
+  padding: $mdc-space-between;
+  width: calc(100% - $mdc-space-between);
+
+  @media screen and (max-width: $tablet-min-width) {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
 
   >.reply-to-info {
     width: 100%;
+    margin-bottom: $mdc-space-between - $mdc-input-field-margin-top-bottom;
     display: none;
+
+    .mdc-chip-set {
+      justify-content: space-between;
+
+      .text>.plain {
+        align-self: center;
+      }
+    }
   }
 
   >.profile {
@@ -102,17 +137,49 @@
     display: -webkit-flex;
     display: flex;
 
+    @media screen and (max-width: $tablet-min-width) {
+      height: auto;
+      display: block;
+    }
+
     >.avatar {
-      width: $line-height;
-      height: 100%;
-      background: coral;
+      width: $mdc-input-field-height;
+      height: $mdc-input-field-height;
+      margin-top: $mdc-input-field-margin-top-bottom;
+      margin-right: $mdc-input-field-margin-left-right;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: $mdc-input-field-border-radius;
+      }
+
+      @media screen and (max-width: $tablet-min-width) {
+        position: absolute;
+        width: $mobile-avatar-size;
+        height: $mobile-avatar-size;
+        right: $mdc-space-between + $mobile-avatar-margin;
+        margin-top: $mdc-input-field-margin-top-bottom + $mobile-avatar-margin;
+        margin-right: auto;
+
+        img {
+          border-radius: 50%;
+        }
+      }
     }
 
     >.fields {
       width: 100%;
       height: 100%;
+      margin-left: $mdc-input-field-margin-left-right;
       display: -webkit-flex;
       display: flex;
+
+      @media screen and (max-width: $tablet-min-width) {
+        margin-left: 0;
+        flex-direction: column;
+        justify-content: flex-start
+      }
 
       >* {
         width: 100%;
@@ -121,7 +188,13 @@
 
         input {
           margin-left: $mdc-input-field-height;
-          width: calc(100% - #{$mdc-input-field-height});
+          width: calc(100% - #{$mdc-input-field-height - 6px + 16px});
+        }
+
+        @media screen and (max-width: $tablet-min-width) {
+          #author {
+            width: calc(100% - #{$mdc-input-field-height - 6px + $mobile-avatar-size + $mobile-avatar-margin*2});
+          }
         }
 
         .mdc-notched-outline {
@@ -131,15 +204,27 @@
 
       >.left {
         margin-right: $mdc-input-field-margin-left-right;
+
+        @media screen and (max-width: $tablet-min-width) {
+          margin-right: 0;
+        }
       }
 
       >.center {
         margin-right: $mdc-input-field-margin-left-right;
         margin-left: $mdc-input-field-margin-left-right;
+
+        @media screen and (max-width: $tablet-min-width) {
+          margin: $mdc-space-between - $mdc-input-field-margin-top-bottom 0;
+        }
       }
 
       >.right {
         margin-left: $mdc-input-field-margin-left-right;
+
+        @media screen and (max-width: $tablet-min-width) {
+          margin-left: 0;
+        }
       }
     }
 

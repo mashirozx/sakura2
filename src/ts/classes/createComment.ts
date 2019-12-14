@@ -1,5 +1,5 @@
 import ApoloMutate from './graphqlMutate'
-import PageNavigationBar from './pageNavigationBar'
+import snapbar from '../functions/module/snackbar'
 import mutateCreateComment from '../graphql/mutateCreateComment.gql'
 
 export interface CommentForm {
@@ -128,6 +128,7 @@ export class CreateComment {
 
   /**
    * creat comment item for response data
+   * @since 4.0.0
    * TODO: we can add a is_approved area
    * @return DocumentFragment
    */
@@ -316,10 +317,10 @@ export class CreateComment {
     // reset comment form
     CreateComment.reset_comment_form(false)
 
-
     // TODO: scroll page
-    // TODO: also raise a message
-
+    // TODO: add anomation 
+    // raise a snapbar
+    snapbar(data.message)
   }
 
   /**
@@ -328,7 +329,7 @@ export class CreateComment {
    * @param {Data} data mutation callback
    */
   public error_handle(data: Data) {
-    console.log(data.message)
+    snapbar(data.message, 0)
   }
 
   private mutate() {

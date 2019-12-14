@@ -14,8 +14,8 @@
 				<div class="dislike"><i class="iconfont icon-dislike-o"></i> <span class="num"></span></div>
 				<div class="share"><i class="iconfont icon-forward"></i></div>
 				<div class="more"><i class="iconfont icon-more-dots"></i></div>
+				<div class="reply-form"></div>
 				<ul class="comment-list-ul child"></ul>
 			</div>
-			<div class="reply-form"></div>
 		</li>
 	</template>

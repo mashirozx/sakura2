@@ -288,6 +288,31 @@ Redux::setSection($opt_name, array(
             'default' => 'en',
         ),
 
+        array(
+            'id' => 'analytics_code',
+            'type' => 'ace_editor',
+            'title' => __('Analytics Code', 'sakura_demo'),
+            'subtitle' => __('Paste your analytics code here (HTML). Leave it blank if you don\'t need any external analytics service.', 'sakura'),
+            'mode' => 'html',
+            'theme' => 'github',
+            'desc' => __('Recommand using <a href="https://analytics.google.com/" target="_blank">Google Analytics</a>.', 'sakura'),
+            'default' => "<!-- Global site tag (gtag.js) - Google Analytics -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-XX\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'UA-XXXXXXXX-XX');\n</script>",
+        ),
+
+        array(
+            'id'       => 'analytics_code_position',
+            'type'     => 'button_set',
+            'title'    => __( 'Analytics Code Position', 'sakura_demo' ),
+            'subtitle' => __( 'Where to load your analytics code?', 'sakura_demo' ),
+            'desc'     => __( 'Load a script in header may low down your web page performance, but some analytics service provider aks us to past in &lt;head&gt;. (So sometimes we need a async parameter on the script)', 'sakura_demo' ),
+            //Must provide key => value pairs for radio options
+            'options'  => array(
+                'head' => '&lt;head&gt;',
+                'foot' => '&lt;foot&gt;'
+            ),
+            'default'  => 'head'
+        ),
+
     ),
 
     // -> END OPTIONS

@@ -53,7 +53,7 @@ class CommentsPostHandle
                 // throw new Exception(__('Submission Failure.', 'sakura'));
                 return array(
                     'succeed' => false,
-                    'message' => __('Submission failure (Unknown Type).', 'sakura'),
+                    'message' => __('Submission failure (unknown reason).', 'sakura'),
                     'comment' => $comment,
                 );
             }
@@ -61,7 +61,7 @@ class CommentsPostHandle
 
         return array(
             'succeed' => true,
-            'message' => __('Comment Succeed', 'sakura'),
+            'message' => $comment->comment_approved==1?__('Comment is submitted successfully.', 'sakura'):__('Comment is submitted successfully, but awaiting moderation.', 'sakura'),
             'comment' => $comment,
         );
     }
