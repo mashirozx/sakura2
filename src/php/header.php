@@ -14,25 +14,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta name="description" content="<?php bloginfo('description');?>">
 
+  <!-- analytics -->
+  <?php if (sakura_options('analytics_code_position')=='head')echo sakura_options('analytics_code'); ?>
+
   <?php wp_head();?>
 
 </head>
 
 <body>
-  <!-- wrapper (pjax container) -->
-  <div id="root" class="wrapper">
-    <header id="nav-header" class="mdc-top-app-bar mdc-top-app-bar--dense nav-header">
-      <!--nav mune-->
-      <div class="mdc-top-app-bar__row">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-          <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
-          <span class="mdc-top-app-bar__title">Sakura</span>
-        </section>
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-          <a href="<?php echo esc_url( home_url() ); ?>" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">home</a>
-          <a href="#" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">print</a>
-          <a href="#" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">bookmark</a>
-        </section>
-      </div>
-    </header>
-    <!-- /header -->
+
+  <!-- top-app-bar -->
+  <?php get_template_part('layout/top-app-bar'); ?>
+
+  <!-- drawer -->
+  <?php get_template_part('layout/drawer'); ?>
+
+  <!-- `mdc-top-app-bar--fixed-adjust` if need a blank area -->
+  <!-- drawer app content -->
+  <div class="mdc-drawer-app-content">
+
+    <!-- wrapper (pjax container) -->
+    <main class="main-content" id="main-content">
+

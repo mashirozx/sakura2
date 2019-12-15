@@ -6,12 +6,13 @@
  */
 
 .page-content {
-    position: relative; // important for parallax scrolling
+    position: relative;
     background: white;
     display: -webkit-flex;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    padding-bottom: 30px; // the footer wave height
 
     .main-center {
         margin: 0;

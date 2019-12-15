@@ -1,7 +1,11 @@
 node_modules
 dist
+includes/vendor
 push.bat
 pull.bat
 push.sh
 pull.sh
-vendor
+package-lock.json
+composer.lock
+# *.dat
+# *.mmndb

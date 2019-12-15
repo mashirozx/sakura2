@@ -1,13 +1,16 @@
 /*varbles*/
 @import "./variables";
 
-/*env init*/
-@import "./components/normalize";
-@import "./layouts/ini";
+/*3-rd part*/
+@import "normalize.css/normalize";
+@import "animate.css/animate";
 
 /*components*/
 @import "./components/mdc";
 @import "./components/pjax";
+
+/*env init*/
+@import "./layouts/ini";
 
 /*layouts*/
 @import "./layouts/header";
@@ -16,7 +19,9 @@
 @import "./layouts/pageContent";
 @import "./layouts/postThumbList";
 @import "./layouts/postFeature";
-@import "./layouts/comment.scss";
+@import "./layouts/comment";
+@import "./layouts/pageNavigationBar";
+@import "./layouts/drawer";
 
 /*themes*/
 @import "./markdown/markdown";

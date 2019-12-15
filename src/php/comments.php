@@ -5,47 +5,28 @@
 
 	<?php return;endif;?>
 
+<!-- if have comment -->
 <?php if (have_comments()): ?>
 
-	<h2><?php comments_number();?></h2>
+	<?php get_template_part('layout/comment', 'list'); ?>
 
-	<!-- TODO: also generate a copy in php side for SEO -->
-	<ul id="comment-list-ul" class="comment-list">
-	</ul>
+<!-- if comment open but have no comment -->
+<?php elseif (!have_comments() && comments_open()): ?>
 
-	<template id="comment-list-li-template">
-		<li class="comment-item">
-			<a class="avatar"><img class="user-avatar"></a>
-			<div class="author"><a class="name"></a></div>
-			<div class="reply">Reply</div>
-			<div class="mate"><span class="time"></span> <span class="location"></span></div>
-			<div class="content"></div>
-			<div class="like"><i class="iconfont icon-like-o"></i> <span class="num"></span></div>
-			<div class="dislike"><i class="iconfont icon-dislike-o"></i> <span class="num"></span></div>
-			<div class="share"><i class="iconfont icon-forward"></i></div>
-			<div class="more"><i class="iconfont icon-more-dots"></i></div>
-			<div class="child"></div>
-		</li>
-	</template>
+	<?php get_template_part('layout/comment', 'list'); ?>
 
-	<template id="comment-child-li-template">
-		<li class="comment-pre">
-			<a class="avatar"><img class="user-avatar"></a>
-			<div class="author"><a class="name"></a></div>
-			<div class="reply">Reply</div>
-			<div class="mate"><span class="time"></span> <span class="location"></span></div>
-			<div class="content"></div>
-			<div class="like"><i class="iconfont icon-like-o"></i> <span class="num"></span></div>
-			<div class="dislike"><i class="iconfont icon-dislike-o"></i> <span class="num"></span></div>
-			<div class="share"><i class="iconfont icon-forward"></i></div>
-			<div class="more"><i class="iconfont icon-more-dots"></i></div>
-		</li>
-	</template>
+<?php else: ?>
 
-<?php elseif (!comments_open() && !is_page() && post_type_supports(get_post_type(), 'comments')): ?>
-
-	<p><?php esc_html_e('Comments are closed here.', 'sakura'); ?></p>
+	<p><?php esc_html_e('Comments are closed here.', 'sakura');?></p>
 
 <?php endif;?>
+
+<!-- if comment is opened here -->
+
+<?php if (comments_open()): ?>
+
+<?php get_template_part('layout/comment', 'form'); ?>
+
+<?php endif; ?>
 
 </div>

@@ -1,76 +1,267 @@
 /*comment list*/
-.comment-list {
-  padding: 0;
+.comment-wrapper {
+  padding: 10px;
 
-  .comment-item,
-  .comment-pre,
-  .comment-child {
-    display: grid;
-    grid-template-columns: 60px repeat(3, 50px) auto 50px;
-    grid-template-rows: 25px 25px auto 25px auto;
-    grid-template-areas:
-      'avatar author author author author reply'
-      'avatar mate mate mate mate reply'
-      '. content content content content content'
-      '. like dislike share . more'
-      '. child child child child child';
+  @media screen and (max-width: $tablet-min-width) {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+.comment-list-ul {
+  padding: 0;
+  list-style: none;
+
+  .comment-item {
+    position: relative;
+
+    .grid {
+      $avatar-size: 50px;
+      $avatar-margin-right: 10px;
+      display: grid;
+      grid-template-columns: $avatar-size + $avatar-margin-right repeat(3, 50px) auto 50px;
+      grid-template-rows: $avatar-size/2 $avatar-size/2 auto auto 25px auto auto;
+      grid-template-areas:
+        'avatar author author author author reply'
+        'avatar mate mate mate mate reply'
+        '. mate mate mate mate .'
+        '. content content content content content'
+        '. like dislike share . more'
+        'form form form form form form'
+        '. child child child child child';
+
+      >.avatar {
+        grid-area: avatar;
+
+        img {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+        }
+      }
+
+      >.author {
+        grid-area: author;
+        color: $font-color-gray;
+
+        a.name {
+          text-decoration: none;
+          color: $font-color-pink;
+        }
+      }
+
+      >.reply {
+        grid-area: reply;
+      }
+
+      >.mate {
+        grid-area: mate;
+        color: $font-color-gray;
+      }
+
+      >.content {
+        grid-area: content;
+        color: $font-color-normal;
+        display: inline-block;
+        word-break: break-word;
+      }
+
+      >.like {
+        grid-area: like;
+        color: $font-color-gray;
+      }
+
+      >.dislike {
+        grid-area: dislike;
+        color: $font-color-gray;
+      }
+
+      >.share {
+        grid-area: share;
+        color: $font-color-gray;
+      }
+
+      >.more {
+        grid-area: more;
+        color: $font-color-gray;
+      }
+
+      >.reply-form {
+        grid-area: form;
+        display: none;
+      }
+
+      >.child {
+        grid-area: child;
+
+        .child-collapse {
+          .mdc-chip-set {
+            align-items: center
+          }
+        }
+
+        @media screen and (max-width: $tablet-min-width) {
+          .comment-form {
+            width: calc(100% + #{$avatar-size + $avatar-margin-right});
+            margin-left: - #{$avatar-size + $avatar-margin-right};
+          }
+        }
+      }
+    }
+  }
+}
+
+.comment-form {
+  $mdc-input-field-height: 56px;
+  $mdc-input-field-margin-top-bottom: 2px;
+  $mdc-input-field-margin-left-right: 5px;
+  $line-height: $mdc-input-field-height + $mdc-input-field-margin-top-bottom * 2;
+  $mdc-text-area-height: 120px;
+  $mdc-space-between: $mdc-input-field-margin-left-right*2;
+  $mobile-avatar-margin: 8px;
+  $mobile-avatar-size: $mdc-input-field-height - $mobile-avatar-margin * 2;
+  $mdc-input-field-border-radius: 4px;
+
+  margin: $mdc-space-between 0;
+  padding: $mdc-space-between;
+  width: calc(100% - $mdc-space-between);
+
+  @media screen and (max-width: $tablet-min-width) {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  >.reply-to-info {
+    width: 100%;
+    margin-bottom: $mdc-space-between - $mdc-input-field-margin-top-bottom;
+    display: none;
+
+    .mdc-chip-set {
+      justify-content: space-between;
+
+      .text>.plain {
+        align-self: center;
+      }
+    }
+  }
+
+  >.profile {
+    width: 100%;
+    height: $line-height;
+    display: -webkit-flex;
+    display: flex;
+
+    @media screen and (max-width: $tablet-min-width) {
+      height: auto;
+      display: block;
+    }
 
     >.avatar {
-      grid-area: avatar;
+      width: $mdc-input-field-height;
+      height: $mdc-input-field-height;
+      margin-top: $mdc-input-field-margin-top-bottom;
+      margin-right: $mdc-input-field-margin-left-right;
 
       img {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        border-radius: $mdc-input-field-border-radius;
+      }
+
+      @media screen and (max-width: $tablet-min-width) {
+        position: absolute;
+        width: $mobile-avatar-size;
+        height: $mobile-avatar-size;
+        right: $mdc-space-between + $mobile-avatar-margin;
+        margin-top: $mdc-input-field-margin-top-bottom + $mobile-avatar-margin;
+        margin-right: auto;
+
+        img {
+          border-radius: 50%;
+        }
       }
     }
 
-    >.author {
-      grid-area: author;
-      color: $font-color-gray;
+    >.fields {
+      width: 100%;
+      height: 100%;
+      margin-left: $mdc-input-field-margin-left-right;
+      display: -webkit-flex;
+      display: flex;
 
-      a.name {
-        text-decoration: none;
-        color: $font-color-pink;
+      @media screen and (max-width: $tablet-min-width) {
+        margin-left: 0;
+        flex-direction: column;
+        justify-content: flex-start
+      }
+
+      >* {
+        width: 100%;
+        height: 100%;
+        margin: $mdc-input-field-margin-top-bottom 0;
+
+        input {
+          margin-left: $mdc-input-field-height;
+          width: calc(100% - #{$mdc-input-field-height - 6px + 16px});
+        }
+
+        @media screen and (max-width: $tablet-min-width) {
+          #author {
+            width: calc(100% - #{$mdc-input-field-height - 6px + $mobile-avatar-size + $mobile-avatar-margin*2});
+          }
+        }
+
+        .mdc-notched-outline {
+          top: 0;
+        }
+      }
+
+      >.left {
+        margin-right: $mdc-input-field-margin-left-right;
+
+        @media screen and (max-width: $tablet-min-width) {
+          margin-right: 0;
+        }
+      }
+
+      >.center {
+        margin-right: $mdc-input-field-margin-left-right;
+        margin-left: $mdc-input-field-margin-left-right;
+
+        @media screen and (max-width: $tablet-min-width) {
+          margin: $mdc-space-between - $mdc-input-field-margin-top-bottom 0;
+        }
+      }
+
+      >.right {
+        margin-left: $mdc-input-field-margin-left-right;
+
+        @media screen and (max-width: $tablet-min-width) {
+          margin-left: 0;
+        }
       }
     }
 
-    >.reply {
-      grid-area: reply;
+  }
+
+  >.content {
+    width: 100%;
+
+    .mdc-text-field {
+      margin-top: $mdc-space-between - $mdc-input-field-margin-top-bottom;
+
+      textarea {
+        height: $mdc-text-area-height;
+        min-height: $mdc-input-field-height;
+      }
     }
 
-    >.mate {
-      grid-area: mate;
-      color: $font-color-gray;
-    }
+  }
 
-    >.content {
-      grid-area: content;
-      color: $font-color-normal;
-    }
-
-    >.like {
-      grid-area: like;
-      color: $font-color-gray;
-    }
-
-    >.dislike {
-      grid-area: dislike;
-      color: $font-color-gray;
-    }
-
-    >.share {
-      grid-area: share;
-      color: $font-color-gray;
-    }
-
-    >.more {
-      grid-area: more;
-      color: $font-color-gray;
-    }
-
-    >.child {
-      grid-area: child;
-    }
+  >.submit {
+    width: 100%;
+    margin-top: $mdc-space-between;
   }
 }

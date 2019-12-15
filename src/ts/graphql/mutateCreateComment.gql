@@ -1,0 +1,17 @@
+mutation CREATE_COMMENT($input: PostCommentInput!) {
+  postComment(input: $input) {
+    succeed
+    message
+    comment_ID
+    comment_author
+    comment_author_avatar
+    comment_parent
+    content
+    date
+    level
+    location
+    role
+    ua
+    url
+  }
+}

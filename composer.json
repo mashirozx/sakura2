@@ -1,5 +1,17 @@
 {
+    "name": "mashirozx/sakura2",
+    "description": "WordPress theme Sakura",
+    "type": "wordpress-theme",
+    "license": "MIT",
+    "authors": [{
+        "name": "Mashiro",
+        "email": "adadam@qq.com"
+    }],
     "require": {
-        "wp-graphql/wp-graphql": "^0.4.2"
+        "geoip2/geoip2": "^2.9",
+        "paquettg/php-html-parser": "^2.1"
+    },
+    "config": {
+        "vendor-dir": "includes/vendor"
     }
 }

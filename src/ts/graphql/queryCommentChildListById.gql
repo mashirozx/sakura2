@@ -1,0 +1,9 @@
+query GET_COMMENTS($commentId: Int, $pageSize: Int, $targetPage: Int) {
+  commentChildListById(commentId: $commentId, pageSize: $pageSize, targetPage: $targetPage) {
+    wpDbId
+    totalPage
+    targetPage
+    pageSize
+    comments
+  }
+}

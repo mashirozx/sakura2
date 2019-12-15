@@ -1,1 +1,10 @@
 @import "@material/textfield/mdc-text-field";
+@import "@material/snackbar/mdc-snackbar";
+@import "@material/chips/mdc-chips";
+@import "@material/drawer/mdc-drawer";
+@import "@material/list/mdc-list";
+
+// some fix
+.mdc-snackbar__dismiss {
+  color: hsla(0,0%,100%,.87) !important;
+}
