@@ -1,4 +1,16 @@
 .page-navigation {
+  &.left {
+    text-align: left;
+  }
+
+  &.right {
+    text-align: right;
+  }
+
+  &.center {
+    text-align: center;
+  }
+
   .button-wrapper {
     >button {
       .mdc-button__label {

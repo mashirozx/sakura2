@@ -1,8 +1,11 @@
 <?php
+
 /**
- * Author: Mashiro | @mashirozx
- * URL: https://2heng.xin | @2heng.xin
- * Custom functions, support, custom post types and more.
+ * Author: Mashiro
+ * URL: https://2heng.xin
+ * GitHub: https://github.com/mashirozx
+ * 
+ * Made in China.
  */
 
 /*------------------------------------*\
@@ -11,16 +14,15 @@ Define Global Constants
 
 // Debug mode
 define('SAKURA_DEBUG', false);
-// Get webpack manifest file
-define('MANIFEST', json_decode(file_get_contents(get_template_directory() . "/manifest.json"), true));
 
 /*------------------------------------*\
 External Modules
 \*------------------------------------*/
 
-require_once __DIR__.'/../includes/vendor/autoload.php';
+require_once __DIR__ . '/../includes/vendor/autoload.php';
 
 require_once 'classes/lib/ip-location-qqwary.php';
+require_once 'classes/wp-register.php';
 require_once 'classes/error.php';
 require_once 'classes/get-ip-location.php';
 require_once 'classes/get-user-agent.php';
@@ -31,132 +33,29 @@ require_once 'classes/graphql-register-mutate.php';
 require_once 'classes/get-comment-list.php';
 require_once 'classes/get-comment-child-list.php';
 
-/*------------------------------------*\
-External Utils
-\*------------------------------------*/
-
 require_once 'utils/tools.php';
 require_once 'utils/disable-wp-emoji.php';
 require_once 'utils/admin.php';
 require_once 'utils/redux-config.php';
 require_once 'utils/redux-demo-config.php';
-require_once 'utils/graphql-init.php';
 require_once 'utils/debug.php';
 
 /*------------------------------------*\
-Theme Support
+Register
 \*------------------------------------*/
+
+$sakura_register = new Sakura\Classes\Register();
+$graphql_register_types = new Sakura\Classes\GraphqlRegisterTypes();
+$grapgql_register_fields = new Sakura\Classes\GraphqlRegisterFields();
+$grapgql_register_mutate = new Sakura\Classes\GraphqlRegisterMutate();
 
 if (!isset($content_width)) {
     $content_width = 900;
 }
 
-if (function_exists('add_theme_support')) {
-
-    // Add Thumbnail Theme Support.
-    add_theme_support('post-thumbnails');
-    add_image_size('large', 700, '', true); // Large Thumbnail.
-    add_image_size('medium', 250, '', true); // Medium Thumbnail.
-    add_image_size('small', 120, '', true); // Small Thumbnail.
-    add_image_size('custom-size', 700, 200, true); // Custom Thumbnail Size call using the_post_thumbnail('custom-size');
-
-    // Add Support for Custom Backgrounds - Uncomment below if you're going to use.
-    /*add_theme_support('custom-background', array(
-    'default-color' => 'FFF',
-    'default-image' => get_template_directory_uri() . '/img/bg.jpg'
-    ));*/
-
-    // Add Support for Custom Header - Uncomment below if you're going to use.
-    /*add_theme_support('custom-header', array(
-    'default-image'          => get_template_directory_uri() . '/img/headers/default.jpg',
-    'header-text'            => false,
-    'default-text-color'     => '000',
-    'width'                  => 1000,
-    'height'                 => 198,
-    'random-default'         => false,
-    'wp-head-callback'       => $wphead_cb,
-    'admin-head-callback'    => $adminhead_cb,
-    'admin-preview-callback' => $adminpreview_cb
-    ));*/
-
-    // Enables post and comment RSS feed links to head.
-    add_theme_support('automatic-feed-links');
-
-    // Enable HTML5 support.
-    add_theme_support('html5', array('comment-list', 'comment-form', 'search-form', 'gallery', 'caption'));
-
-    // Localisation Support.
-    load_theme_textdomain('sakura', get_template_directory() . '/languages');
-}
-
 /*------------------------------------*\
 Functions
 \*------------------------------------*/
-
-// HTML5 Blank navigation
-function html5blank_nav()
-{
-    wp_nav_menu(
-        array(
-            'theme_location' => 'header-menu',
-            'menu' => '',
-            'container' => 'div',
-            'container_class' => 'menu-{menu slug}-container',
-            'container_id' => '',
-            'menu_class' => 'menu',
-            'menu_id' => '',
-            'echo' => true,
-            'fallback_cb' => 'wp_page_menu',
-            'before' => '',
-            'after' => '',
-            'link_before' => '',
-            'link_after' => '',
-            'items_wrap' => '<ul>%3$s</ul>',
-            'depth' => 0,
-            'walker' => '',
-        )
-    );
-}
-
-// Load scripts (header.php)
-function sakura_header_scripts()
-{
-    if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
-        // Remove jQuery
-        wp_deregister_script('jquery');
-        // Scripts minify
-        wp_register_script('bundle-js', get_template_directory_uri() . join_paths('/', MANIFEST['main']['js'][0]), array(), '1.0.0');
-        // Enqueue Scripts
-        wp_enqueue_script('bundle-js');
-    }
-}
-
-// Load styles
-function sakura_styles()
-{
-    // TODO add options!
-    wp_deregister_style('wp-block-library'); // Gutenberg CSS
-
-    // Icon fonts
-    wp_register_style('MaterialIcons', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), '1.0');
-    wp_enqueue_style('MaterialIcons');
-    wp_register_style('SakuraIcons', 'https://at.alicdn.com/t/font_679578_9p0ydgvimss.css', array(), '1.0');
-    wp_enqueue_style('SakuraIcons');
-
-    // Custom CSS
-    wp_register_style('sakura_style', get_template_directory_uri() . join_paths('/', MANIFEST['main']['css'][0]), array(), '1.0');
-    // Register CSS
-    wp_enqueue_style('sakura_style');
-}
-
-// Register HTML5 Blank Navigation
-function register_html5_menu()
-{
-    register_nav_menus(array( // Using array to specify more menus if needed
-        'header-menu' => esc_html('Header Menu', 'html5blank'), // Main Navigation
-        'extra-menu' => esc_html('Extra Menu', 'html5blank'), // Extra Navigation if needed (duplicate as many as you need!)
-    ));
-}
 
 // Remove the <div> surrounding the dynamic navigation to cleanup markup
 function my_wp_nav_menu_args($args = '')
@@ -385,10 +284,9 @@ Actions + Filters + ShortCodes
 \*------------------------------------*/
 
 // Add Actions
-add_action('wp_enqueue_scripts', 'sakura_header_scripts'); // Add Custom Scripts to wp_head
+
 add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
-add_action('wp_enqueue_scripts', 'sakura_styles'); // Add Theme Stylesheet
-add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
+
 add_action('init', 'create_post_type_html5'); // Add our HTML5 Blank Custom Post Type
 add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
 add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination

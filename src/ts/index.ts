@@ -5,6 +5,7 @@ window.onload = function () {
   onloadInit()
 }
 
-window.onscroll = function () {
-  headerBarScrollHandler()
-}
+// TODO: this should be container onscroll event, and can be a class
+// window.onscroll = function () {
+//   headerBarScrollHandler()
+// }

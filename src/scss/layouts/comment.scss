@@ -1,4 +1,14 @@
 /*comment list*/
+.comment-wrapper {
+  padding: 10px;
+
+  @media screen and (max-width: $tablet-min-width) {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
 .comment-list-ul {
   padding: 0;
   list-style: none;
@@ -80,18 +90,23 @@
       >.reply-form {
         grid-area: form;
         display: none;
-
-        @media screen and (max-width: $tablet-min-width) {
-          .comment-form {
-            width: calc(100% + $avatar-size + $avatar-margin-right);
-            margin-left: - $avatar-size + $avatar-margin-right;
-          }
-        }
-
       }
 
       >.child {
         grid-area: child;
+
+        .child-collapse {
+          .mdc-chip-set {
+            align-items: center
+          }
+        }
+
+        @media screen and (max-width: $tablet-min-width) {
+          .comment-form {
+            width: calc(100% + #{$avatar-size + $avatar-margin-right});
+            margin-left: - #{$avatar-size + $avatar-margin-right};
+          }
+        }
       }
     }
   }
@@ -108,6 +123,7 @@
   $mobile-avatar-size: $mdc-input-field-height - $mobile-avatar-margin * 2;
   $mdc-input-field-border-radius: 4px;
 
+  margin: $mdc-space-between 0;
   padding: $mdc-space-between;
   width: calc(100% - $mdc-space-between);
 

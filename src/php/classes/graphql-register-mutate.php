@@ -181,9 +181,9 @@ class GraphqlRegisterMutate
                 // https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/comment.php#L3314
                 if (property_exists($comment, 'comment_author_url')) {
                     $url = $comment->comment_author_url;
-                    $url = !empty($url) ? $url : null;
+                    $url = !empty($url) ? $url : 'javascript: void 0;';
                 } else {
-                    $url = null;
+                    $url = 'javascript: void 0;';
                 }
 
                 return [

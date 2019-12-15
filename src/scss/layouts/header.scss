@@ -11,4 +11,9 @@
     transition: top .3s;
     height: $nav-header-height;
     background: transparent;
+    margin-left: $drawer-width;
+
+    @media screen and (max-width: $tablet-min-width) {
+        margin-left: $drawer-mobile-width;
+    }
 }

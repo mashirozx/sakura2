@@ -123,7 +123,15 @@ export class CreateComment {
    * @since 4.0.0
    */
   public static reset_comment_form_button_listener() {
+    // TODO
+  }
 
+  /**
+   * popup user info in a folat window
+   * @since 4.0.0
+   */
+  public static uesr_info_hover_listener() {
+    // TODO
   }
 
   /**
@@ -313,6 +321,11 @@ export class CreateComment {
     else {
       ul.appendChild(data_ele)
     }
+
+    // remove leave-first-comment title
+    let leave_first_notice = document.getElementById('leave-first-comment')
+    if (typeof (leave_first_notice) !== 'undefined' && leave_first_notice !== null)
+      leave_first_notice.remove()
 
     // reset comment form
     CreateComment.reset_comment_form(false)

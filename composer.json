@@ -8,7 +8,8 @@
         "email": "adadam@qq.com"
     }],
     "require": {
-        "geoip2/geoip2": "^2.9"
+        "geoip2/geoip2": "^2.9",
+        "paquettg/php-html-parser": "^2.1"
     },
     "config": {
         "vendor-dir": "includes/vendor"

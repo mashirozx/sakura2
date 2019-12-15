@@ -116,7 +116,7 @@ class GetCommentList
                 'comment_parent' => intval($comment_array->comment_parent),
                 'comment_author' => $comment_array->comment_author,
                 'comment_author_avatar' => get_avatar_url($comment_array->comment_author_email),
-                'url' => $comment_array->comment_author_url,
+                'url' => !empty($comment_array->comment_author_url) ? $comment_array->comment_author_url : 'javascript: void 0;',
                 'content' => $comment_array->comment_content,
                 'date' => $comment_array->comment_date,
                 'ua' => GetUserAgent::get_json($comment_array->comment_agent),

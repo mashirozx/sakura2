@@ -126,7 +126,7 @@ class ListComments {
       // add click event listener on collapse open button to show child detail
       if (document.getElementById(`open-comment-${i}`)) {
         let open: HTMLElement = document.getElementById(`open-comment-${i}`)
-        open.addEventListener('click', ListComments.collapse.bind(event), false)
+        open.addEventListener('click', ListComments.collapse.bind(event), true)
       }
     }
 
@@ -153,6 +153,7 @@ class ListComments {
     let element = event['path'][0]
     let commentId = element.getAttribute('data-comment')
     let list_comment_child = new ListCommentChild(Number(commentId), 10, 1)
+    CreateComment.reset_comment_form()
   }
 
   /**
@@ -220,8 +221,19 @@ class ListComments {
         // add collapse
         if (comment.child.child_count > 3) {
           let collapse: Element = document.createElement('div'),
-            collapseText: string = `<strong>${comment.child.child_count}</strong> replies in total, \
-              <span class="open" id="open-comment-${comment.comment_ID}" data-comment="${comment.comment_ID}">click to view</span>`
+            collapseText: string = `
+            <div class="mdc-chip-set" role="grid">
+              <div class="mdc-chip open" id="open-comment-${comment.comment_ID}" data-comment="${comment.comment_ID}" role="row">
+                <div class="mdc-chip__ripple open"></div>
+                <i class="material-icons mdc-chip__icon mdc-chip__icon--leading"  data-comment="${comment.comment_ID}">expand_more</i>
+                <span role="gridcell">
+                  <span role="button" tabindex="0" class="mdc-chip__text" data-comment="${comment.comment_ID}">Expand</span>
+                </span>
+              </div>
+              &nbsp;<strong>${comment.child.child_count}</strong>&nbsp; replies in total
+            <div>`
+
+          // TODO: also add a Collapse button to detail list (material-icons: expand_less)
 
           collapse.classList.add('child-collapse')
           collapse.innerHTML = collapseText.trim()
@@ -323,7 +335,7 @@ class ListCommentChild extends ListComments {
 
     // print nav html
     //  - add listener for nav bar
-    const nav: PageNavigationBar = new PageNavigationBar(this.target_page, this.total_page)
+    const nav: PageNavigationBar = new PageNavigationBar(this.target_page, this.total_page, 'left')
     let nav_html: Element = nav.dom
     nav_html.setAttribute('id', `comment-child-list-nav-${this.db_id}`)
     comment_list_ul.appendChild(nav_html)

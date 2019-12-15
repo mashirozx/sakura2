@@ -34,3 +34,7 @@ $img-wave-svg: "../images/wave.svg";
 
 /* uncategorized sizes */
 $nav-header-height: 50px;
+
+$drawer-width: 260px;
+// BUG: .main-center with wrong with $drawer-mobile-width: 200px; where is the 60px??
+$drawer-mobile-width: 260px;

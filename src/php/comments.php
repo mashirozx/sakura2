@@ -5,18 +5,28 @@
 
 	<?php return;endif;?>
 
+<!-- if have comment -->
 <?php if (have_comments()): ?>
 
-	<h2><?php comments_number();?></h2>
+	<?php get_template_part('layout/comment', 'list'); ?>
+
+<!-- if comment open but have no comment -->
+<?php elseif (!have_comments() && comments_open()): ?>
 
 	<?php get_template_part('layout/comment', 'list'); ?>
-	
-	<?php get_template_part('layout/comment', 'form'); ?>
 
-<?php elseif (!comments_open() && !is_page() && post_type_supports(get_post_type(), 'comments')): ?>
+<?php else: ?>
 
 	<p><?php esc_html_e('Comments are closed here.', 'sakura');?></p>
 
 <?php endif;?>
+
+<!-- if comment is opened here -->
+
+<?php if (comments_open()): ?>
+
+<?php get_template_part('layout/comment', 'form'); ?>
+
+<?php endif; ?>
 
 </div>

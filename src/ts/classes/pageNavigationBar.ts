@@ -12,6 +12,7 @@ export default class PageNavigationBar {
   public current: number
   public total: number
   public list: number[]
+  public align: string
   public dom: Element
 
   /**
@@ -22,9 +23,10 @@ export default class PageNavigationBar {
    * @param {number} current  current page number
    * @param {number} total    total page number
    */
-  public constructor(current: number, total: number) {
+  public constructor(current: number, total: number, align: string = 'center') {
     this.current = current
     this.total = total
+    this.align = align
     this.list = []
     this.main()
     this.get_dom()
@@ -54,6 +56,7 @@ export default class PageNavigationBar {
   private get_dom() {
     let nav: Element = document.createElement('nav')
     nav.classList.add('page-navigation')
+    nav.classList.add(this.align)
 
     let wrapper: Element = document.createElement('div')
     wrapper.classList.add('button-wrapper')
@@ -74,7 +77,10 @@ export default class PageNavigationBar {
 
     nav.appendChild(wrapper)
 
-    this.dom = nav
+    if (this.total <= 1)
+      this.dom = document.createElement('nav')
+    else
+      this.dom = nav
   }
 
   private main() {
@@ -86,8 +92,8 @@ export default class PageNavigationBar {
     } else {
       this.list.push(1)
       this.list.push(0)
-      this.list.push(this.current-2)
-      this.list.push(this.current-1)
+      this.list.push(this.current - 2)
+      this.list.push(this.current - 1)
       this.list.push(this.current)
     }
 

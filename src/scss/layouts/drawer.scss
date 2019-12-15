@@ -1,0 +1,42 @@
+body {
+  display: flex;
+  height: 100vh;
+  width: calc(100% + #{$drawer-width});
+  margin-left: - $drawer-width;
+
+  @media screen and (max-width: $tablet-min-width) {
+    margin-left: - $drawer-mobile-width;
+  }
+}
+
+body.show-drawer {
+  margin-left: 0;
+}
+
+.mdc-drawer-app-content {
+  flex: auto;
+  overflow: auto;
+  position: relative;
+}
+
+.main-content {
+  overflow: auto;
+  height: 100%;
+}
+
+.app-bar {
+  position: absolute;
+}
+
+// only apply this style if below top app bar
+.mdc-top-app-bar {
+  z-index: 7;
+}
+
+.mdc-drawer {
+  @include mdc-drawer-width($drawer-width);
+
+  @media screen and (max-width: $tablet-min-width) {
+    @include mdc-drawer-width($drawer-mobile-width);
+  }
+}

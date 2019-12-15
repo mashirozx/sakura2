@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Get theme options
  * @since 4.0

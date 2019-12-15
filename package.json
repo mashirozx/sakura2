@@ -33,6 +33,7 @@
     "i18n-webpack-plugin": "^1.0.0",
     "material-components-web": "^4.0.0",
     "node-sass": "^4.13.0",
+    "normalize.css": "^8.0.1",
     "parallax-js": "^3.1.0",
     "pjax": "^0.2.8",
     "remove-files-webpack-plugin": "^1.1.3",

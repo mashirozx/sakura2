@@ -4,7 +4,10 @@
  * @author Mashiro
  * @license MIT
  */
-import mdcConf from "./mdcConf"
+import mdcConf from "./mdcConf";
+import { MDCList } from "@material/list";
+import { MDCDrawer } from "@material/drawer";
+import { MDCTopAppBar } from "@material/top-app-bar";
 
 const Conf = mdcConf
 
@@ -30,4 +33,11 @@ export default function () {
             })
         }
     }
+
+    // other configurations
+
+    const list = MDCList.attachTo(document.querySelector('.mdc-list'));
+    // we reload the menu with pjax instead
+    list.wrapFocus = true;
+
 }
