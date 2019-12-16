@@ -12,8 +12,6 @@
 
       <?php get_template_part('layout/post-list-loop'); ?>
 
-      <?php get_template_part('layout/pagination'); ?>
-
     </div>
     <!-- /post-thumb-list -->
   </section>

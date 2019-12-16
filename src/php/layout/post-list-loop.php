@@ -18,3 +18,5 @@ if (have_posts()) {
 } else {
 	get_template_part( 'templates/post-list-noting' );
 }
+
+get_template_part('layout/pagination');

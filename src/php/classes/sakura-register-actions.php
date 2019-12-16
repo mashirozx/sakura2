@@ -2,9 +2,7 @@
 
 namespace Sakura\Classes;
 
-use PHPHtmlParser\Dom;
-
-class Register
+class RegisterActions
 {
     /**
      * WP Register
@@ -12,7 +10,7 @@ class Register
      */
     public function __construct()
     {
-        // Add theme support
+        // Add Universal Theme Support
         add_action('init', [$this, 'add_theme_support']);
         // Add Custom Scripts to wp_head
         add_action('wp_enqueue_scripts', [$this, 'sakura_header_scripts']);
@@ -20,6 +18,12 @@ class Register
         add_action('wp_enqueue_scripts', [$this, 'sakura_styles']);
         // Add Menu Support
         add_action('init', [$this, 'register_menu']);
+        // Add Pagination Support
+        // add_action('init', [$this, 'sakura_pagination']);
+        // Add 'View Article' button instead of [...] for Excerpts
+        // add_filter('excerpt_more', [$this, 'sakura_view_article']);
+        // Remove Admin bar
+        add_filter('show_admin_bar', [$this, 'remove_admin_bar']);
     }
 
     /**
@@ -32,55 +36,6 @@ class Register
             'drawer-menu' => esc_html('Drawer Menu (on the right side)', 'sakura'),
             'header-menu' => esc_html('Header Menu (on the top bar)', 'sakura'),
         ));
-    }
-
-    /**
-     * Custom nav menu
-     */
-    public static function get_drawer_nav_menu()
-    {
-        $menu_name = 'header-menu';
-        $locations = get_nav_menu_locations();
-        $menu_id = $locations[$menu_name];
-        // wp_get_nav_menu_object($menu_id);
-        $nav = wp_nav_menu(
-            array(
-                'menu' => $menu_id,
-                'container' => 'div',
-                'container_class' => '',
-                'container_id' => '',
-                'menu_class' => 'menu',
-                'menu_id' => '',
-                'echo' => false,
-                'fallback_cb' => 'wp_page_menu',
-                'before' => '',
-                'after' => '',
-                'link_before' => '',
-                'link_after' => '',
-                'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-                'item_spacing' => 'preserve',
-                'depth' => 0,
-                'walker' => '',
-                'theme_location' => '',
-            )
-        );
-
-        $dom = new Dom;
-        $dom->load($nav);
-
-        $nav = '';
-
-        foreach ($dom->find('a') as $a) {
-            $url = $a->getAttribute('href');
-            preg_match('/\[(.*?)\](.*)/i', $a->text, $matches, PREG_UNMATCHED_AS_NULL);
-            $icon = $matches[1];
-            $label = $matches[2];
-            $nav .= '<a class="mdc-list-item drawer-items" href="' . $url . '">';
-            $nav .= '<i class="material-icons mdc-list-item__graphic">' . $icon . '</i>';
-            $nav .= '<span class="mdc-list-item__text">' . $label . '</span>';
-            $nav .= '</a>';
-        }
-        return $nav;
     }
 
     /**
@@ -129,17 +84,6 @@ class Register
     }
 
     /**
-     * Get webpack manifest file
-     * @since 4.0.0
-     *
-     * @return string
-     */
-    public static function MANIFEST()
-    {
-        return json_decode(file_get_contents(__DIR__ . "/../manifest.json"), true);
-    }
-
-    /**
      * Load scripts (header.php)
      * @since 4.0.0
      */
@@ -148,9 +92,8 @@ class Register
         if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
             // Remove jQuery
             wp_deregister_script('jquery');
-            // Scripts minify
-            wp_register_script('bundle-js', get_template_directory_uri() . join_paths('/', self::MANIFEST()['main']['js'][0]), array(), '1.0.0');
-            // Enqueue Scripts
+
+            wp_register_script('bundle-js', get_template_directory_uri() . join_paths('/', MANIFEST()['main']['js'][0]), array(), SAKURA_VERSION);
             wp_enqueue_script('bundle-js');
         }
     }
@@ -165,15 +108,36 @@ class Register
         wp_deregister_style('wp-block-library'); // Gutenberg CSS
 
         // Icon fonts
-        wp_register_style('MaterialIcons', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), '1.0');
+        wp_register_style('MaterialIcons', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), SAKURA_VERSION);
         wp_enqueue_style('MaterialIcons');
-        wp_register_style('SakuraIcons', 'https://at.alicdn.com/t/font_679578_9p0ydgvimss.css', array(), '1.0');
+
+        wp_register_style('SakuraIcons', 'https://at.alicdn.com/t/font_679578_9p0ydgvimss.css', array(), SAKURA_VERSION);
         wp_enqueue_style('SakuraIcons');
 
+        wp_register_style('FontAwesome', 'https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), SAKURA_VERSION);
+        wp_enqueue_style('FontAwesome');
+
         // Custom CSS
-        wp_register_style('sakura_style', get_template_directory_uri() . join_paths('/', self::MANIFEST()['main']['css'][0]), array(), '1.0');
+        wp_register_style('sakura_style', get_template_directory_uri() . join_paths('/', MANIFEST()['main']['css'][0]), array(), SAKURA_VERSION);
         // Register CSS
         wp_enqueue_style('sakura_style');
+    }
+
+    /**
+     * Custom View Article link to Post
+     */
+    public static function sakura_view_article($more)
+    {
+        global $post;
+        return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . esc_html_e('View Article', 'sakura') . '</a>';
+    }
+
+    /**
+     * Remove Admin bar
+     */
+    public static function remove_admin_bar()
+    {
+        return false;
     }
 
 }

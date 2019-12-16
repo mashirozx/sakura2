@@ -4,7 +4,7 @@ import pjaxInit from '../components/pjaxInit'
 import coverParallax from '../module/coverParallax'
 import footerWave from '../module/footerWave'
 import pageInit from '../page/init'
-import drewer from '../../classes/drawer'
+import drawer from '../../classes/drawer'
 
 /**
  * Global init function
@@ -18,7 +18,7 @@ export default function init() {
   pjaxInit()
 
   // toggle drawer
-  drewer.drawer_toggle()
+  drawer.drawer_toggle()
   
   /* below should also add to pjaxReload */
 

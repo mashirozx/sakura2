@@ -5,9 +5,7 @@
   </div>
   <div class="mdc-drawer__content">
     <!-- nav -->
-    <nav id="draver-nav-list" class="mdc-list">
-      <?php echo Sakura\Classes\Register::get_drawer_nav_menu(); ?>
-    </nav>
+    <?php echo get_drawer_nav_menu(); ?>
   </div>
 </aside>
 

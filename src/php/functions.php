@@ -4,7 +4,7 @@
  * Author: Mashiro
  * URL: https://2heng.xin
  * GitHub: https://github.com/mashirozx
- * 
+ *
  * Made in China.
  */
 
@@ -12,7 +12,7 @@
 Define Global Constants
 \*------------------------------------*/
 
-// Debug mode
+define('SAKURA_VERSION', wp_get_theme()->get('Version'));
 define('SAKURA_DEBUG', false);
 
 /*------------------------------------*\
@@ -22,7 +22,9 @@ External Modules
 require_once __DIR__ . '/../includes/vendor/autoload.php';
 
 require_once 'classes/lib/ip-location-qqwary.php';
-require_once 'classes/wp-register.php';
+
+require_once 'classes/sakura-register-actions.php';
+require_once 'classes/sakura-walker-nav-menu.php';
 require_once 'classes/error.php';
 require_once 'classes/get-ip-location.php';
 require_once 'classes/get-user-agent.php';
@@ -33,18 +35,19 @@ require_once 'classes/graphql-register-mutate.php';
 require_once 'classes/get-comment-list.php';
 require_once 'classes/get-comment-child-list.php';
 
-require_once 'utils/tools.php';
+require_once 'utils/sakura-functions.php';
+require_once 'utils/sakura-tools.php';
 require_once 'utils/disable-wp-emoji.php';
-require_once 'utils/admin.php';
+require_once 'utils/sakura-admin.php';
+require_once 'utils/sakura-debug.php';
 require_once 'utils/redux-config.php';
 require_once 'utils/redux-demo-config.php';
-require_once 'utils/debug.php';
 
 /*------------------------------------*\
 Register
 \*------------------------------------*/
 
-$sakura_register = new Sakura\Classes\Register();
+$sakura_glowbal_actions = new Sakura\Classes\RegisterActions();
 $graphql_register_types = new Sakura\Classes\GraphqlRegisterTypes();
 $grapgql_register_fields = new Sakura\Classes\GraphqlRegisterFields();
 $grapgql_register_mutate = new Sakura\Classes\GraphqlRegisterMutate();
@@ -139,68 +142,6 @@ function my_remove_recent_comments_style()
     }
 }
 
-// Pagination for paged posts, Page 1, Page 2, Page 3, with Next and Previous Links, No plugin
-function html5wp_pagination()
-{
-    global $wp_query;
-    $big = 999999999;
-    echo paginate_links(array(
-        'base' => str_replace($big, '%#%', get_pagenum_link($big)),
-        'format' => '?paged=%#%',
-        'current' => max(1, get_query_var('paged')),
-        'total' => $wp_query->max_num_pages,
-    ));
-}
-
-// Create 20 Word Callback for Index page Excerpts, call using sakura_wp_excerpt('sakura_wp_index');
-function sakura_wp_index($length)
-{
-    return 20;
-}
-
-// Create 40 Word Callback for Custom Post Excerpts, call using sakura_wp_excerpt('sakura_wp_custom_post');
-function sakura_wp_custom_post($length)
-{
-    return 40;
-}
-
-// Create the Custom Excerpts callback
-function sakura_wp_excerpt($length_callback = '', $more_callback = '')
-{
-    global $post;
-    if (function_exists($length_callback)) {
-        add_filter('excerpt_length', $length_callback);
-    }
-    if (function_exists($more_callback)) {
-        add_filter('excerpt_more', $more_callback);
-    }
-    $output = get_the_excerpt();
-    $output = apply_filters('wptexturize', $output);
-    $output = apply_filters('convert_chars', $output);
-    echo esc_html($output);
-}
-
-// Custom View Article link to Post
-function sakura_view_article($more)
-{
-    global $post;
-    return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . esc_html_e('View Article', 'html5blank') . '</a>';
-}
-
-// Default post thumbnail
-function get_post_thumb_url($size)
-{
-    // TODO: full sizes of sizes
-    $default = "https://view.moezx.cc/images/2019/10/21/5e65o9lxtbvht2tdjvpgsmarw.jpg";
-    return has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), $size) : $default;
-}
-
-// Remove Admin bar
-function remove_admin_bar()
-{
-    return false;
-}
-
 // Remove 'text/css' from our enqueued stylesheet
 function html5_style_remove($tag)
 {
@@ -222,74 +163,16 @@ function html5blankgravatar($avatar_defaults)
     return $avatar_defaults;
 }
 
-// Threaded Comments
-function enable_threaded_comments()
-{
-    if (!is_admin()) {
-        if (is_singular() and comments_open() and (get_option('thread_comments') == 1)) {
-            wp_enqueue_script('comment-reply');
-        }
-    }
-}
-
-// Custom Comments Callback
-function html5blankcomments($comment, $args, $depth)
-{
-    $GLOBALS['comment'] = $comment;
-    extract($args, EXTR_SKIP);
-
-    if ('div' == $args['style']) {
-        $tag = 'div';
-        $add_below = 'comment';
-    } else {
-        $tag = 'li';
-        $add_below = 'div-comment';
-    }
-    ?>
-    <!-- heads up: starting < for the html tag (li or div) in the next line: -->
-    <<?php echo esc_html($tag) ?> <?php comment_class(empty($args['has_children']) ? '' : 'parent')?> id="comment-<?php comment_ID();?>">
-    <?php if ('div' != $args['style']): ?>
-    <div id="div-comment-<?php comment_ID();?>" class="comment-body">
-    <?php endif;?>
-    <div class="comment-author vcard">
-    <?php if ($args['avatar_size'] != 0) {
-        echo get_avatar($comment, $args['avatar_size']);
-    }
-    ?>
-    <?php printf(esc_html('<cite class="fn">%s</cite> <span class="says">says:</span>'), get_comment_author_link())?>
-    </div>
-<?php if ($comment->comment_approved == '0'): ?>
-    <em class="comment-awaiting-moderation"><?php esc_html_e('Your comment is awaiting moderation.')?></em>
-    <br />
-<?php endif;?>
-
-    <div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)) ?>">
-        <?php
-printf(esc_html('%1$s at %2$s'), get_comment_date(), get_comment_time())?></a><?php edit_comment_link(esc_html_e('(Edit)'), '  ', '');
-    ?>
-    </div>
-
-    <?php comment_text()?>
-
-    <div class="reply">
-    <?php comment_reply_link(array_merge($args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth'])))?>
-    </div>
-    <?php if ('div' != $args['style']): ?>
-    </div>
-    <?php endif;?>
-<?php }
-
 /*------------------------------------*\
 Actions + Filters + ShortCodes
 \*------------------------------------*/
 
 // Add Actions
 
-add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
+// add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
 
 add_action('init', 'create_post_type_html5'); // Add our HTML5 Blank Custom Post Type
 add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
-add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
 
 // Remove Actions
 remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
@@ -312,8 +195,6 @@ add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <di
 add_filter('the_category', 'remove_category_rel_from_category_list'); // Remove invalid rel attribute
 add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
-//add_filter( 'excerpt_more', 'sakura_view_article' ); // Add 'View Article' button instead of [...] for Excerpts
-add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
 add_filter('style_loader_tag', 'html5_style_remove'); // Remove 'text/css' from enqueued stylesheet
 add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
 add_filter('post_thumbnail_html', 'remove_width_attribute', 10); // Remove width and height dynamic attributes to post images

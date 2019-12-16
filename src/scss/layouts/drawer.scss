@@ -15,12 +15,12 @@ body.show-drawer {
 
 .mdc-drawer-app-content {
   flex: auto;
-  overflow: auto;
+  overflow-y: auto;
   position: relative;
 }
 
 .main-content {
-  overflow: auto;
+  overflow-x: hidden;
   height: 100%;
 }
 
