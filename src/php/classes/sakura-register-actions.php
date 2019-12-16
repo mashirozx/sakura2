@@ -33,8 +33,10 @@ class RegisterActions
     public static function register_menu()
     {
         register_nav_menus(array(
-            'drawer-menu' => esc_html('Drawer Menu (on the right side)', 'sakura'),
-            'header-menu' => esc_html('Header Menu (on the top bar)', 'sakura'),
+            'drawer-menu' => esc_html('Drawer Menu (show on mobile, and not support sub-items)', 'sakura'),
+            'header-menu' => esc_html('Header Menu (show on desktap)', 'sakura'),
+            'header-sub-menu' => esc_html('Header Sub Menu (show on desktap)', 'sakura'),
+            'notice' => __('How to set your menus? <a href="https://www.google/com" target="_blank">Read this</a>.', 'sakura'),
         ));
     }
 

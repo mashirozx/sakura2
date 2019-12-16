@@ -32,8 +32,11 @@ $tablet-min-width: 800px;
 /* Image files */
 $img-wave-svg: "../images/wave.svg";
 
-/* uncategorized sizes */
-$nav-header-height: 50px;
+/* Top app bar (show on mobile only) */
+$top-app-bar-height: 50px;
+
+/* site header bar (show on desktop only) */
+$site-header-height: 48px;
 
 $drawer-width: 260px;
 // BUG: .main-center with wrong with $drawer-mobile-width: 200px; where is the 60px??

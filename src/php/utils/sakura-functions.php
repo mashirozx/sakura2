@@ -34,9 +34,31 @@ function sakura_options(string $id)
 }
 
 /**
- * Custom nav menu
+ * Custom drawer nav menu
  */
 function get_drawer_nav_menu()
+{
+    $menu_name = 'drawer-menu';
+    $locations = get_nav_menu_locations();
+    $menu_id = $locations[$menu_name];
+    // wp_get_nav_menu_object($menu_id);
+    $nav = wp_nav_menu(
+        array(
+            'menu' => $menu_id,
+            'depth' => 1,
+            'items_wrap' => '<nav id="draver-nav-list" data-id="%1$s" class="mdc-list %2$s">%3$s</nav>',
+            'walker' => new Sakura\Classes\Sakura_Walker_Nav_Menu,
+            'echo' => false,
+        )
+    );
+
+    return $nav;
+}
+
+/**
+ * Custom site header nav menu
+ */
+function get_header_nav_menu()
 {
     $menu_name = 'header-menu';
     $locations = get_nav_menu_locations();
@@ -45,8 +67,7 @@ function get_drawer_nav_menu()
     $nav = wp_nav_menu(
         array(
             'menu' => $menu_id,
-            'items_wrap' => '<nav id="draver-nav-list" data-id="%1$s" class="mdc-list %2$s">%3$s</nav>',
-            'walker' => new Sakura\Classes\Sakura_Walker_Nav_Menu,
+            'depth' => 1,
             'echo' => false,
         )
     );

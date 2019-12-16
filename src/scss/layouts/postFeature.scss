@@ -60,7 +60,11 @@
   &.fit::before {
     content: "";
     display: block;
-    height: $nav-header-height;
+    height: $site-header-height;
+
+    @media screen and (max-width: $tablet-min-width) {
+      height: $top-app-bar-height;
+    }
   }
 
   &.full {
@@ -99,7 +103,11 @@
   &.fit::before {
     content: "";
     display: block;
-    height: $nav-header-height;
+    height: $site-header-height;
+
+    @media screen and (max-width: $tablet-min-width) {
+      height: $top-app-bar-height;
+    }
   }
 
   hr {

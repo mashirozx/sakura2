@@ -7,10 +7,10 @@ body {
   @media screen and (max-width: $tablet-min-width) {
     margin-left: - $drawer-mobile-width;
   }
-}
 
-body.show-drawer {
-  margin-left: 0;
+  &.show-drawer {
+    margin-left: 0;
+  }
 }
 
 .mdc-drawer-app-content {

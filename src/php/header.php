@@ -3,10 +3,14 @@
 
 <?php get_template_part('layout/head'); ?>
 
-<body>
+<!-- TODO: show in js obj -->
+<body data-sakura-version="<?php echo SAKURA_VERSION; ?>" data-php-version="<?php echo phpversion(); ?>" data-wp-version="<?php echo $wp_version; ?>">
 
   <!-- top-app-bar -->
   <?php get_template_part('layout/top-app-bar'); ?>
+
+  <!-- site-header -->
+  <?php get_template_part('layout/site-header'); ?>
 
   <!-- drawer -->
   <?php get_template_part('layout/drawer'); ?>

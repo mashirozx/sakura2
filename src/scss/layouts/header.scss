@@ -1,19 +1,163 @@
-/**
- * Copyright 2019 Mashiro
- * @description header.scss
- * @author Mashiro
- * @license MIT
- */
-@import "@material/top-app-bar/mdc-top-app-bar";
-@import "@material/icon-button/mdc-icon-button";
-
-.nav-header {
-    transition: top .3s;
-    height: $nav-header-height;
-    background: transparent;
+.site-header {
+    position: absolute;
+    width: 100%;
+    height: $site-header-height;
     margin-left: $drawer-width;
+    background: white;
+    z-index: 9;
+
+    @media screen and (max-width: $tablet-min-width) {
+        display: none;
+    }
+
+    .site-header-inner {
+        .top-row-wrapper {
+            height: $site-header-height;
+
+            .top-row {
+                display: -webkit-flex;
+                display: flex;
+                flex-flow: row nowrap;
+                height: 100%;
+
+                >* {
+                    height: 100%;
+                }
+
+                >.top-row-left {
+                    display: -webkit-flex;
+                    display: flex;
+                    flex-flow: column nowrap;
+                    padding: 0 24px;
+
+                    .title {
+                        font-weight: 900;
+                        font-size: 16px;
+                        line-height: 20px;
+                        height: 100%;
+                        padding: 14px 0;
+                    }
+                }
+
+                >.top-row-middle {
+                    display: -webkit-flex;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    width: 100%;
+
+                    nav {
+                        display: -webkit-flex;
+                        display: flex;
+                        flex-flow: column;
+                        height: 100%;
+                        width: 100%;
+
+                        ul {
+                            display: -webkit-box;
+                            display: flex;
+                            -webkit-box-orient: horizontal;
+                            -webkit-box-direction: normal;
+                            flex-flow: row nowrap;
+                            -webkit-box-align: center;
+                            justify-content: center;
+                            align-items: center;
+                            margin: 0;
+                            padding: 0;
+                            height: 100%;
+                            list-style-type: none;
+
+                            li {
+                                height: 100%;
+                                display: flex;
+                                flex-flow: column;
+                                justify-content: center;
+                                position: relative;
+
+                                a {
+                                    white-space: nowrap;
+                                    padding: 0 24px;
+                                    font-weight: 500;
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    text-decoration: none;
+                                    color: #5f6368;
+
+                                    &:hover::after {
+                                        background: $mdc-theme-primary;
+                                        bottom: 0;
+                                        content: "";
+                                        display: block;
+                                        height: 2px;
+                                        left: 0;
+                                        position: absolute;
+                                        right: 0;
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    search {
+                        display: flex;
+                        flex-flow: column;
+                        justify-content: center;
+
+                        form {
+                            .searchbox {
+                                position: relative;
+                                background: #f1f3f4;
+                                height: 36px;
+                                margin: auto 24px;
+
+                                .search-input {
+                                    background: none;
+                                    border: 0;
+                                    color: #5f6368;
+                                    height: 36px;
+                                    outline: 0;
+                                    padding-left: 40px;
+                                    -webkit-transition: background .2s, color .2s;
+                                    transition: background .2s, color .2s;
+                                    width: 100%;
+                                    line-height: 24px;
+                                }
+
+                                .search-icon {
+                                    color: #5f6368;
+                                    left: 8px;
+                                    position: absolute;
+                                    top: 6px;
+                                    -webkit-transition: color .2s;
+                                    transition: color .2s;
+
+                                    &::before {
+                                        content: "search";
+                                    }
+                                }
+                            }
+
+                            .search-button {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.top-app-bar {
+    height: $top-app-bar-height;
+    margin-left: $drawer-width;
+    display: none;
 
     @media screen and (max-width: $tablet-min-width) {
         margin-left: $drawer-mobile-width;
+    }
+
+    @media screen and (max-width: $tablet-min-width) {
+        display: block;
     }
 }

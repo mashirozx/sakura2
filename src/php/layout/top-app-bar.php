@@ -1,4 +1,4 @@
-<header id="app-bar" class="mdc-top-app-bar mdc-top-app-bar--dense nav-header app-bar">
+<header id="app-bar" class="mdc-top-app-bar mdc-top-app-bar--dense top-app-bar app-bar">
   <div class="mdc-top-app-bar__row">
     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
       <button id="toggle-drawer" class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>

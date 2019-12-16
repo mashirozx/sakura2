@@ -25,23 +25,23 @@ require_once 'classes/lib/ip-location-qqwary.php';
 
 require_once 'classes/sakura-register-actions.php';
 require_once 'classes/sakura-walker-nav-menu.php';
-require_once 'classes/error.php';
-require_once 'classes/get-ip-location.php';
-require_once 'classes/get-user-agent.php';
-require_once 'classes/comments-post-handle.php';
+require_once 'classes/sakura-error.php';
 require_once 'classes/graphql-register-types.php';
 require_once 'classes/graphql-register-fields.php';
 require_once 'classes/graphql-register-mutate.php';
+require_once 'classes/get-ip-location.php';
+require_once 'classes/get-user-agent.php';
 require_once 'classes/get-comment-list.php';
 require_once 'classes/get-comment-child-list.php';
+require_once 'classes/comments-post-handle.php';
 
 require_once 'utils/sakura-functions.php';
 require_once 'utils/sakura-tools.php';
-require_once 'utils/disable-wp-emoji.php';
 require_once 'utils/sakura-admin.php';
 require_once 'utils/sakura-debug.php';
 require_once 'utils/redux-config.php';
 require_once 'utils/redux-demo-config.php';
+require_once 'utils/disable-wp-emoji.php';
 
 /*------------------------------------*\
 Register
