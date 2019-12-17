@@ -47,7 +47,7 @@ function get_drawer_nav_menu()
             'menu' => $menu_id,
             'depth' => 1,
             'items_wrap' => '<nav id="draver-nav-list" data-id="%1$s" class="mdc-list %2$s">%3$s</nav>',
-            'walker' => new Sakura\Classes\Sakura_Walker_Nav_Menu,
+            'walker' => new Sakura\Classes\Sakura_Walker_Drawer_Nav_Menu,
             'echo' => false,
         )
     );
@@ -71,6 +71,7 @@ function get_header_nav_menu()
             'echo' => false,
             'menu_class' => 'header-menu',
             'menu_id' => 'header-menu',
+            'walker' => new Sakura\Classes\Sakura_Walker_Header_Nav_Menu,
         )
     );
 

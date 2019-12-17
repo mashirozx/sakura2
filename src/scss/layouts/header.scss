@@ -3,7 +3,6 @@
     width: 100%;
     height: $site-header-height;
     margin-left: $drawer-width;
-    background: white;
     z-index: 9;
 
     @media screen and (max-width: $tablet-min-width) {
@@ -13,6 +12,7 @@
     .site-header-inner {
         .top-row-wrapper {
             height: $site-header-height;
+            background: white;
 
             .top-row {
                 display: -webkit-flex;
@@ -94,6 +94,14 @@
                                         position: absolute;
                                         right: 0;
                                     }
+
+                                    i {
+                                        margin-right: 5px;
+                                        display: inline-block;
+                                        font-size: inherit;
+                                        text-rendering: auto;
+                                        -webkit-font-smoothing: antialiased;
+                                    }
                                 }
 
                                 &.menu-item-has-children {
@@ -112,7 +120,8 @@
 
                                     &:hover {
                                         ul.sub-menu {
-                                            margin-top: 48px;
+                                            -webkit-transform: scaleY(1);
+                                            transform: scaleY(1);
                                         }
 
                                         &::after {
@@ -128,15 +137,24 @@
                                     /* lv1 sub menu */
                                     // TODO: how to fit 100% height of children
                                     ul.sub-menu {
-                                        margin-top: -999px;
+                                        top: 48px;
+                                        height: max-content;
+                                        border-radius: 0 0 4px 4px;
+                                        padding: 12px 0;
+                                        background: white;
                                         position: absolute;
                                         display: block;
-                                        -webkit-transition: margin-top .2s;
-                                        transition: margin-top .2s;
+                                        -webkit-transform: scaleY(0);
+                                        transform: scaleY(0);
+                                        transform-origin: top;
+                                        -webkit-transition: -webkit-transform .2s;
+                                        transition: -webkit-transform .2s;
+                                        transition: transform .2s;
+                                        transition: transform .2s, -webkit-transform .2s;
 
                                         li.menu-item {
+                                            height: 48px;
                                             white-space: nowrap;
-                                            background-color: white;
 
                                             &:hover {
                                                 background: #f1f3f4;
@@ -147,18 +165,6 @@
                                                     display: none;
                                                 }
                                             }
-                                        }
-
-                                        &::before,
-                                        &::after {
-                                            content: "";
-                                            display: block;
-                                            background: white;
-                                            width: 100%;
-                                            height: 12px;
-                                            box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-                                                0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-                                                0px 1px 3px 0px rgba(0, 0, 0, 0.12);
                                         }
                                     }
                                 }

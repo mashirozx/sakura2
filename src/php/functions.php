@@ -24,7 +24,8 @@ require_once __DIR__ . '/../includes/vendor/autoload.php';
 require_once 'classes/lib/ip-location-qqwary.php';
 
 require_once 'classes/sakura-register-actions.php';
-require_once 'classes/sakura-walker-nav-menu.php';
+require_once 'classes/sakura-walker-drawer-nav.php';
+require_once 'classes/sakura-walker-header-nav.php';
 require_once 'classes/sakura-error.php';
 require_once 'classes/graphql-register-types.php';
 require_once 'classes/graphql-register-fields.php';

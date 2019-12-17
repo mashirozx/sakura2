@@ -3,6 +3,8 @@
  * Customize nav menu walker
  * https://core.trac.wordpress.org/browser/tags/5.3/src/wp-includes/class-walker-nav-menu.php
  *
+ * add sub-menu mdc-elevation--z1 class to sub ul
+ *
  * @since 4.0.0
  * @author Mashiro
  */
@@ -11,9 +13,8 @@ namespace Sakura\Classes;
 
 use Walker_Nav_Menu;
 
-class Sakura_Walker_Nav_Menu extends Walker_Nav_Menu
+class Sakura_Walker_Header_Nav_Menu extends Walker_Nav_Menu
 {
-
     /**
      * Starts the list before the elements are added.
      *
@@ -38,7 +39,7 @@ class Sakura_Walker_Nav_Menu extends Walker_Nav_Menu
         }
         $indent = str_repeat($t, $depth);
         // Default class.
-        $classes = array('sub-menu');
+        $classes = array('sub-menu', 'mdc-elevation--z1');
         /**
          * Filters the CSS class(es) applied to a menu list element.
          *
@@ -50,31 +51,9 @@ class Sakura_Walker_Nav_Menu extends Walker_Nav_Menu
          */
         $class_names = join(' ', apply_filters('nav_menu_submenu_css_class', $classes, $args, $depth));
         $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
-        $output .= "{$n}{$indent}<sub-ul$class_names>{$n}";
+        $output .= "{$n}{$indent}<ul$class_names>{$n}";
     }
-    /**
-     * Ends the list of after the elements are added.
-     *
-     * @since 3.0.0
-     *
-     * @see Walker::end_lvl()
-     *
-     * @param string   $output Used to append additional content (passed by reference).
-     * @param int      $depth  Depth of menu item. Used for padding.
-     * @param stdClass $args   An object of wp_nav_menu() arguments.
-     */
-    public function end_lvl(&$output, $depth = 0, $args = null)
-    {
-        if (isset($args->item_spacing) && 'discard' === $args->item_spacing) {
-            $t = '';
-            $n = '';
-        } else {
-            $t = "\t";
-            $n = "\n";
-        }
-        $indent = str_repeat($t, $depth);
-        $output .= "$indent</sub-ul>{$n}";
-    }
+
     /**
      * Starts the element output.
      *
@@ -137,7 +116,7 @@ class Sakura_Walker_Nav_Menu extends Walker_Nav_Menu
          */
         $id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth);
         $id = $id ? ' id="' . esc_attr($id) . '"' : '';
-        // $output .= $indent . '<li' . $id . $class_names . '>';
+        $output .= $indent . '<li' . $id . $class_names . '>';
         $atts = array();
         $atts['title'] = !empty($item->attr_title) ? $item->attr_title : '';
         $atts['target'] = !empty($item->target) ? $item->target : '';
@@ -187,9 +166,9 @@ class Sakura_Walker_Nav_Menu extends Walker_Nav_Menu
          * @param stdClass $args  An object of wp_nav_menu() arguments.
          * @param int      $depth Depth of menu item. Used for padding.
          */
-        // HACK
-        $output .= $indent . '<a class="mdc-list-item drawer-items" href="' . $atts['href'] . '">';
         $title = apply_filters('nav_menu_item_title', $title, $item, $args, $depth);
+
+        // HACK
         preg_match('/\[(.*?)\](.*)/i', $title, $matches, PREG_UNMATCHED_AS_NULL);
         if (isset($matches[1])) {
             $icon = $matches[1];
@@ -207,15 +186,20 @@ class Sakura_Walker_Nav_Menu extends Walker_Nav_Menu
             }
         }
         if ($flag == 1) {
-            $item_output = '<i class="material-icons mdc-list-item__graphic">' . $icon . '</i>';
+            $title = '<i class="material-icons">' . $icon . '</i>';
         } elseif ($flag == 2) {
-            $item_output = '<i class="' . $icon . ' mdc-list-item__graphic" aria-hidden="true"></i>';
+            $title = '<i class="' . $icon . '" aria-hidden="true"></i>';
         } else {
-            $item_output = '<i class="mdc-list-item__graphic" aria-hidden="true"></i>';
+            $title = '';
         }
-        $item_output .= '<span class="mdc-list-item__text">';
-        $item_output .= $label;
-        $item_output .= '</span>';
+        $title .= $label;
+        // HACK END
+
+        $item_output = $args->before;
+        $item_output .= '<a' . $attributes . '>';
+        $item_output .= $args->link_before . $title . $args->link_after;
+        $item_output .= '</a>';
+        $item_output .= $args->after;
         /**
          * Filters a menu item's starting output.
          *
@@ -231,29 +215,5 @@ class Sakura_Walker_Nav_Menu extends Walker_Nav_Menu
          * @param stdClass $args        An object of wp_nav_menu() arguments.
          */
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
-    }
-    /**
-     * Ends the element output, if needed.
-     *
-     * @since 3.0.0
-     *
-     * @see Walker::end_el()
-     *
-     * @param string   $output Used to append additional content (passed by reference).
-     * @param WP_Post  $item   Page data object. Not used.
-     * @param int      $depth  Depth of page. Not Used.
-     * @param stdClass $args   An object of wp_nav_menu() arguments.
-     */
-    public function end_el(&$output, $item, $depth = 0, $args = null)
-    {
-        if (isset($args->item_spacing) && 'discard' === $args->item_spacing) {
-            $t = '';
-            $n = '';
-        } else {
-            $t = "\t";
-            $n = "\n";
-        }
-        // $output .= "</li>{$n}";
-        $output .= "</a>{$n}";
     }
 }
