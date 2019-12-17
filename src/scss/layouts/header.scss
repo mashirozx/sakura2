@@ -43,6 +43,7 @@
                     display: -webkit-flex;
                     display: flex;
                     flex-flow: row nowrap;
+                    justify-content: space-between;
                     width: 100%;
 
                     nav {
@@ -50,7 +51,6 @@
                         display: flex;
                         flex-flow: column;
                         height: 100%;
-                        width: 100%;
 
                         ul {
                             display: -webkit-box;
@@ -68,10 +68,12 @@
 
                             li {
                                 height: 100%;
+                                display: -webkit-flex;
                                 display: flex;
                                 flex-flow: column;
                                 justify-content: center;
                                 position: relative;
+                                cursor: pointer;
 
                                 a {
                                     white-space: nowrap;
@@ -91,7 +93,73 @@
                                         left: 0;
                                         position: absolute;
                                         right: 0;
-                                        cursor: pointer;
+                                    }
+                                }
+
+                                &.menu-item-has-children {
+                                    &::after {
+                                        content: "arrow_drop_down";
+                                        font: normal normal normal 24px/1 "Material Icons";
+                                        position: absolute;
+                                        right: 0;
+                                        -webkit-transform: rotate(0deg);
+                                        transform: rotate(0deg);
+                                        -webkit-transition: -webkit-transform .2s;
+                                        transition: -webkit-transform .2s;
+                                        transition: transform .2s;
+                                        transition: transform .2s, -webkit-transform .2s;
+                                    }
+
+                                    &:hover {
+                                        ul.sub-menu {
+                                            margin-top: 48px;
+                                        }
+
+                                        &::after {
+                                            -webkit-transform: rotate(180deg);
+                                            transform: rotate(180deg);
+                                        }
+                                    }
+
+                                    a:hover::after {
+                                        display: none;
+                                    }
+
+                                    /* lv1 sub menu */
+                                    // TODO: how to fit 100% height of children
+                                    ul.sub-menu {
+                                        margin-top: -999px;
+                                        position: absolute;
+                                        display: block;
+                                        -webkit-transition: margin-top .2s;
+                                        transition: margin-top .2s;
+
+                                        li.menu-item {
+                                            white-space: nowrap;
+                                            background-color: white;
+
+                                            &:hover {
+                                                background: #f1f3f4;
+                                            }
+
+                                            a {
+                                                &:hover::after {
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+
+                                        &::before,
+                                        &::after {
+                                            content: "";
+                                            display: block;
+                                            background: white;
+                                            width: 100%;
+                                            height: 12px;
+                                            box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+                                                0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+                                                0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+                                        }
                                     }
                                 }
                             }
@@ -99,6 +167,7 @@
                     }
 
                     search {
+                        display: -webkit-flex;
                         display: flex;
                         flex-flow: column;
                         justify-content: center;
@@ -145,19 +214,5 @@
                 }
             }
         }
-    }
-}
-
-.top-app-bar {
-    height: $top-app-bar-height;
-    margin-left: $drawer-width;
-    display: none;
-
-    @media screen and (max-width: $tablet-min-width) {
-        margin-left: $drawer-mobile-width;
-    }
-
-    @media screen and (max-width: $tablet-min-width) {
-        display: block;
     }
 }

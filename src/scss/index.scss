@@ -13,15 +13,16 @@
 @import "./layouts/ini";
 
 /*layouts*/
-@import "./layouts/header";
-@import "./layouts/footer";
-@import "./layouts/coverImage";
-@import "./layouts/pageContent";
-@import "./layouts/postThumbList";
-@import "./layouts/postFeature";
-@import "./layouts/comment";
-@import "./layouts/pageNavigationBar";
-@import "./layouts/drawer";
+@import "./layouts/header"; // site header
+@import "./layouts/top-app-bar"; // top app bar
+@import "./layouts/drawer"; // mobile drawer
+@import "./layouts/footer"; // site footer
+@import "./layouts/coverImage"; // homepage cover image
+@import "./layouts/pageContent"; // page content
+@import "./layouts/postThumbList"; // homepage post list
+@import "./layouts/postFeature"; // post feature image
+@import "./layouts/comment"; // comment area (list & form)
+@import "./layouts/pageNavigationBar"; // navigation bar
 
 /*themes*/
 @import "./markdown/markdown";

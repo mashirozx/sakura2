@@ -1,0 +1,13 @@
+.top-app-bar {
+  height: $top-app-bar-height;
+  margin-left: $drawer-width;
+  display: none;
+
+  @media screen and (max-width: $tablet-min-width) {
+      margin-left: $drawer-mobile-width;
+  }
+
+  @media screen and (max-width: $tablet-min-width) {
+      display: block;
+  }
+}

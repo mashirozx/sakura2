@@ -67,8 +67,10 @@ function get_header_nav_menu()
     $nav = wp_nav_menu(
         array(
             'menu' => $menu_id,
-            'depth' => 1,
+            'depth' => 2,
             'echo' => false,
+            'menu_class' => 'header-menu',
+            'menu_id' => 'header-menu',
         )
     );
 
