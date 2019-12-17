@@ -101,6 +101,10 @@
                                         font-size: inherit;
                                         text-rendering: auto;
                                         -webkit-font-smoothing: antialiased;
+
+                                        &.material-icons {
+                                            transform: translateY(2px);
+                                        }
                                     }
                                 }
 
